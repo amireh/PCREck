@@ -16,6 +16,7 @@
 
 local cli = require "cliargs"
 
+print(cli.version)
 cli:set_name("PCREck")
 cli:add_opt("--pattern=PTRN", "PCRE regular expression pattern", nil, ".*")
 cli:add_opt("--subject=TEXT", "subject to test using the pattern", "subject", "")
@@ -25,19 +26,24 @@ cli:add_opt("-i, --interface", "the interface to bind to when daemonized", "inte
 cli:add_opt("-p, --port", "the port to bind to when daemonized", "port", 8942)
 cli:add_opt("-c, --concurrency", "the maximum number of clients at any time", nil, 256)
 
-local args = cli:parse_args()
+local args = cli:parse_args(true)
 if not args then return end
 
 require 'rex_pcre'
 local json = require 'json'
 
 function test_subject(pattern, subject)
-  local success, rex_or_msg = pcall(rex_pcre.new, pattern)
+  print("Testing pattern: [" .. pattern .. "]")
+  print("Testing subject: [" .. subject .. "]")
+
+
+  local success, rex_or_msg = pcall(rex_pcre.new, json.decode(pattern) )
   if not success then
     return nil, "invalid regular expression; " .. rex_or_msg
   end
 
-  return { rex_pcre.find(subject, rex_or_msg) }
+
+  return { rex_pcre.find(json.decode(subject), rex_or_msg) }
 end
 
 if not args["d"] then

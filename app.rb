@@ -17,13 +17,21 @@ post '/' do
 
   halt 401 if !ptrn || !text
 
-  puts "Escaped pattern: #{Shellwords.escape(ptrn.to_json)}"
-  puts "Escaped subject: #{Shellwords.escape(text.to_json)}"
+  # ret = %x{PCREck.lua \
+  #   --compact \
+  #   --pattern=#{Shellwords.escape(ptrn.to_json)} \
+  #   --subject=#{Shellwords.escape(text.to_json)}}
 
-  ret = %x{PCREck.lua \
-    --compact \
-    --pattern=#{Shellwords.escape(ptrn.to_json)} \
-    --subject=#{ Shellwords.escape(text.to_json) }}
+  ret = nil
+  IO.popen(["PCREck.lua", 
+            "--pattern=#{ptrn.to_json}", 
+            "--subject=#{text.to_json}", 
+            "--compact", :err=>[:child, :out]]) {|io|
+    ret = io.read
+    # puts ret
+    ret = ret.split("\n").last
+  }
+
 
   halt 500 if ret.strip.empty?
 
@@ -33,7 +41,7 @@ post '/' do
     return [ false, ret["error"] ].to_json
   end
 
-  puts ret.inspect
+  # puts ret.inspect
 
   return 200, ret.to_json
 end

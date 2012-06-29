@@ -48,7 +48,7 @@
 
             var target = $("#PCREck_subject").attr("value");
             var match_begin = PCREck_result[0] - 1, // subtract 1 because Lua starts indexes @ 1
-                match_end = PCREck_result[1] - 3; // subtract 1+2 because of the suffixed \"
+                match_end = PCREck_result[1] - 1;
 
             target = target.split('');
             target[match_begin] = "<em>" + target[match_begin];
