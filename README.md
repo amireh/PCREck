@@ -3,7 +3,7 @@
 An interface for writing and checking [PCRE](http://www.pcre.org) regular expressions.
 [PCREck](http://www.pcreck.com) is similar to what [Rubular](http://www.rubular.com) is for Ruby's regexes.
 
-## `PCREck.lua`
+## The Lua part
 
 Uses [lrexlib-pcre](http://rrthomas.github.com/lrexlib/manual.html) to test a PCRE
 pattern on a subject.
@@ -22,10 +22,11 @@ You can get all the dependencies using [luarocks](http://www.luarocks.org/). The
 
 * lrexlib-pcre
 * lua_cliargs
+* json4lua
 * luasocket (only when using the daemonized mode)
 * luasignal (only when using the daemonized mode)
 
-## `app.rb`
+## The Ruby part
 
 A minial Sinatra Ruby server that accepts `GET '/'` for displaying
 the HTML interface, and `POST '/'` for invoking `PCREck.lua` in

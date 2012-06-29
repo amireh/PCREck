@@ -3,6 +3,7 @@ gem 'sinatra'
 require 'rubygems'
 require 'sinatra'
 require 'json'
+require 'shellwords'
 
 get '/' do
   erb :index
@@ -19,7 +20,7 @@ post '/' do
   puts "Escaped pattern: #{Shellwords.escape(ptrn.to_json)}"
   puts "Escaped subject: #{Shellwords.escape(text.to_json)}"
 
-  ret = %x{./PCREck.lua \
+  ret = %x{PCREck.lua \
     --compact \
     --pattern=#{Shellwords.escape(ptrn.to_json)} \
     --subject=#{ Shellwords.escape(text.to_json) }}
