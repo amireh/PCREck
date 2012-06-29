@@ -1,0 +1,153 @@
+/* ------
+ * PCREck
+ * ------ */
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  background: #fff;
+  color: #2E2633;
+  font-family: "ProximaNova-Light", Arial, Helvetica, Verdana;
+  width: 960px;
+  margin: 0 auto;
+  letter-spacing: 1px;
+}
+
+a,a:visited { color: #00A0B0; }
+a:hover { text-decoration: none; }
+
+header h1 {
+  color: black;
+  font-size: 3em;
+  margin: 0;
+  padding: 10px 0;
+}
+
+h2 {
+  color: #fff;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ddd;
+  color: #99173C;
+}
+
+code {
+  color: purple;
+  font-size: 14px;
+  /*color: #490A3D;*/
+  /*color: orange;*/
+}
+
+input[type=text],
+textarea,
+pre {
+  width: 100%;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 10px;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+  font-family: "ProximaNova-Light", Arial, Helvetica, Verdana;  
+  min-height: 40px;
+}
+input[type^=text],
+textarea,
+fieldset,
+pre {
+  border: 1px solid #ddd;
+}
+input[type=text],
+textarea,
+pre {
+  border-top: none;
+}
+textarea, pre {
+  max-width: 100%;
+  min-width: 100%;
+}
+
+pre em { /* highlighted matches */
+  font-style: normal;
+  background: orange;
+}
+
+table td {
+  vertical-align: top;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+}
+section,
+.part {
+  float: left;
+}
+
+footer {
+  display: block;
+  float: left;
+  width: 100%;
+  margin: 20px 0;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+section:not(.part) h2:first-child {
+  margin-bottom: 0;
+}
+td:first-of-type {
+  padding-right: 5px
+}
+
+#PCREck label {
+  box-shadow: 0 3px 3px 0px rgba(0,0,0,0.5);
+  display: block;
+  /*background: #EFFFCD;*/
+  background: #555152;
+  color: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  z-index: 10;
+  position: relative;
+}
+#PCREck_pattern_options,
+#PCREck_pattern {
+  min-height: 43px;
+  vertical-align: middle;
+}
+
+#PCREck_subject {
+  min-height: 130px;
+}
+
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+
+.part {
+  width: 50%;
+}
+.part.spanner {
+  width: 100%;
+}
+.part.left {
+  border-right: 5px solid transparent;
+}
+.part.right {
+  border-left: 5px solid transparent;
+}
+
