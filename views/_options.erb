@@ -1,3 +1,33 @@
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(function() {
+      // append or remove a toggled pattern option into the pattern option box
+      $("#PCRE_options input[type=checkbox]").change(function() {
+        var el = $(this);
+        var opts = $("#PCREck_pattern_options");
+        var curr_opts = opts.attr("value");
+        if (el.is(":checked")) {
+          opts.attr("value", curr_opts + el.attr("value"));
+        } else {
+          opts.attr("value", opts.attr("value").replace(el.attr("value"), ""));
+        }
+      })
+
+      // update the pattern options' :checked state when the user
+      // manually writes options in the pattern option box
+      $("#PCREck_pattern_options").keyup(function() {
+        var opts = $(this).attr("value").split('');
+        $("#PCRE_options input[type=checkbox]").attr("checked", null);
+        $("#PCRE_options input[type=checkbox]").each(function() {
+          var this_opt = $(this).attr("value");
+          if (opts.indexOf(this_opt) != -1)
+            $(this).attr("checked", "checked");
+        });
+      });
+    });
+  </script>
+<% end %>
+
 <section id="PCRE_options">
   <fieldset>
     <legend>PCRE Options</legend>

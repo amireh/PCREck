@@ -1,252 +1,199 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="description" 
-          content="PCREck is an interface for writing, testing, and validating your PCRE regular expressions.">
+<% content_for :scripts do %>
+  <script type="text/javascript">
 
-    <title>PCREck - a PCRE regular expression checker</title>
+    var pattern_editor = null,
+        subject_editor = null;
 
-    <script type="text/javascript" src="/js/jquery.1.7.1.min.js"></script>
-    <% if has_proximanova? then %>
-      <link href="/css/fonts/proximanova.css" rel="stylesheet" type="text/css" />
-    <% end %>
+    var reset_status = function(text) {
+      $("#PCREck_match").empty().html(text || "");
+      $("#PCREck_capture").empty();
+    }
 
-    <script src="/js/codemirror-2.3/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="/js/codemirror-2.3/lib/codemirror.css">
-    <script src="/js/codemirror-2.3/mode/shell/shell.js"></script>
+    var test = function() {
 
-    <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript">
-
-      var pattern_editor = null,
-          subject_editor = null;
-
-      var reset_status = function(text) {
-        $("#PCREck_match").empty().html(text || "");
-        $("#PCREck_capture").empty();
+      if ($("#PCREck_pattern").attr("value").length == 0) {
+        reset_status();
+        return;
       }
 
-      var test = function() {
+      $.ajax({
+        url: "/",
+        type: "POST",
+        data: {
+          pattern: "(?" + $("#PCREck_pattern_options").attr("value") + ")" + 
+                   $("#PCREck_pattern").attr("value"),
+          text: $("#PCREck_subject").attr("value")
+        },
+        success: function(PCREck_result) {
+          if (!PCREck_result || PCREck_result.length == 0) {
+            reset_status("No match.");
+            return;
+          }
 
-        if ($("#PCREck_pattern").attr("value").length == 0) {
+          if (!PCREck_result[0]) {
+            reset_status("Error: " + PCREck_result[1]);
+            return;
+          }
+
+          var target = $("#PCREck_subject").attr("value");
+          var match_begin = PCREck_result[0] - 1, // subtract 1 because Lua starts indexes @ 1
+              match_end = PCREck_result[1] - 1;
+
+          target = target.split('');
+          target[match_begin] = "<em>" + target[match_begin];
+          target[match_end] = target[match_end] + "</em>";
+          target = target.join('');
+          target = target.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
+
+          $("#PCREck_match").html(target);
+          $("#PCREck_capture").empty();
+          for (var i = 2; i < PCREck_result.length; ++i) {
+            $("#PCREck_capture").append("  %" + (i-1) + " => " + PCREck_result[i] + "\n");
+          }
+        }
+      });
+
+      return false;
+    };
+
+    $(function() {
+      var t = null;
+      var pulse = 50;
+
+      $("#gen_permalink").click(function() {
+        var pattern = $("#PCREck_pattern").attr("value");
+        var subject = $("#PCREck_subject").attr("value");
+        var options = $("#PCREck_pattern_options").attr("value");
+
+        if (pattern.length == 0 && subject.length == 0) {
           reset_status();
           return;
         }
 
         $.ajax({
-          url: "/",
+          url: "/permalink",
           type: "POST",
           data: {
-            pattern: "(?" + $("#PCREck_pattern_options").attr("value") + ")" + 
-                     $("#PCREck_pattern").attr("value"),
-            text: $("#PCREck_subject").attr("value")
+            pattern: pattern,
+            subject: subject,
+            options: options
           },
-          success: function(PCREck_result) {
-            if (!PCREck_result || PCREck_result.length == 0) {
-              reset_status("No match.");
-              return;
-            }
-
-            if (!PCREck_result[0]) {
-              reset_status("Error: " + PCREck_result[1]);
-              return;
-            }
-
-            var target = $("#PCREck_subject").attr("value");
-            var match_begin = PCREck_result[0] - 1, // subtract 1 because Lua starts indexes @ 1
-                match_end = PCREck_result[1] - 1;
-
-            target = target.split('');
-            target[match_begin] = "<em>" + target[match_begin];
-            target[match_end] = target[match_end] + "</em>";
-            target = target.join('');
-            target = target.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
-
-            $("#PCREck_match").html(target);
-            $("#PCREck_capture").empty();
-            for (var i = 2; i < PCREck_result.length; ++i) {
-              $("#PCREck_capture").append("  %" + (i-1) + " => " + PCREck_result[i] + "\n");
-            }
+          success: function(url) {
+            $("#permalink").html("Your regular expression can be viewed at: <a href='" + url + "'>" + url + "</a>");
           }
-        });
-
-        return false;
-      };
-
-      $(function() {
-        var t = null;
-        var pulse = 50;
-
-        $("#gen_permalink").click(function() {
-          var pattern = $("#PCREck_pattern").attr("value");
-          var subject = $("#PCREck_subject").attr("value");
-          var options = $("#PCREck_pattern_options").attr("value");
-
-          if (pattern.length == 0 && subject.length == 0) {
-            reset_status();
-            return;
-          }
-
-          $.ajax({
-            url: "/permalink",
-            type: "POST",
-            data: {
-              pattern: pattern,
-              subject: subject,
-              options: options
-            },
-            success: function(url) {
-              $("#permalink").html("Your regular expression can be viewed at: <a href='" + url + "'>" + url + "</a>");
-            }
-          });
-        });
-
-        var refresh = function() {
-          if (t) { clearTimeout(t); }
-          t = setTimeout("test()", pulse);
-        }
-
-        $("#PCREck input, #PCREck textarea").keyup(function() {
-          refresh();
-        });
-        $("#PCRE_options input[type=checkbox]").change(function() {
-          refresh();
-        })
-
-        // append or remove a toggled pattern option into the pattern option box
-        $("#PCRE_options input[type=checkbox]").change(function() {
-          var el = $(this);
-          var opts = $("#PCREck_pattern_options");
-          var curr_opts = opts.attr("value");
-          if (el.is(":checked")) {
-            opts.attr("value", curr_opts + el.attr("value"));
-          } else {
-            opts.attr("value", opts.attr("value").replace(el.attr("value"), ""));
-          }
-        })
-
-        // update the pattern options' :checked state when the user
-        // manually writes options in the pattern option box
-        $("#PCREck_pattern_options").keyup(function() {
-          var opts = $(this).attr("value").split('');
-          $("#PCRE_options input[type=checkbox]").attr("checked", null);
-          $("#PCRE_options input[type=checkbox]").each(function() {
-            var this_opt = $(this).attr("value");
-            if (opts.indexOf(this_opt) != -1)
-              $(this).attr("checked", "checked");
-          });
-        });
-
-        // force a test if the fields were initialized with a custom value
-        var pattern = $("#PCREck_pattern").attr("value");
-        var subject = $("#PCREck_subject").attr("value");
-        if (pattern.length > 0 && subject.length > 0)
-          test();
-
-
-        pattern_editor = CodeMirror.fromTextArea(document.getElementById("PCREck_pattern"), {
-          mode: "shell",
-          lineNumbers: false,
-          matchBrackets: true,
-          // theme: "default",
-          tabSize: 2,
-          gutter: false,
-          autoClearEmptyLines: false,
-          lineWrapping: true
         });
       });
 
-    </script>
+      var refresh = function() {
+        if (t) { clearTimeout(t); }
+        t = setTimeout("test()", pulse);
+      }
 
-    <script type="text/javascript">
+      $("#PCREck input, #PCREck textarea").keyup(function() {
+        refresh();
+      });
+      $("#PCRE_options input[type=checkbox]").change(function() {
+        refresh();
+      })
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-15596792-3']);
-      _gaq.push(['_setDomainName', 'pcreck.com']);
-      _gaq.push(['_trackPageview']);
+      // append or remove a toggled pattern option into the pattern option box
+      $("#PCRE_options input[type=checkbox]").change(function() {
+        var el = $(this);
+        var opts = $("#PCREck_pattern_options");
+        var curr_opts = opts.attr("value");
+        if (el.is(":checked")) {
+          opts.attr("value", curr_opts + el.attr("value"));
+        } else {
+          opts.attr("value", opts.attr("value").replace(el.attr("value"), ""));
+        }
+      })
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+      // update the pattern options' :checked state when the user
+      // manually writes options in the pattern option box
+      $("#PCREck_pattern_options").keyup(function() {
+        var opts = $(this).attr("value").split('');
+        $("#PCRE_options input[type=checkbox]").attr("checked", null);
+        $("#PCRE_options input[type=checkbox]").each(function() {
+          var this_opt = $(this).attr("value");
+          if (opts.indexOf(this_opt) != -1)
+            $(this).attr("checked", "checked");
+        });
+      });
 
-    </script>    
-  </head>
-  <body>
-    <header>
-      <hgroup>
-        <h1>PCRE<span style="color: orange">ck</span></h1>
-      </hgroup>
-      <p>
-        PCREck is a <a href="http://www.pcre.org/pcre.txt">PCRE</a>
-        regular expression editor and tester similar 
-        to what <a href="http://www.rubular">Rubular</a> is
-        for Ruby's regular expressions.
-      </p>
-    </header>
-    <section id="PCREck">
-      <div class="part spanner">
-        <label for="PCREck_pattern">Your regular expression:</label>
-        <div class="part left" style="width: 120px; margin-right: 0">
-          <code>(?</code>
-          <input type="text" id="PCREck_pattern_options"
-            style="width: 70px; font-size: 12px"
-            placeholder="imsxUX"
-            value="<%= @link.options %>" />
-          <code>)</code>
-        </div>
-        <div class="part right" style="width: 840px; border-left: none">
+      // force a test if the fields were initialized with a custom value
+      var pattern = $("#PCREck_pattern").attr("value");
+      var subject = $("#PCREck_subject").attr("value");
+      if (pattern.length > 0 && subject.length > 0)
+        test();
+
+
+      pattern_editor = CodeMirror.fromTextArea(document.getElementById("PCREck_pattern"), {
+        mode: "shell",
+        lineNumbers: false,
+        matchBrackets: true,
+        // theme: "default",
+        tabSize: 2,
+        gutter: false,
+        autoClearEmptyLines: false,
+        lineWrapping: true
+      });
+    });
+
+  </script>
+<% end %>
+
+<section id="PCREck">
+  <div class="part spanner">
+    <label for="PCREck_pattern">Your regular expression:</label>
+    <div class="part left" style="width: 120px; margin-right: 0">
+      <code>(?</code>
+      <input type="text" id="PCREck_pattern_options"
+        style="width: 70px; font-size: 12px"
+        placeholder="imsxUX"
+        value="<%= @link.options %>" />
+      <code>)</code>
+    </div>
+    <div class="part right" style="width: 840px; border-left: none">
 <!--           <input 
-            type="text" id="PCREck_pattern" 
-            autofocus="autofocus"
-            placeholder="^(banana)+s? (.*)$"
-            value="<%= @link.pattern %>"
-           /> -->
-         <textarea 
-            id="PCREck_pattern" 
-            autofocus="autofocus"
-            placeholder="^(banana)+s? (.*)$"><%= @link.pattern %></textarea>
-        </div>
-      </div>
-      <div class="part left">
-        <label for="PCREck_subject">Your test string:</label>
-        <textarea
-          id="PCREck_subject"
-          placeholder="bananas in the car"><%= @link.subject %></textarea>
-        <!-- <button id="add_subject">Add another subject</button> -->
-      </div>
-      
-      <div class="part right">
-        <label>
-          Matches:
-        </label>
-        <pre id="PCREck_match">--</pre>
-        <label>
-          Captured subpatterns:
-        </label>
-        <pre id="PCREck_capture">--</pre>
+        type="text" id="PCREck_pattern" 
+        autofocus="autofocus"
+        placeholder="^(banana)+s? (.*)$"
+        value="<%= @link.pattern %>"
+       /> -->
+     <textarea 
+        id="PCREck_pattern" 
+        autofocus="autofocus"
+        placeholder="^(banana)+s? (.*)$"><%= @link.pattern %></textarea>
+    </div>
+  </div>
+  <div class="part left">
+    <label for="PCREck_subject">Your test string:</label>
+    <textarea
+      id="PCREck_subject"
+      placeholder="bananas in the car"><%= @link.subject %></textarea>
+    <!-- <button id="add_subject">Add another subject</button> -->
+  </div>
+  
+  <div class="part right">
+    <label>
+      Matches:
+    </label>
+    <pre id="PCREck_match">--</pre>
+    <label>
+      Captured subpatterns:
+    </label>
+    <pre id="PCREck_capture">--</pre>
 
-      </div>
-      <span id="curly">{</span>
-    </section>
+  </div>
+  <span id="curly">{</span>
+</section>
 
-    <%= erb :"_options" %>
+<%= erb :"_options" %>
 
-    <section id="PCREck_actions">
-      <button id="gen_permalink">Permanent link</button>
-      <span id="permalink"></span>
-    </section>
+<section id="PCREck_actions">
+  <button id="gen_permalink">Permanent link</button>
+  <span id="permalink"></span>
+</section>
 
-    <%= erb :"_cheatsheet" %>
-    <%= erb :"_references" %>
-
-    <footer>
-      <small><a href="http://www.pcreck.com">PCREck</a> is free software.
-        <a href="https://github.com/amireh/PCREck.git">Fork it</a> on Github,
-        or pay its <a href="http://www.mxvt.net">author</a> a visit.
-      </small>
-    </footer>
-  </body>
-</html>
+<%= erb :"_cheatsheet" %>
+<%= erb :"_references" %>

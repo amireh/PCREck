@@ -1,8 +1,10 @@
 gem 'sinatra'
+gem 'sinatra-content-for'
 gem "data_mapper", ">=1.2.0"
 
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/content_for'
 require 'json'
 require 'base64'
 require 'data_mapper'
@@ -58,7 +60,7 @@ get '/:token' do |token|
 
   @link = Permalink.get(token) || Permalink.new
 
-  erb :index
+  erb :"modes/simple"
 end
 
 get '/' do
@@ -71,7 +73,7 @@ get '/' do
     options: params[:o] || ""
   })
 
-  return erb :index
+  erb :"modes/simple"
 end
 
 
