@@ -164,7 +164,7 @@ PCREck = function() {
             mode: "simple"
           },
           success: function(url) {
-            $("#permalink").html("Your regular expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
+            $("#permalink").html("Your expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
           },
           complete: function() {
             hide_indicator();
@@ -225,7 +225,7 @@ PCREck = function() {
           type: "POST",
           data: params,
           success: function(url) {
-            $("#permalink").html("Your regular expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
+            $("#permalink").html("Your expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
           },
           complete: function() {
             hide_indicator();
