@@ -293,3 +293,13 @@ button:active {
   display: block;
   z-index: 1000;
 }
+
+#indicator {
+  position: fixed;
+  right: 10px;
+  z-index: 100;
+  bottom: 10px;
+}
+#indicator img {
+  vertical-align: middle;
+}

@@ -4,8 +4,17 @@ PCREck = function() {
       options_el = null,
       subject_el = null,
       tt = null,
-      pulse = 50;
+      pulse = 50,
+      in_operation = false;
 
+  function show_indicator() {
+    $("#indicator").show();
+    in_operation = true;
+  }
+  function hide_indicator() {
+    $("#indicator").hide();
+    in_operation = false;
+  }
   /**
    * format_result():
    *  Decodes the PCREck response, injects (and highlights) matched and captured values
@@ -73,13 +82,28 @@ PCREck = function() {
       if (tt) { clearTimeout(tt); }
       tt = setTimeout("PCREck.query()", pulse);
     },
+    // mode-agnostic helpers
     query: function() {
+      if (in_operation)
+        return;
+
       if (mode == "simple")
         return PCREck.simple.query();
       else if (mode == "advanced")
         return PCREck.advanced.query();
       else
-        console.log("Error: no PCREck mode has been set, unable to query.")
+        console.log("Error: an invalid PCREck mode has been set, unable to query.")
+    },
+    gen_permalink: function() {
+      if (in_operation)
+        return;
+
+      if (mode == "simple")
+        return PCREck.simple.gen_permalink();
+      else if (mode == "advanced")
+        return PCREck.advanced.gen_permalink();
+      else
+        console.log("Error: an invalid PCREck mode has been set, unable to query.")
     },
 
     simple: {
@@ -97,6 +121,8 @@ PCREck = function() {
           return;
         }
 
+        show_indicator();
+
         $.ajax({
           url: "/",
           type: "POST",
@@ -108,6 +134,9 @@ PCREck = function() {
             result = JSON.parse(result);
 
             return format_result(result, subject, $("#PCREck_match"), $("#PCREck_capture"));
+          },
+          complete: function() {
+            hide_indicator();
           }
         });
 
@@ -123,6 +152,8 @@ PCREck = function() {
           return;
         }
 
+        show_indicator();
+
         $.ajax({
           url: "/permalink",
           type: "POST",
@@ -134,6 +165,9 @@ PCREck = function() {
           },
           success: function(url) {
             $("#permalink").html("Your regular expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
+          },
+          complete: function() {
+            hide_indicator();
           }
         });
       }
@@ -148,6 +182,8 @@ PCREck = function() {
           PCREck.advanced.reset_status();
           return;
         }
+
+        show_indicator();
 
         var params = $("textarea:visible,input[type=text]:visible").serialize();
 
@@ -170,6 +206,9 @@ PCREck = function() {
                             capture_el,
                             subject_idx);
             });
+          },
+          complete: function() {
+            hide_indicator();
           }
         });
 
@@ -177,7 +216,9 @@ PCREck = function() {
       }, // advanced.query()
       gen_permalink: function() {
         var params = $("textarea:visible,input[type=text]:visible").serialize();
-        params += "&mode=advanced"
+        params += "&mode=advanced";
+
+        show_indicator();
 
         $.ajax({
           url: "/permalink",
@@ -185,6 +226,9 @@ PCREck = function() {
           data: params,
           success: function(url) {
             $("#permalink").html("Your regular expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
+          },
+          complete: function() {
+            hide_indicator();
           }
         });
       }
