@@ -2,22 +2,26 @@
   <script type="text/javascript">
     $(function() {
       PCREck.set_mode("advanced");
+      $("#gen_permalink").click(PCREck.advanced.gen_permalink);
 
       dyn_register_callback(function(clone, action) {
         if (clone && action == "add") {
-          var idx = clone.attr("data-dyn-index");
-          if (idx % 2 != 0)
+          var idx = parseInt(clone.attr("data-dyn-index"));
+          if (idx % 2 != 0) {
             clone.addClass("odd");
+          } else {
+            // clone.before("<div class='part spanner'></div>");
+          }
 
           clone.find("textarea").autosize();
           clone.find("textarea").keyup(PCREck.pulsate);
         }
       });
 
-      $("#add_subject").click();
-      $("#PCREck_pattern").attr("value", "foo(bar)");
-      $("textarea[name^=subject]:visible:first").attr("value", "foobar");
-      PCREck.query();
+      // $("#add_subject").click();
+      // $("#PCREck_pattern").attr("value", "foo(bar)");
+      // $("textarea[name^=subject]:visible:first").attr("value", "foobar");
+      // PCREck.query();
     });
 
 
@@ -46,35 +50,51 @@
   </div>
 </section>
 <%= erb :"_options" %>
+<% 
+  subjects = [ "" ]
+  if @link && @link.mode == "advanced" && @link.subject && !@link.subject.empty?
+    JSON.parse(@link.subject).each_pair { |_, subject|
+      subjects << subject
+    }
+  else
+    # subjects << @link.subject
+  end
+%>
+
 <section class="PCREck" id="PCREck_subjects">
 
-  <div class="PCREck_subject" data-dyn-entity="subjects">
-    <h3>Subject #<span data-dyn-substitute="index"></span></h3>
-    <div class="part spanner">
-      <label>Your test string:</label>
-      <textarea
-        name="subjects[-1]"
-        placeholder="bananas in the car"><%= @link.subject %></textarea>
-      <!-- <button id="add_subject">Add another subject</button> -->
-    </div>
-    
-    <div class="part spanner">
-      <label>
-        Matches:
-      </label>
-      <pre class="match">--</pre>
-      <label>
-        Captured subpatterns:
-      </label>
-      <pre class="capture">--</pre>
+  <% subjects.each_with_index do |subject, idx| %>
+    <% curr_idx = idx - 1 %>
+    <div  data-dyn-entity="subjects" data-dyn-index="<%= curr_idx %>"
+          class="PCREck_subject <%= 'odd' if idx != 0 && (curr_idx) % 2 != 0 %>" >
+      <h3>Subject #<span data-dyn-substitute="index"><%= curr_idx %></span></h3>
+      <button data-dyn-target="subjects" data-dyn-target-index="<%= curr_idx %>" data-dyn-action="remove">X</button>
+      <div class="part spanner">
+        <label>Your test string:</label>
+        <textarea
+          name="subjects[<%= curr_idx %>]"
+          placeholder="bananas in the car"><%= subject %></textarea>
+        <!-- <button id="add_subject">Add another subject</button> -->
+      </div>
+      
+      <div class="part spanner">
+        <label>
+          Matches:
+        </label>
+        <pre class="match">--</pre>
+        <label>
+          Captured subpatterns:
+        </label>
+        <pre class="capture">--</pre>
 
+      </div>
     </div>
-  </div>
+  <% end %>
 </section>
-<button id="add_subject" data-dyn-target="subjects">Add another subject</button>
+<button id="add_subject" data-dyn-target="subjects">&uarr; Add another subject</button>
 
 <section id="PCREck_actions">
-  <button id="gen_permalink">Permanent link</button>
+  <button id="gen_permalink">&hearts; Permanent link</button>
   <span id="permalink"></span>
 </section>
 

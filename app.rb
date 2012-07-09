@@ -21,6 +21,7 @@ class Permalink
   property :pattern, Text, default: ""
   property :subject, Text, default: ""
   property :options, String, default: ""
+  property :mode, String, default: "simple"
   property :created_at, DateTime, default: lambda { |_,__| DateTime.now }
 end
 
@@ -44,12 +45,16 @@ helpers do
 end
 
 get '/mode/advanced' do
+  puts params.inspect
   # Accept initial values from the URL parameters, if any
   @link = Permalink.new({
     pattern: params[:p] || "",
-    subject: params[:s] || "",
-    options: params[:o] || ""
+    subject: { 0 => (params[:s] || "") }.to_json,
+    options: params[:o] || "",
+    mode: "advanced"
   })
+
+  puts @link.inspect
 
   erb :"modes/advanced"
 end
@@ -60,11 +65,15 @@ get '/:token' do |token|
 
   @link = Permalink.get(token) || Permalink.new
 
-  erb :"modes/simple"
+  if @link.mode == "advanced" then
+    erb :"modes/advanced"
+  else
+    erb :"modes/simple"
+  end
 end
 
 get '/' do
-  puts params.inspect
+  # puts params.inspect
 
   # Accept initial values from the URL parameters, if any
   @link = Permalink.new({
@@ -84,7 +93,7 @@ def query(pattern, subject)
             "--subject=#{subject.to_json}", 
             "--compact", :err=>[:child, :out]]) {|io|
     res = io.read
-    puts res
+    # puts res
     res = res.split("\n").last.strip
   }
   res
@@ -130,13 +139,25 @@ post '/mode/advanced' do
 end
 
 post '/permalink' do
-  halt 400 if !params[:pattern] || !params[:subject]
-  halt 400 if params[:pattern].empty? && params[:subject].empty?
+  puts params.inspect
+
+  halt 400 if !params[:pattern] || (!params[:subject] && !params[:subjects])
+  halt 400 if params[:pattern].empty? && params[:subject].empty? && params[:subjects].empty?
+
+  subject = params[:subject]
+  if params[:mode] == "advanced" then
+    subject = params[:subjects].to_json
+  end
+
+  puts subject
+
+  # return 200
 
   link = Permalink.create({
     pattern: params[:pattern],
-    subject: params[:subject],
-    options: params[:options]
+    subject: subject,
+    options: params[:options],
+    mode: params[:mode]
   })
 
   port = request.port != 80 ? ":#{request.port}" : ""
@@ -153,5 +174,9 @@ helpers do
   def has_proximanova?
     File.exists?(File.join(settings.root, "public", "css", "fonts", "proximanova.css"))
   end
+
+  def pattern_option(key)
+    "<input type=\"checkbox\" name=\"pcre[options]\" value=\"#{key}\" #{"checked=\"checked\"" if @link.options.include?(key)} />"
+  end  
 
 end

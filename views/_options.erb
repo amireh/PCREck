@@ -11,7 +11,7 @@
         } else {
           opts.attr("value", opts.attr("value").replace(el.attr("value"), ""));
         }
-      })
+      });
 
       // update the pattern options' :checked state when the user
       // manually writes options in the pattern option box
@@ -24,6 +24,11 @@
             $(this).attr("checked", "checked");
         });
       });
+
+      $("#PCRE_options input[type=checkbox]").each(function() {
+        // $(this).change();
+        // $(this).change();
+      })
     });
   </script>
 <% end %>
@@ -32,27 +37,27 @@
   <fieldset>
     <legend>PCRE Options</legend>
     <label title="makes matching case insensitive">
-      <input type="checkbox" name="pcre[options]" value="i" />
+      <%= pattern_option("i") %>
       Caseless <code>/i</code>
     </label>
     <label title="captures will span line feeds">
-      <input type="checkbox" name="pcre[options]" value="m" />
+      <%= pattern_option("m") %>
       Multi-line <code>/m</code>
     </label>
     <label title="makes .* match everything, including control characters">
-      <input type="checkbox" name="pcre[options]" value="s" />
+      <%= pattern_option("s") %>
       Dot-ALL <code>/s</code>
     </label>
     <label>
-      <input type="checkbox" name="pcre[options]" value="x" />
+      <%= pattern_option("x") %>
       Extended <code>/x</code>
     </label>
     <label>
-      <input type="checkbox" name="pcre[options]" value="U" />
+      <%= pattern_option("U") %>
       Ungreedy <code>/U</code>
     </label>
     <label>
-      <input type="checkbox" name="pcre[options]" value="X" />
+      <%= pattern_option("X") %>
       Extra <code>/X</code>
     </label>
   </fieldset>
