@@ -31,7 +31,7 @@ local args = cli:parse_args(true)
 if not args then return end
 
 require 'rex_pcre'
-local json = require 'json'
+local json = require 'dkjson'
 
 function test_subject(pattern, subject, dont_decode)
   print("Testing pattern: [" .. pattern .. "]")
