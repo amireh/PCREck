@@ -38,6 +38,11 @@ header h1 {
   padding: 10px 0;
   display: inline-block;
 }
+header h1 a,
+header h1 a:visited {
+  color: black;
+  text-decoration: none;
+}
 header h1,
 header h1 em {
   -webkit-transition: color 0.2s ease 0s;  /* Saf3.2+, Chrome */
@@ -46,14 +51,18 @@ header h1 em {
   -o-transition: color 0.2s ease 0s;  /* Opera 10.5+ */
   transition: color 0.2s ease 0s;
 }
-header h1:hover {
+header h1:hover a {
   color: orange;
 }
 header h1:hover em {
   color: black !important;
 }
-header span.description {
+header h2.description {
   font-size: 14px;
+  color: black;
+  font-weight: normal;
+  display: inline;
+  border: none;
   /*float: left;*/
 }
 
@@ -83,10 +92,15 @@ pre {
 pre#PCREck_match,
 pre#PCREck_capture,
 pre.match,
-pre.capture {
-  white-space: pre-wrap;
+pre.capture,
+pre em {
   font-family: "ProximaNova-Light", Arial, Helvetica, Verdana;  
   min-height: 40px;
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */  
 }
 input[type^=text],
 textarea,
@@ -118,7 +132,7 @@ table td {
   padding: 0;
 }
 
-section {
+section, article {
   display: block;
   width: 100%;
   margin: 5px 0;
@@ -261,10 +275,21 @@ button {
 
 }
 
-button:hover:not(:active) {
+button:hover:not(:active),
+button:focus:not(:active) {
   background: #fff;
   color: #111;
 }
 button:active {
   background: orange;
+}
+
+#cheatsheet_opener {
+  /*font-size: 14px; font-weight: normal; font-style: italic;*/
+  position: absolute;
+  top: 30px;
+  text-decoration: none;
+  right: 0;
+  display: block;
+  z-index: 1000;
 }

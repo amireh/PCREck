@@ -9,8 +9,6 @@
           var idx = parseInt(clone.attr("data-dyn-index"));
           if (idx % 2 != 0) {
             clone.addClass("odd");
-          } else {
-            // clone.before("<div class='part spanner'></div>");
           }
 
           clone.find("textarea").autosize();
@@ -18,10 +16,7 @@
         }
       });
 
-      // $("#add_subject").click();
-      // $("#PCREck_pattern").attr("value", "foo(bar)");
-      // $("textarea[name^=subject]:visible:first").attr("value", "foobar");
-      // PCREck.query();
+      PCREck.simple.query();
     });
 
 
@@ -74,7 +69,7 @@
     <div  data-dyn-entity="subjects" data-dyn-index="<%= curr_idx %>"
           class="PCREck_subject <%= 'odd' if idx != 0 && (curr_idx) % 2 != 0 %>" >
       <h3>Subject #<span data-dyn-substitute="index"><%= curr_idx %></span></h3>
-      <button data-dyn-target="subjects" data-dyn-target-index="<%= curr_idx %>" data-dyn-action="remove">X</button>
+      <button tabindex="-1" data-dyn-target="subjects" data-dyn-target-index="<%= curr_idx %>" data-dyn-action="remove">X</button>
       <div class="part spanner">
         <label>Your test string:</label>
         <textarea
