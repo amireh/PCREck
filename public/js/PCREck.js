@@ -108,7 +108,7 @@ PCREck = function() {
             mode: "simple"
           },
           success: function(url) {
-            $("#permalink").html("Your regular expression can be viewed at: <a href='" + url + "'>" + url + "</a>");
+            $("#permalink").html("Your regular expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
           }
         });
       }
@@ -127,7 +127,7 @@ PCREck = function() {
         var params = $("textarea:visible,input[type=text]:visible").serialize();
 
         $.ajax({
-          url: "/mode/advanced",
+          url: "/modes/advanced",
           type: "POST",
           data: params,
           success: function(master_resultset) {
@@ -192,7 +192,7 @@ PCREck = function() {
           type: "POST",
           data: params,
           success: function(url) {
-            $("#permalink").html("Your regular expression can be viewed at: <a href='" + url + "'>" + url + "</a>");
+            $("#permalink").html("Your regular expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
           }
         });
       }

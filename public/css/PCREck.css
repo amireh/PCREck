@@ -18,17 +18,28 @@ body {
   letter-spacing: 1px;
 }
 
-a,a:visited { color: #00A0B0; }
-a:hover { text-decoration: none; }
+a,a:visited {
+  color: #00A0B0;
+  -webkit-transition: color 0.2s ease 0s;  /* Saf3.2+, Chrome */
+  -moz-transition: color 0.2s ease 0s;  /* FF4+ */
+  -ms-transition: color 0.2s ease 0s;  /* IE10 */
+  -o-transition: color 0.2s ease 0s;  /* Opera 10.5+ */
+  transition: color 0.2s ease 0s;  
+}
+a:hover {
+  text-decoration: none;
+  color: orange;  
+}
 
 header h1 {
   color: black;
   font-size: 3em;
   margin: 0;
   padding: 10px 0;
+  display: inline-block;
 }
 header h1,
-header h1 span {
+header h1 em {
   -webkit-transition: color 0.2s ease 0s;  /* Saf3.2+, Chrome */
   -moz-transition: color 0.2s ease 0s;  /* FF4+ */
   -ms-transition: color 0.2s ease 0s;  /* IE10 */
@@ -38,8 +49,12 @@ header h1 span {
 header h1:hover {
   color: orange;
 }
-header h1:hover span {
+header h1:hover em {
   color: black !important;
+}
+header span.description {
+  font-size: 14px;
+  /*float: left;*/
 }
 
 h2 {
@@ -214,6 +229,10 @@ span#curly {
   background: #EEE;
   color: #111;
   box-shadow: 0 3px 3px 0px rgba(0, 0, 0, 0.05);
+}
+
+.PCREck_subject .part.spanner {
+  margin-bottom: 10px;
 }
 
 .PCREck_subject button {

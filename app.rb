@@ -44,7 +44,11 @@ helpers do
   # end
 end
 
-get '/mode/advanced' do
+get '/modes/simple' do
+  redirect '/'
+end
+
+get '/modes/advanced' do
   puts params.inspect
   # Accept initial values from the URL parameters, if any
   @link = Permalink.new({
@@ -57,6 +61,10 @@ get '/mode/advanced' do
   puts @link.inspect
 
   erb :"modes/advanced"
+end
+
+get '/cheatsheets/PCRE' do
+  erb :"cheatsheets/PCRE", layout: :"minimal_layout"
 end
 
 # Permanent entry links handler
@@ -125,7 +133,7 @@ post '/' do
   return 200, reportable_result(res)
 end
 
-post '/mode/advanced' do
+post '/modes/advanced' do
   puts params.inspect
   halt 400 if !params[:pattern] || !params[:subjects] || params[:subjects].empty?
 

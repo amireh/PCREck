@@ -1,0 +1,229 @@
+<section class="part left">
+  <h2>PCRE Characters</h2>
+
+  <h3>Ranges</h3>
+  <div class="">
+    <table>
+      <tbody>
+        <tr>
+          <td><code>.</code></td>
+          <td>any single character</td>
+        </tr>            
+        <tr>
+          <td><code>[abc]</code></td>
+          <td>a single character of: a, b or c</td>
+        </tr>
+        <tr>
+          <td><code>[^abc]</code></td>
+          <td>any single character except: a, b, or c</td>
+        </tr>
+        <tr>
+          <td><code>[a-z]</code></td>
+          <td>any single character in the range a-z</td>
+        </tr>
+        <tr>
+          <td><code>[a-zA-Z]</code></td>
+          <td>any single character in the range a-z or A-Z</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <h3>Assertions</h3>
+  <div class="">
+    <table>
+      <tbody>
+        <tr>
+          <td><code>^</code></td>
+          <td>start of line</td>
+        </tr>
+        <tr>
+          <td><code>$</code></td>
+          <td>end of line</td>
+        </tr>
+        <tr>
+          <td><code>\b</code></td>
+          <td>any word boundary character</td>
+        </tr>
+        <tr>
+          <td><code>\B</code></td>
+          <td>any non-word boundary character</td>
+        </tr>            
+        <tr>
+          <td><code>\A</code></td>
+          <td>start of string</td>
+        </tr>
+        <tr>
+          <td><code>\z</code></td>
+          <td>end of string</td>
+        </tr>
+      </tbody>
+    </table>        
+  </div>
+</section>
+
+
+<section class="part right">
+  <h2>PCRE Controls</h2>
+  <h3>Quantifiers</h3>
+  <table>
+    <tbody>
+      <tr>
+        <td><code>(a|b)</code></td>
+        <td>a or b</td>
+      </tr>
+      <tr>
+        <td><code>a?</code></td>
+        <td>zero or one of a</td>
+      </tr>
+      <tr>
+        <td><code>a*</code></td>
+        <td>zero or more of a</td>
+      </tr>
+      <tr>
+        <td><code>a+</code></td>
+        <td>one or more of a</td>
+      </tr>
+      <tr>
+        <td><code>a{3}</code></td>
+        <td>exactly 3 of a</td>
+      </tr>
+      <tr>
+        <td><code>a{3,}</code></td>
+        <td>3 or more of a</td>
+      </tr>
+      <tr>
+        <td><code>a{3,6}</code></td>
+        <td>between 3 and 6 of a</td>
+      </tr>        
+    </tbody>
+  </table>      
+  <h3>Subpattern modifiers</h3>
+  <table>
+    <tbody>
+      <tr>
+        <!-- <td>Positive look-ahead</code></td> -->
+        <td style="width: 160px"><code>foo(?=bar)</code></td>
+        <td><code>foo</code> will match if it's followed by <code>bar</code></td>
+      </tr>
+      <tr>
+        <!-- <td>Negative look-ahead</td> -->
+        <td><code>foo(?!bar)</code></td>
+        <td><code>foo</code> will match if it's not followed by <code>bar</code></td>
+      </tr>
+      <tr>
+        <!-- <td>Positive look-behind</td> -->
+        <td><code>(?&lt;=foo)bar</code></td>
+        <td><code>bar</code> will match if it's preceded by <code>foo</code></td>
+      </tr>
+      <tr>
+        <!-- <td>Negative look-behind</td> -->
+        <td><code>(?&lt;!foo)bar</code></td>
+        <td><code>bar</code> will match if there isn't a <code>foo</code> behind it</td>
+      </tr>
+      <tr>
+        <!-- <td>Conditional subpatterns</td> -->
+        <td><code>(foo)?(?(1)(bar))</code></td>
+        <td><code>bar</code> will be captured only if <code>foo</code> was</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</section>
+<section>
+  <h2>PCRE Character Classes</h2>
+    <div class="part left">
+      <h3>Generic character types</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td><code>\s</code></td>
+            <td>any whitespace character</td>
+          </tr>
+          <tr>
+            <td><code>\S</code></td>
+            <td>any non-whitespace character</td>
+          </tr>
+          <tr>
+            <td><code>\d</code></td>
+            <td>any digit</td>
+          </tr>
+          <tr>
+            <td><code>\D</code></td>
+            <td>any non-digit</td>
+          </tr>
+          <tr>
+            <td><code>\w</code></td>
+            <td>any word character (letter, number, underscore)</td>
+          </tr>
+          <tr>
+            <td><code>\W</code></td>
+            <td>any non-word character</td>
+          </tr>
+
+       </tbody>
+      </table>   
+
+      <h3>POSIX Classes</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td><code>[:alnum:]</code></td>
+            <td>letters and digits</td>
+          </tr>
+          <tr>
+            <td><code>[:alpha:]</code></td>
+            <td>letters</td>
+          </tr>
+          <tr>
+            <td><code>[:ascii:]</code></td>
+            <td>character codes 0 - 127</td>
+          </tr>
+          <tr>
+            <td><code>[:blank:]</code></td>
+            <td>space or tab only</td>
+          </tr>
+          <tr>
+            <td><code>[:cntrl:]</code></td>
+            <td>control characters</td>
+          </tr>
+          <tr>
+            <td><code>[:graph:]</code></td>
+            <td>printing characters, excluding space</td>
+          </tr>
+          <tr>
+            <td><code>[:print:]</code></td>
+            <td>printing characters, excluding space</td>
+          </tr>
+          <tr>
+            <td><code>[:punct:]</code></td>
+            <td>printing characters, excluding letters and digits and spaces</td>
+          </tr>
+          <tr>
+            <td><code>[:space:]</code></td>
+            <td>white space (not quite the same as \s)</td>
+          </tr>
+          <tr>
+            <td><code>[:xdigit:]</code></td>
+            <td>hexadecimal digits</td>
+          </tr>
+        </tbody>
+      </table>
+
+           
+    </div>
+    <div class="part right">
+      <h3>Usage examples</h3>
+      <p>POSIX classes are supported only as sub-classes
+        (<code>[]</code> define a class);
+       to match hexadecimal digits
+        along with the characters <code>%</code> and <code>}</code>:
+      </p>
+      <p><code>[%{[:xdigit:]]</code></p>
+      <p>To negate a class, prefix the identifier with <code>^</code>:
+      </p>
+      <p><code>[%{[:^xdigit:]]</code></p>
+
+    </div>
+</section>

@@ -35,14 +35,27 @@
   <body>
     <header>
       <hgroup>
-        <h1>PCRE<span style="color: orange">ck</span></h1>
+        <h1>
+          PCRE<em style="font-style: normal; color: orange">ck</em>
+        </h1>
+        <span class="description">a realtime <a href="http://www.pcre.org/pcre.txt">PCRE</a> regular expression editor</span>
+        <nav>
+          &gt;&gt;
+          <% if @link && @link.mode == "simple" %>
+            <span>Simple mode</span> &brvbar;
+            <a title="The advanced mode provides features useful for complex and large expressions" href="/modes/advanced">Advanced mode</a>
+          <% else %>
+            <a href="/">Simple mode</a> &brvbar;
+            <span>Advanced mode</span>
+          <% end %>
+        </nav>
       </hgroup>
-      <p>
+      <!-- <p>
         PCREck is a <a href="http://www.pcre.org/pcre.txt">PCRE</a>
         regular expression editor and tester similar 
         to what <a href="http://www.rubular">Rubular</a> is
         for Ruby's regular expressions.
-      </p>
+      </p> -->
     </header>
 
     <%= yield %>
