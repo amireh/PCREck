@@ -71,6 +71,30 @@
         var t = null;
         var pulse = 50;
 
+        $("#gen_permalink").click(function() {
+          var pattern = $("#PCREck_pattern").attr("value");
+          var subject = $("#PCREck_subject").attr("value");
+          var options = $("#PCREck_pattern_options").attr("value");
+
+          if (pattern.length == 0 && subject.length == 0) {
+            reset_status();
+            return;
+          }
+
+          $.ajax({
+            url: "/permalink",
+            type: "POST",
+            data: {
+              pattern: pattern,
+              subject: subject,
+              options: options
+            },
+            success: function(url) {
+              $("#permalink").html("Your regular expression can be viewed at: <a href='" + url + "'>" + url + "</a>");
+            }
+          });
+        });
+
         var refresh = function() {
           if (t) { clearTimeout(t); }
           t = setTimeout("test()", pulse);
@@ -106,6 +130,12 @@
               $(this).attr("checked", "checked");
           });
         });
+
+        // force a test if the fields were initialized with a custom value
+        var pattern = $("#PCREck_pattern").attr("value");
+        var subject = $("#PCREck_subject").attr("value");
+        if (pattern.length > 0 && subject.length > 0)
+          test();
 
       });
 
@@ -145,17 +175,25 @@
           <code>(?</code>
           <input type="text" id="PCREck_pattern_options"
             style="width: 70px; font-size: 12px"
-            placeholder="imsxUX" value="" />
+            placeholder="imsxUX"
+            value="<%= @link.options %>" />
           <code>)</code>
         </div>
         <div class="part right" style="width: 840px; border-left: none">
-          <input type="text" id="PCREck_pattern" autofocus="autofocus" value=""
-          placeholder="^(banana)+s? (.*)$" />
+          <input 
+            type="text" id="PCREck_pattern" 
+            autofocus="autofocus"
+            placeholder="^(banana)+s? (.*)$"
+            value="<%= @link.pattern %>"
+           />
         </div>
       </div>
       <div class="part left">
         <label for="PCREck_subject">Your test string:</label>
-        <textarea id="PCREck_subject" placeholder="bananas in the car"></textarea>
+        <textarea
+          id="PCREck_subject"
+          placeholder="bananas in the car"><%= @link.subject %></textarea>
+        <!-- <button id="add_subject">Add another subject</button> -->
       </div>
       
       <div class="part right">
@@ -169,7 +207,7 @@
         <pre id="PCREck_capture">--</pre>
 
       </div>
-
+      <span id="curly">{</span>
     </section>
 
     <section id="PCRE_options">
@@ -200,6 +238,11 @@
           Extra <code>/X</code>
         </label>
       </fieldset>
+    </section>
+
+    <section id="PCREck_actions">
+      <button id="gen_permalink">Permanent link</button>
+      <span id="permalink"></span>
     </section>
 
     <section class="part left">

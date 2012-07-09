@@ -1,12 +1,66 @@
 gem 'sinatra'
+gem "data_mapper", ">=1.2.0"
 
 require 'rubygems'
 require 'sinatra'
 require 'json'
-require 'shellwords'
+require 'base64'
+require 'data_mapper'
+require 'dm-mysql-adapter'
+
+class Permalink
+  include DataMapper::Resource
+
+  property :id, String, 
+    key: true, 
+    unique: true, 
+    length: 24, 
+    default: lambda { |_,__| Base64.urlsafe_encode64 rand(36**16).to_s(36) }
+  property :pattern, Text, default: ""
+  property :subject, Text, default: ""
+  property :options, String, default: ""
+  property :created_at, DateTime, default: lambda { |_,__| DateTime.now }
+end
+
+configure do
+  puts "connecting to the MySQL backend"
+  DataMapper::Logger.new($stdout, :debug)
+  DataMapper.setup(:default, 'mysql://root@localhost/PCREck')
+  DataMapper.finalize
+  DataMapper.auto_upgrade!
+end
+
+helpers do
+  # for permalinks
+  # def deflate(string, level)
+  #   Base64.urlsafe_encode64 string
+  # end
+
+  # def inflate(string)
+  #   Base64.urlsafe_decode64 string
+  # end
+end
+
+# Permanent entry links handler
+get '/:token' do |token|
+  return if token == "favicon.ico" # ...
+
+  @link = Permalink.get(token) || Permalink.new
+
+  erb :index
+end
 
 get '/' do
-  erb :index
+  puts params.inspect
+
+  # Accept initial values from the URL parameters, if any
+  @link = Permalink.new({
+    pattern: params[:p] || "",
+    subject: params[:s] || "",
+    options: params[:o] || ""
+  })
+
+  return erb :index
 end
 
 post '/' do
@@ -17,21 +71,15 @@ post '/' do
 
   halt 401 if !ptrn || !text
 
-  # ret = %x{PCREck.lua \
-  #   --compact \
-  #   --pattern=#{Shellwords.escape(ptrn.to_json)} \
-  #   --subject=#{Shellwords.escape(text.to_json)}}
-
   ret = nil
   IO.popen(["PCREck.lua", 
             "--pattern=#{ptrn.to_json}", 
             "--subject=#{text.to_json}", 
             "--compact", :err=>[:child, :out]]) {|io|
     ret = io.read
-    # puts ret
+    puts ret
     ret = ret.split("\n").last
   }
-
 
   halt 500 if ret.strip.empty?
 
@@ -41,9 +89,23 @@ post '/' do
     return [ false, ret["error"] ].to_json
   end
 
-  # puts ret.inspect
+  puts ret.inspect
 
   return 200, ret.to_json
+end
+
+post '/permalink' do
+  halt 401 if !params[:pattern] || !params[:subject]
+  halt 401 if params[:pattern].empty? && params[:subject].empty?
+
+  link = Permalink.create({
+    pattern: params[:pattern],
+    subject: params[:subject],
+    options: params[:options]
+  })
+
+  port = request.port != 80 ? ":#{request.port}" : ""
+  return 200, "http://#{request.host}#{port}/#{link.id}"
 end
 
 helpers do

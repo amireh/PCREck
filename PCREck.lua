@@ -21,6 +21,7 @@ cli:set_name("PCREck")
 cli:add_opt("--pattern=PTRN", "PCRE regular expression pattern", nil, ".*")
 cli:add_opt("--subject=TEXT", "subject to test using the pattern", "subject", "")
 cli:add_flag("--compact", "output will be compact")
+cli:add_flag("--raw", "pattern and subject will be treated as raw instead of JSON")
 cli:add_flag("-d, --daemonize", "run PCREck as a daemon")
 cli:add_opt("-i, --interface", "the interface to bind to when daemonized", "interface", "127.0.0.1")
 cli:add_opt("-p, --port", "the port to bind to when daemonized", "port", 8942)
@@ -32,22 +33,26 @@ if not args then return end
 require 'rex_pcre'
 local json = require 'json'
 
-function test_subject(pattern, subject)
+function test_subject(pattern, subject, dont_decode)
   print("Testing pattern: [" .. pattern .. "]")
   print("Testing subject: [" .. subject .. "]")
 
+  if not dont_decode then
+    pattern = json.decode(pattern)
+    subject = json.decode(subject)
+  end
 
-  local success, rex_or_msg = pcall(rex_pcre.new, json.decode(pattern) )
+  local success, rex_or_msg = pcall(rex_pcre.new, pattern)
   if not success then
     return nil, "invalid regular expression; " .. rex_or_msg
   end
 
 
-  return { rex_pcre.find(json.decode(subject), rex_or_msg) }
+  return { rex_pcre.find(subject, rex_or_msg) }
 end
 
 if not args["d"] then
-  local encoded, err = test_subject(args["pattern"], args["subject"])
+  local encoded, err = test_subject(args["pattern"], args["subject"], args["raw"])
 
   if args["compact"] then
     if encoded then
@@ -59,7 +64,7 @@ if not args["d"] then
     return
   end
 
-  if encoded then
+  if encoded and #encoded >= 2 then
     print("Matched at [" .. encoded[1] .. "," .. encoded[2] .. "]")
     print("Captures:")
     for k,v in pairs(encoded) do
