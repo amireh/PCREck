@@ -7,11 +7,7 @@
       $("#gen_permalink").click(PCREck.simple.gen_permalink);
 
       // force a query if the fields were initialized with a custom value
-      var pattern = $("#PCREck_pattern").attr("value");
-      var subject = $("#PCREck_subject").attr("value");
-      if (pattern.length > 0 && subject.length > 0)
-        PCREck.simple.query();
-
+      PCREck.simple.query();
     });
 
   </script>

@@ -46,7 +46,7 @@ configure do
         json_result = [ false, json_result["error"] ]
       end
 
-      # log json_result.inspect
+      log json_result.inspect
 
       dont_encode ? json_result : json_result.to_json
     end
@@ -74,7 +74,7 @@ configure do
 
   log "connecting to the MySQL backend"
 
-  DataMapper::Logger.new($stdout, :debug)
+  # DataMapper::Logger.new($stdout, :debug)
   DataMapper.setup(:default, 'mysql://root@localhost/PCREck')
   DataMapper.finalize
   DataMapper.auto_upgrade!

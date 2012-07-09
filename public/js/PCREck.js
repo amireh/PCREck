@@ -6,9 +6,58 @@ PCREck = function() {
       tt = null,
       pulse = 50;
 
+  /**
+   * format_result():
+   *  Decodes the PCREck response, injects (and highlights) matched and captured values
+   *  in the respective elements.
+   *
+   * Parameters:
+   *  1. result; a JSON object containing the PCREck result
+   *  2. subject; the subject (text) the result applies to
+   *  3. match_el; jQuery handle to the element that contains the matches
+   *  4. capture_el; jQuery handle to the element that contains the captures
+   *  5. subject_idx; the index of the subject (ONLY IN ADVANCED MODE)
+   */
+  function format_result(result, subject, match_el, capture_el, subject_idx) {
+    if (result.length == 0) {
+      mode == "simple"
+        ? PCREck.simple.reset_status("No match.")
+        : PCREck.advanced.reset_status(subject_idx, "No match.");
+
+      return;
+    }
+
+    if (!result[0]) {
+      mode == "simple"
+        ? PCREck.simple.reset_status("Error: " + result[1])
+        : PCREck.advanced.reset_status(subject_idx, "Error: " + result[1]);
+
+      return;
+    }
+
+    var match = subject,
+        match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
+        match_end = result[1] - 1;
+
+    match = match.split('');
+    match[match_begin] = "<em>" + match[match_begin];
+    match[match_end] = match[match_end] + "</em>";
+    match = match.join('');
+    // this is required for highlighting linebreaks and whitespace
+    match = match.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
+
+    match_el.html(match);
+    capture_el.empty();
+    // starting from 2 since the first two elements are the match boundaries
+    for (var i = 2; i < result.length; ++i) {
+      capture_el.append("  %" + (i-1) + " => " + result[i] + "\n");
+    }
+  }
+
   return {
     this: this,
     setup: function() {
+      // these are constant across all modes
       pattern_el = $("#PCREck_pattern"),
       options_el = $("#PCREck_pattern_options");
     },
@@ -56,33 +105,9 @@ PCREck = function() {
             text: subject
           },
           success: function(result) {
-            if (result.length == 0) {
-              PCREck.simple.reset_status("No match.");
-              return;
-            }
+            result = JSON.parse(result);
 
-            if (!result[0]) {
-              PCREck.simple.reset_status("Error: " + result[1]);
-              return;
-            }
-
-            var match = subject,
-                match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
-                match_end = result[1] - 1;
-
-            match = match.split('');
-            match[match_begin] = "<em>" + match[match_begin];
-            match[match_end] = match[match_end] + "</em>";
-            match = match.join('');
-            // this is required for highlighting linebreaks and whitespace
-            match = match.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
-
-            $("#PCREck_match").html(match);
-            $("#PCREck_capture").empty();
-            // starting from 2 since the first two elements are the match boundaries
-            for (var i = 2; i < result.length; ++i) {
-              $("#PCREck_capture").append("  %" + (i-1) + " => " + result[i] + "\n");
-            }
+            return format_result(result, subject, $("#PCREck_match"), $("#PCREck_capture"));
           }
         });
 
@@ -132,41 +157,18 @@ PCREck = function() {
           data: params,
           success: function(master_resultset) {
             master_resultset = JSON.parse(master_resultset);
-            // console.log(master_resultset);
 
             $.each(master_resultset, function(subject_idx, result) {
-              console.log(result)
-              console.log(typeof result)
-              if (result.length == 0) {
-                PCREck.advanced.reset_status(subject_idx, "No match.");
-                return;
-              }
+              var subject_el = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
+                  match_el = subject_el.find(".match:first"),
+                  capture_el = subject_el.find(".capture:first"),
+                  subject = subject_el.find("textarea:first").attr("value");
 
-              if (!result[0]) {
-                PCREck.advanced.reset_status(subject_idx, "Error: " + result[1]);
-                return;
-              }
-
-              var subject = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
-                  match = subject.find(".match:first"),
-                  capture = subject.find(".capture:first");
-
-              var matched_subject = subject.find("textarea:first").attr("value");
-              var match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
-                  match_end = result[1] - 1;
-
-              matched_subject = matched_subject.split('');
-              matched_subject[match_begin] = "<em>" + matched_subject[match_begin];
-              matched_subject[match_end] = matched_subject[match_end] + "</em>";
-              matched_subject = matched_subject.join('');
-              matched_subject = matched_subject.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
-
-              match.html(matched_subject);
-              capture.empty();
-              for (var i = 2; i < result.length; ++i) {
-                capture.append("  %" + (i-1) + " => " + result[i] + "\n");
-              }
-
+              format_result(result, 
+                            subject,
+                            match_el,
+                            capture_el,
+                            subject_idx);
             });
           }
         });
@@ -174,18 +176,8 @@ PCREck = function() {
         return false;
       }, // advanced.query()
       gen_permalink: function() {
-        // var pattern = pattern_el.attr("value"),
-        //     options = options_el.attr("value"),
-        //     subject = subject_el.attr("value");
         var params = $("textarea:visible,input[type=text]:visible").serialize();
         params += "&mode=advanced"
-        // console.log(params);
-        // $.extend(params, { mode: "advanced" });
-        // console.log(params);
-
-        // if (pattern.length == 0 && subject.length == 0) {
-          // return;
-        // }
 
         $.ajax({
           url: "/permalink",
