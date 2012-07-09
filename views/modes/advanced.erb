@@ -12,62 +12,64 @@
       <link href="/css/fonts/proximanova.css" rel="stylesheet" type="text/css" />
     <% end %>
 
-    <script src="/js/codemirror-2.3/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="/js/codemirror-2.3/lib/codemirror.css">
-    <script src="/js/codemirror-2.3/mode/shell/shell.js"></script>
-
+    <script src="/js/jquery.autosize.js"></script>
+    <script src="/js/dynamism.js"></script>
     <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
 
-      var pattern_editor = null,
-          subject_editor = null;
-
-      var reset_status = function(text) {
-        $("#PCREck_match").empty().html(text || "");
-        $("#PCREck_capture").empty();
+      var reset_status = function(idx, text) {
+        $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .match").empty().html(text || "");
+        $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .capture").empty();
       }
 
       var test = function() {
-
         if ($("#PCREck_pattern").attr("value").length == 0) {
           reset_status();
           return;
         }
 
+        var params = $("textarea:visible,input[type=text]:visible").serialize();
+
         $.ajax({
-          url: "/",
+          url: "/mode/advanced",
           type: "POST",
-          data: {
-            pattern: "(?" + $("#PCREck_pattern_options").attr("value") + ")" + 
-                     $("#PCREck_pattern").attr("value"),
-            text: $("#PCREck_subject").attr("value")
-          },
-          success: function(PCREck_result) {
-            if (!PCREck_result || PCREck_result.length == 0) {
-              reset_status("No match.");
-              return;
-            }
+          data: params,
+          success: function(master_resultset) {
+            master_resultset = JSON.parse(master_resultset);
+            // console.log(master_resultset);
 
-            if (!PCREck_result[0]) {
-              reset_status("Error: " + PCREck_result[1]);
-              return;
-            }
+            $.each(master_resultset, function(subject_idx, result) {
+              if (!result || result.length == 0) {
+                reset_status(subject_idx, "No match.");
+                return;
+              }
 
-            var target = $("#PCREck_subject").attr("value");
-            var match_begin = PCREck_result[0] - 1, // subtract 1 because Lua starts indexes @ 1
-                match_end = PCREck_result[1] - 1;
+              if (!result[0]) {
+                reset_status(subject_idx, "Error: " + result[1]);
+                return;
+              }
 
-            target = target.split('');
-            target[match_begin] = "<em>" + target[match_begin];
-            target[match_end] = target[match_end] + "</em>";
-            target = target.join('');
-            target = target.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
+              var subject = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
+                  match = subject.find(".match:first"),
+                  capture = subject.find(".capture:first");
 
-            $("#PCREck_match").html(target);
-            $("#PCREck_capture").empty();
-            for (var i = 2; i < PCREck_result.length; ++i) {
-              $("#PCREck_capture").append("  %" + (i-1) + " => " + PCREck_result[i] + "\n");
-            }
+              var matched_subject = subject.find("textarea:first").attr("value");
+              var match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
+                  match_end = result[1] - 1;
+
+              matched_subject = matched_subject.split('');
+              matched_subject[match_begin] = "<em>" + matched_subject[match_begin];
+              matched_subject[match_end] = matched_subject[match_end] + "</em>";
+              matched_subject = matched_subject.join('');
+              matched_subject = matched_subject.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
+
+              match.html(matched_subject);
+              capture.empty();
+              for (var i = 2; i < result.length; ++i) {
+                capture.append("  %" + (i-1) + " => " + result[i] + "\n");
+              }
+
+            });
           }
         });
 
@@ -144,35 +146,32 @@
         if (pattern.length > 0 && subject.length > 0)
           test();
 
+        $("textarea").autosize();
 
-        pattern_editor = CodeMirror.fromTextArea(document.getElementById("PCREck_pattern"), {
-          mode: "shell",
-          lineNumbers: false,
-          matchBrackets: true,
-          // theme: "default",
-          tabSize: 2,
-          gutter: false,
-          autoClearEmptyLines: false,
-          lineWrapping: true
+        dyn_register_callback(function(clone, action) {
+          if (clone && action == "add") {
+            var idx = clone.attr("data-dyn-index");
+            if (idx % 2 != 0)
+              clone.addClass("odd");
+
+            clone.find("textarea").autosize();
+            clone.find("textarea").keyup(function() {
+              refresh();
+            });
+          }
         });
+
+        $("#add_subject").click();
+        $("#PCREck_pattern").attr("value", "foo(bar)");
+        $("textarea[name^=subject]:visible:first").attr("value", "foobar");
+        test();
       });
 
+  
     </script>
 
-    <script type="text/javascript">
+    <%= erb :"_google_analytics" %>
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-15596792-3']);
-      _gaq.push(['_setDomainName', 'pcreck.com']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>    
   </head>
   <body>
     <header>
@@ -186,54 +185,56 @@
         for Ruby's regular expressions.
       </p>
     </header>
-    <section id="PCREck">
+    <form>
+    <section class="PCREck">
       <div class="part spanner">
         <label for="PCREck_pattern">Your regular expression:</label>
         <div class="part left" style="width: 120px; margin-right: 0">
           <code>(?</code>
           <input type="text" id="PCREck_pattern_options"
+            name="options"
             style="width: 70px; font-size: 12px"
             placeholder="imsxUX"
             value="<%= @link.options %>" />
           <code>)</code>
         </div>
         <div class="part right" style="width: 840px; border-left: none">
-<!--           <input 
-            type="text" id="PCREck_pattern" 
-            autofocus="autofocus"
-            placeholder="^(banana)+s? (.*)$"
-            value="<%= @link.pattern %>"
-           /> -->
          <textarea 
-            id="PCREck_pattern" 
+            id="PCREck_pattern"
+            name="pattern"
             autofocus="autofocus"
             placeholder="^(banana)+s? (.*)$"><%= @link.pattern %></textarea>
         </div>
       </div>
-      <div class="part left">
-        <label for="PCREck_subject">Your test string:</label>
-        <textarea
-          id="PCREck_subject"
-          placeholder="bananas in the car"><%= @link.subject %></textarea>
-        <!-- <button id="add_subject">Add another subject</button> -->
-      </div>
-      
-      <div class="part right">
-        <label>
-          Matches:
-        </label>
-        <pre id="PCREck_match">--</pre>
-        <label>
-          Captured subpatterns:
-        </label>
-        <pre id="PCREck_capture">--</pre>
-
-      </div>
-      <span id="curly">{</span>
     </section>
-
     <%= erb :"_options" %>
+    <section class="PCREck" id="PCREck_subjects">
 
+      <div class="PCREck_subject" data-dyn-entity="subjects">
+        <h3>Subject #<span data-dyn-substitute="index"></span></h3>
+        <div class="part spanner">
+          <label>Your test string:</label>
+          <textarea
+            name="subjects[-1]"
+            placeholder="bananas in the car"><%= @link.subject %></textarea>
+          <!-- <button id="add_subject">Add another subject</button> -->
+        </div>
+        
+        <div class="part spanner">
+          <label>
+            Matches:
+          </label>
+          <pre class="match">--</pre>
+          <label>
+            Captured subpatterns:
+          </label>
+          <pre class="capture">--</pre>
+
+        </div>
+      </div>
+    </section>
+    <button id="add_subject" data-dyn-target="subjects">Add another subject</button>
+    </form>
     <section id="PCREck_actions">
       <button id="gen_permalink">Permanent link</button>
       <span id="permalink"></span>

@@ -41,6 +41,17 @@ helpers do
   # end
 end
 
+get '/mode/advanced' do
+  # Accept initial values from the URL parameters, if any
+  @link = Permalink.new({
+    pattern: params[:p] || "",
+    subject: params[:s] || "",
+    options: params[:o] || ""
+  })
+
+  erb :"modes/advanced"
+end
+
 # Permanent entry links handler
 get '/:token' do |token|
   return if token == "favicon.ico" # ...
@@ -63,40 +74,62 @@ get '/' do
   return erb :index
 end
 
+
+def query(pattern, subject)
+  res = nil
+  IO.popen(["PCREck.lua", 
+            "--pattern=#{pattern.to_json}", 
+            "--subject=#{subject.to_json}", 
+            "--compact", :err=>[:child, :out]]) {|io|
+    res = io.read
+    puts res
+    res = res.split("\n").last.strip
+  }
+  res
+end
+def reportable_result(pcreck_res, dont_encode = false)
+  json_result = JSON.parse(pcreck_res)
+
+  if json_result.class != Array && json_result.has_key?("error")
+    return [ false, json_result["error"] ].to_json
+  end
+
+  # puts json_result.inspect
+
+  dont_encode ? json_result : json_result.to_json
+end
+
 post '/' do
   content_type :json
 
   ptrn = params[:pattern]
   text = params[:text]
 
-  halt 401 if !ptrn || !text
+  halt 400 if !ptrn || !text
 
-  ret = nil
-  IO.popen(["PCREck.lua", 
-            "--pattern=#{ptrn.to_json}", 
-            "--subject=#{text.to_json}", 
-            "--compact", :err=>[:child, :out]]) {|io|
-    ret = io.read
-    puts ret
-    ret = ret.split("\n").last
+  res = query(ptrn, text)
+
+  # halt 500 if res.empty?
+
+  return 200, reportable_result(res)
+end
+
+post '/mode/advanced' do
+  puts params.inspect
+  halt 400 if !params[:pattern] || !params[:subjects] || params[:subjects].empty?
+
+  collective_result = {}
+  params[:subjects].each_pair { |idx, subject|
+    res = query(params[:pattern], subject)
+    collective_result[idx] = reportable_result(res, true)
   }
 
-  halt 500 if ret.strip.empty?
-
-  ret = JSON.parse(ret)
-
-  if ret.class != Array && ret.has_key?("error")
-    return [ false, ret["error"] ].to_json
-  end
-
-  puts ret.inspect
-
-  return 200, ret.to_json
+  collective_result.to_json
 end
 
 post '/permalink' do
-  halt 401 if !params[:pattern] || !params[:subject]
-  halt 401 if params[:pattern].empty? && params[:subject].empty?
+  halt 400 if !params[:pattern] || !params[:subject]
+  halt 400 if params[:pattern].empty? && params[:subject].empty?
 
   link = Permalink.create({
     pattern: params[:pattern],
