@@ -93,7 +93,7 @@ def reportable_result(pcreck_res, dont_encode = false)
   json_result = JSON.parse(pcreck_res)
 
   if json_result.class != Array && json_result.has_key?("error")
-    return [ false, json_result["error"] ].to_json
+    json_result = [ false, json_result["error"] ]
   end
 
   # puts json_result.inspect

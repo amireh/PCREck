@@ -1,136 +1,7 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
-
-    var reset_status = function(idx, text) {
-      $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .match").empty().html(text || "");
-      $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .capture").empty();
-    }
-
-    var test = function() {
-      if ($("#PCREck_pattern").attr("value").length == 0) {
-        reset_status();
-        return;
-      }
-
-      var params = $("textarea:visible,input[type=text]:visible").serialize();
-
-      $.ajax({
-        url: "/mode/advanced",
-        type: "POST",
-        data: params,
-        success: function(master_resultset) {
-          master_resultset = JSON.parse(master_resultset);
-          // console.log(master_resultset);
-
-          $.each(master_resultset, function(subject_idx, result) {
-            if (!result || result.length == 0) {
-              reset_status(subject_idx, "No match.");
-              return;
-            }
-
-            if (!result[0]) {
-              reset_status(subject_idx, "Error: " + result[1]);
-              return;
-            }
-
-            var subject = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
-                match = subject.find(".match:first"),
-                capture = subject.find(".capture:first");
-
-            var matched_subject = subject.find("textarea:first").attr("value");
-            var match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
-                match_end = result[1] - 1;
-
-            matched_subject = matched_subject.split('');
-            matched_subject[match_begin] = "<em>" + matched_subject[match_begin];
-            matched_subject[match_end] = matched_subject[match_end] + "</em>";
-            matched_subject = matched_subject.join('');
-            matched_subject = matched_subject.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
-
-            match.html(matched_subject);
-            capture.empty();
-            for (var i = 2; i < result.length; ++i) {
-              capture.append("  %" + (i-1) + " => " + result[i] + "\n");
-            }
-
-          });
-        }
-      });
-
-      return false;
-    };
-
     $(function() {
-      var t = null;
-      var pulse = 50;
-
-      $("#gen_permalink").click(function() {
-        var pattern = $("#PCREck_pattern").attr("value");
-        var subject = $("#PCREck_subject").attr("value");
-        var options = $("#PCREck_pattern_options").attr("value");
-
-        if (pattern.length == 0 && subject.length == 0) {
-          reset_status();
-          return;
-        }
-
-        $.ajax({
-          url: "/permalink",
-          type: "POST",
-          data: {
-            pattern: pattern,
-            subject: subject,
-            options: options
-          },
-          success: function(url) {
-            $("#permalink").html("Your regular expression can be viewed at: <a href='" + url + "'>" + url + "</a>");
-          }
-        });
-      });
-
-      var refresh = function() {
-        if (t) { clearTimeout(t); }
-        t = setTimeout("test()", pulse);
-      }
-
-      $("#PCREck input, #PCREck textarea").keyup(function() {
-        refresh();
-      });
-      $("#PCRE_options input[type=checkbox]").change(function() {
-        refresh();
-      })
-
-      // append or remove a toggled pattern option into the pattern option box
-      $("#PCRE_options input[type=checkbox]").change(function() {
-        var el = $(this);
-        var opts = $("#PCREck_pattern_options");
-        var curr_opts = opts.attr("value");
-        if (el.is(":checked")) {
-          opts.attr("value", curr_opts + el.attr("value"));
-        } else {
-          opts.attr("value", opts.attr("value").replace(el.attr("value"), ""));
-        }
-      })
-
-      // update the pattern options' :checked state when the user
-      // manually writes options in the pattern option box
-      $("#PCREck_pattern_options").keyup(function() {
-        var opts = $(this).attr("value").split('');
-        $("#PCRE_options input[type=checkbox]").attr("checked", null);
-        $("#PCRE_options input[type=checkbox]").each(function() {
-          var this_opt = $(this).attr("value");
-          if (opts.indexOf(this_opt) != -1)
-            $(this).attr("checked", "checked");
-        });
-      });
-
-      // force a test if the fields were initialized with a custom value
-      var pattern = $("#PCREck_pattern").attr("value");
-      var subject = $("#PCREck_subject").attr("value");
-      if (pattern.length > 0 && subject.length > 0)
-        test();
-
-      $("textarea").autosize();
+      PCREck.set_mode("advanced");
 
       dyn_register_callback(function(clone, action) {
         if (clone && action == "add") {
@@ -139,23 +10,20 @@
             clone.addClass("odd");
 
           clone.find("textarea").autosize();
-          clone.find("textarea").keyup(function() {
-            refresh();
-          });
+          clone.find("textarea").keyup(PCREck.pulsate);
         }
       });
 
       $("#add_subject").click();
       $("#PCREck_pattern").attr("value", "foo(bar)");
       $("textarea[name^=subject]:visible:first").attr("value", "foobar");
-      test();
+      PCREck.query();
     });
 
 
   </script>
 <% end %>
 
-<form>
 <section class="PCREck">
   <div class="part spanner">
     <label for="PCREck_pattern">Your regular expression:</label>
@@ -204,7 +72,7 @@
   </div>
 </section>
 <button id="add_subject" data-dyn-target="subjects">Add another subject</button>
-</form>
+
 <section id="PCREck_actions">
   <button id="gen_permalink">Permanent link</button>
   <span id="permalink"></span>

@@ -1,5 +1,6 @@
 PCREck = function() {
-  var pattern_el = null,
+  var mode = null,
+      pattern_el = null,
       options_el = null,
       subject_el = null,
       tt = null,
@@ -13,13 +14,23 @@ PCREck = function() {
     },
     /** accepted modes: "simple"|"advanced" */
     set_mode: function(in_mode) {
+      mode = in_mode;
+
       if (in_mode == "simple") {
         subject_el = $("#PCREck_subject");
       }
     },
     pulsate: function() {
       if (tt) { clearTimeout(tt); }
-      tt = setTimeout("PCREck.simple.query()", pulse);
+      tt = setTimeout("PCREck.query()", pulse);
+    },
+    query: function() {
+      if (mode == "simple")
+        return PCREck.simple.query();
+      else if (mode == "advanced")
+        return PCREck.advanced.query();
+      else
+        console.log("Error: no PCREck mode has been set, unable to query.")
     },
 
     simple: {
@@ -102,8 +113,64 @@ PCREck = function() {
       }
     },
     advanced: {
+      reset_status: function(idx, text) {
+        $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .match").empty().html(text || "");
+        $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .capture").empty();
+      },
       query: function(pattern, options, subjects) {
+        if ($("#PCREck_pattern").attr("value").length == 0) {
+          reset_status();
+          return;
+        }
 
+        var params = $("textarea:visible,input[type=text]:visible").serialize();
+
+        $.ajax({
+          url: "/mode/advanced",
+          type: "POST",
+          data: params,
+          success: function(master_resultset) {
+            master_resultset = JSON.parse(master_resultset);
+            // console.log(master_resultset);
+
+            $.each(master_resultset, function(subject_idx, result) {
+              console.log(result)
+              console.log(typeof result)
+              if (result.length == 0) {
+                PCREck.advanced.reset_status(subject_idx, "No match.");
+                return;
+              }
+
+              if (!result[0]) {
+                PCREck.advanced.reset_status(subject_idx, "Error: " + result[1]);
+                return;
+              }
+
+              var subject = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
+                  match = subject.find(".match:first"),
+                  capture = subject.find(".capture:first");
+
+              var matched_subject = subject.find("textarea:first").attr("value");
+              var match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
+                  match_end = result[1] - 1;
+
+              matched_subject = matched_subject.split('');
+              matched_subject[match_begin] = "<em>" + matched_subject[match_begin];
+              matched_subject[match_end] = matched_subject[match_end] + "</em>";
+              matched_subject = matched_subject.join('');
+              matched_subject = matched_subject.replace(' ', "&nbsp;").replace(/\n/g, "&nbsp;<br />");
+
+              match.html(matched_subject);
+              capture.empty();
+              for (var i = 2; i < result.length; ++i) {
+                capture.append("  %" + (i-1) + " => " + result[i] + "\n");
+              }
+
+            });
+          }
+        });
+
+        return false;
       }
     }
   }

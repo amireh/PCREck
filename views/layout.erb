@@ -21,9 +21,10 @@
       PCREck = PCREck();
       $(function() {
         PCREck.setup();
-        
+
         $("input[type=text], textarea").keyup(PCREck.pulsate);
         $("input[type=checkbox]").change(PCREck.pulsate);
+        $("textarea").autosize();
       });
     </script>
 

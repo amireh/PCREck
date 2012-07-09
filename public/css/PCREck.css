@@ -52,7 +52,9 @@ pre {
   margin: 0;
 }
 pre#PCREck_match,
-pre#PCREck_capture {
+pre#PCREck_capture,
+pre.match,
+pre.capture {
   white-space: pre-wrap;
   font-family: "ProximaNova-Light", Arial, Helvetica, Verdana;  
   min-height: 40px;
