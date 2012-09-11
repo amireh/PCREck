@@ -46,8 +46,14 @@ function test_subject(pattern, subject, decode)
     return nil, "invalid regular expression; " .. rex_or_msg
   end
 
+  local match = { rex_pcre.find(subject, rex_or_msg) }
+  
+  -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
+  if match[1] then
+    match[1] = match[1] - 1
+  end
 
-  return { rex_pcre.find(subject, rex_or_msg) }
+  return match
 end
 
 if not args["d"] then

@@ -4,7 +4,7 @@ module PCREck
     # returns the last line of the output
     def query(in_pattern, subject, options = "", encode = true)
       pattern = "(?#{options})#{in_pattern}"
-      
+
       res = nil
       IO.popen(["PCREck.lua", 
                 "--pattern=#{pattern.to_json}", 
@@ -12,9 +12,9 @@ module PCREck
                 "--decode", 
                 "--compact", :err=>[:child, :out]]) {|io|
         res = io.read
-        # log "---- PCREck's output:"
-        # log res
-        # log "---- END OF PCRECK'S OUTPUT"
+        puts "---- PCREck's output:"
+        puts res
+        puts "---- END OF PCRECK'S OUTPUT"
         res = res.split("\n").last.strip
       }
 

@@ -122,7 +122,7 @@ get '/cheatsheets/PCRE' do
   erb :"cheatsheets/PCRE", layout: :"minimal_layout"
 end
 
-# Permanent entry links handler
+# Permalink capturer
 get '/:token' do |token|
   return if token == "favicon.ico" # ...
 
@@ -134,12 +134,11 @@ end
 post '/' do
   ptrn = params[:pattern]
   subj = params[:subject]
-  opts = params[:options]
+  opts = params[:options] || ""
   engine = params[:engine] || "PCRE"
 
   halt 400, "Missing pattern" unless ptrn
   halt 400, "Missing subject" unless subj
-  halt 400, "Missing options" unless opts
   halt 400, "#{engine} is not supported." if !@@engines[engine]
 
   puts "Querying using engine #{@@engines[engine].language}"
@@ -149,18 +148,22 @@ end
 
 post '/modes/advanced' do
   log params.inspect
+  p = params[:pattern]
+  s = params[:subjects]
+  o = params[:options] || ""
+  e = @@engines[ params[:engine] || "PCRE" ]
 
-  halt 400 if !params[:pattern] || !params[:subjects] || params[:subjects].empty?
+  halt 400, "Missing pattern" if !p
+  halt 400, "Missing subject(s)" if !s || s.empty?
 
   # The returned result looks something like this:
   # { 0: []|{}, ..., n: []|{} } where n is the number of subjects
-  collective_result = {}
-  params[:subjects].each_pair { |idx, subject|
-    res = PCREck.query(params[:pattern], subject)
-    collective_result[idx] = @@engines['PCRE'].query(ptrn, text, nil, false)
+  resultset = {}
+  s.each_with_index { |subject, idx|
+    resultset[idx] = e.query(p, subject, o, false)
   }
 
-  collective_result.to_json
+  resultset.to_json
 end
 
 post '/permalink' do
@@ -185,6 +188,6 @@ post '/permalink' do
     mode: params[:mode]
   })
 
-  port = request.port != 80 ? ":#{request.port}" : ""
-  return 200, "http://#{request.host}#{port}/#{link.id}"
+  port = request.port != 80 ? ":#{request.port}" : "" # WTF?
+  return 200, "http://#{request.host}#{port}/#{link.id}" # TODO: refactor
 end

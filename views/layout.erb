@@ -7,16 +7,15 @@
 
     <title>PCREck - a PCRE regular expression editor</title>
 
-    <script type="text/javascript" src="/js/jquery.1.7.1.min.js"></script>
     <% if has_proximanova? then %>
       <link href="/css/fonts/proximanova.css" rel="stylesheet" type="text/css" />
     <% end %>
-
-    <script src="/js/jquery.autosize.js"></script>
-    
-    <script src="/js/dynamism.js"></script>
-    <script src="/js/PCREck.js"></script>
     <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="/js/jquery.1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.autosize.js"></script>
+    <script type="text/javascript" src="/js/dynamism.js"></script>
+    <script type="text/javascript" src="/js/PCREck.js"></script>
 
     <% yield_content :scripts %>
     <%= erb :"_google_analytics" %>

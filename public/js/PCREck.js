@@ -5,7 +5,16 @@ PCREck = function() {
       subject_el = null,
       tt = null,
       pulse = 50,
-      in_operation = false;
+      is_operating = false;
+
+  function mode_operation(op) {
+    if (mode != "simple" && mode != "advanced") {
+      console.log("Error: an invalid PCREck mode '" + mode + "' has been set, unable to query.")
+      return false;
+    }
+
+    return PCREck[mode][op]();
+  }
 
   /**
    * format_result():
@@ -37,7 +46,7 @@ PCREck = function() {
     }
 
     var match = subject,
-        match_begin = result[0] - 1, // subtract 1 because Lua starts indexes @ 1
+        match_begin = result[0],
         match_end = result[1] - 1;
 
     match = match.split('');
@@ -76,37 +85,27 @@ PCREck = function() {
     },
     // mode-agnostic helpers
     query: function() {
-      if (in_operation)
+      if (is_operating)
         return;
 
-      if (mode == "simple")
-        return PCREck.simple.query();
-      else if (mode == "advanced")
-        return PCREck.advanced.query();
-      else
-        console.log("Error: an invalid PCREck mode has been set, unable to query.")
+      return mode_operation('query');
     },
     gen_permalink: function() {
-      if (in_operation)
+      if (is_operating)
         return;
 
-      if (mode == "simple")
-        return PCREck.simple.gen_permalink();
-      else if (mode == "advanced")
-        return PCREck.advanced.gen_permalink();
-      else
-        console.log("Error: an invalid PCREck mode has been set, unable to query.")
+      return mode_operation('gen_permalink');
     },
 
     status: {
       mark_pending: function() {
         $("#indicator").show();
-        in_operation = true;
+        is_operating = true;
       },
 
       mark_ready: function() {
         $("#indicator").hide();
-        in_operation = false;
+        is_operating = false;
       }
     },
 
@@ -116,29 +115,23 @@ PCREck = function() {
         $("#PCREck_capture").empty();        
       },
       query: function() {
-        var pattern = pattern_el.attr("value"),
-            options = options_el.attr("value"),
-            subject = subject_el.attr("value");
+        var p = pattern_el.attr("value"),
+            o = options_el.attr("value"),
+            s = subject_el.attr("value"),
+            e  = $("#PCREck_engine :checked").attr("value");
 
-        if (pattern.length == 0) {
+        if (p.length == 0) {
           PCREck.simple.reset_status();
-          return;
+          return false;
         }
 
         $.ajax({
           url: "/",
           type: "POST",
-          data: {
-            pattern: pattern,
-            subject: subject,
-            options: options,
-            engine: $("#PCREck_engine :checked").attr("value")
-          },
+          data: { pattern: p, subject: s, options: o, engine: e },
           success: function(result) {
-            console.log(result);
             result = JSON.parse(result);
-
-            return format_result(result, subject, $("#PCREck_match"), $("#PCREck_capture"));
+            return format_result(result, s, $("#PCREck_match"), $("#PCREck_capture"));
           }
         });
 
@@ -146,54 +139,66 @@ PCREck = function() {
       },
 
       gen_permalink: function() {
-        var pattern = pattern_el.attr("value"),
-            options = options_el.attr("value"),
-            subject = subject_el.attr("value");
+        var p = pattern_el.attr("value"),
+            o = options_el.attr("value"),
+            s = subject_el.attr("value"),
+            e  = $("#PCREck_engine :checked").attr("value");
 
-        if (pattern.length == 0 && subject.length == 0) {
+        if (p.length == 0 && s.length == 0) {
           return;
         }
 
         $.ajax({
           url: "/permalink",
           type: "POST",
-          data: {
-            pattern: pattern,
-            subject: subject,
-            options: options,
-            mode: "simple"
-          },
+          data: { pattern: p, subject: s, options: o, engine: e, mode: "simple" },
           success: function(url) {
-            $("#permalink").html("Your expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
+            $("#permalink").
+              html("Your expression can be viewed at: "
+                   + "<a target='_blank' href='" + url + "'>"
+                   + url + "</a>");
           }
         });
       }
     },
     advanced: {
       reset_status: function(idx, text) {
-        $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .match").empty().html(text || "");
-        $( "[data-dyn-entity=subjects][data-dyn-index=" + idx + "] .capture").empty();
+        var subject =
+          $("[data-dyn-entity=subjects][data-dyn-index=" + idx + "]");
+
+        subject.find('.match').empty().html(text || "");
+        subject.find('.capture').empty();
       },
+
       query: function(pattern, options, subjects) {
-        if ($("#PCREck_pattern").attr("value").length == 0) {
+        if (pattern_el.attr("value").length == 0) {
           PCREck.advanced.reset_status();
-          return;
+          return false;
         }
 
-        var params = $("textarea:visible,input[type=text]:visible").serialize();
+        var p = pattern_el.attr("value"),
+            o = options_el.attr("value"),
+            s = [],
+            e = $("#PCREck_engine :checked").attr("value");
+        // console.log(params)
+
+        $("textarea:visible[name*=subject]").each(function() {
+          s.push( $(this).attr("value") );
+          console.log(s)
+        })
 
         $.ajax({
           url: "/modes/advanced",
           type: "POST",
-          data: params,
-          success: function(master_resultset) {
-            master_resultset = JSON.parse(master_resultset);
+          data: { pattern: p, subjects: s, options: o, engine: e },
+          success: function(resultset) {
+            resultset = JSON.parse(resultset);
 
-            $.each(master_resultset, function(subject_idx, result) {
-              var subject_el = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
-                  match_el = subject_el.find(".match:first"),
-                  capture_el = subject_el.find(".capture:first"),
-                  subject = subject_el.find("textarea:first").attr("value");
+            $.each(resultset, function(subject_idx, result) {
+              var subject_el  = $("[data-dyn-entity=subjects][data-dyn-index=" + subject_idx + "]"),
+                  match_el    = subject_el.find(".match:first"),
+                  capture_el  = subject_el.find(".capture:first"),
+                  subject     = subject_el.find("textarea:first").attr("value");
 
               format_result(result, 
                             subject,
