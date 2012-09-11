@@ -35,6 +35,9 @@ the compact mode and passing the result back as JSON.
 **Dependencies**
 
 * the Sinatra gem
+* dm-core
+* dm-migrations
+* dm-mysql-adapter
 
 ## The HTML interface
 
