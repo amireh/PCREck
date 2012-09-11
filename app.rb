@@ -123,9 +123,9 @@ end
   end
 }
 
-get '/cheatsheets/PCRE' do
+get '/:dialect/cheetsheet' do |dialect|
   @fullview = true
-  erb :"cheatsheets/PCRE", layout: :"minimal_layout"
+  erb :"cheatsheets/#{dialect}", layout: :"minimal_layout"
 end
 
 get '/modes/simple' do
