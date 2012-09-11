@@ -7,14 +7,6 @@ PCREck = function() {
       pulse = 50,
       in_operation = false;
 
-  function show_indicator() {
-    $("#indicator").show();
-    in_operation = true;
-  }
-  function hide_indicator() {
-    $("#indicator").hide();
-    in_operation = false;
-  }
   /**
    * format_result():
    *  Decodes the PCREck response, injects (and highlights) matched and captured values
@@ -36,10 +28,10 @@ PCREck = function() {
       return;
     }
 
-    if (!result[0]) {
+    if (result.error) {
       mode == "simple"
-        ? PCREck.simple.reset_status("Error: " + result[1])
-        : PCREck.advanced.reset_status(subject_idx, "Error: " + result[1]);
+        ? PCREck.simple.reset_status("Error: " + result.error)
+        : PCREck.advanced.reset_status(subject_idx, "Error: " + result.error);
 
       return;
     }
@@ -106,6 +98,18 @@ PCREck = function() {
         console.log("Error: an invalid PCREck mode has been set, unable to query.")
     },
 
+    status: {
+      mark_pending: function() {
+        $("#indicator").show();
+        in_operation = true;
+      },
+
+      mark_ready: function() {
+        $("#indicator").hide();
+        in_operation = false;
+      }
+    },
+
     simple: {
       reset_status: function(text) {
         $("#PCREck_match").empty().html(text || "");
@@ -121,22 +125,20 @@ PCREck = function() {
           return;
         }
 
-        show_indicator();
-
         $.ajax({
           url: "/",
           type: "POST",
           data: {
-            pattern: "(?" + options + ")" + pattern,
-            text: subject
+            pattern: pattern,
+            subject: subject,
+            options: options,
+            engine: $("#PCREck_engine :checked").attr("value")
           },
           success: function(result) {
+            console.log(result);
             result = JSON.parse(result);
 
             return format_result(result, subject, $("#PCREck_match"), $("#PCREck_capture"));
-          },
-          complete: function() {
-            hide_indicator();
           }
         });
 
@@ -152,8 +154,6 @@ PCREck = function() {
           return;
         }
 
-        show_indicator();
-
         $.ajax({
           url: "/permalink",
           type: "POST",
@@ -165,9 +165,6 @@ PCREck = function() {
           },
           success: function(url) {
             $("#permalink").html("Your expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
-          },
-          complete: function() {
-            hide_indicator();
           }
         });
       }
@@ -182,8 +179,6 @@ PCREck = function() {
           PCREck.advanced.reset_status();
           return;
         }
-
-        show_indicator();
 
         var params = $("textarea:visible,input[type=text]:visible").serialize();
 
@@ -206,9 +201,6 @@ PCREck = function() {
                             capture_el,
                             subject_idx);
             });
-          },
-          complete: function() {
-            hide_indicator();
           }
         });
 
@@ -218,20 +210,28 @@ PCREck = function() {
         var params = $("textarea:visible,input[type=text]:visible").serialize();
         params += "&mode=advanced";
 
-        show_indicator();
-
         $.ajax({
           url: "/permalink",
           type: "POST",
           data: params,
           success: function(url) {
             $("#permalink").html("Your expression can be viewed at: <a target='_blank' href='" + url + "'>" + url + "</a>");
-          },
-          complete: function() {
-            hide_indicator();
           }
         });
       }
     }
   }
-}
+}();
+
+// PCREck = PCREck();
+$(function() {
+  PCREck.setup();
+
+  $(document).ajaxStart(PCREck.status.mark_pending);
+  $(document).ajaxComplete(PCREck.status.mark_ready);
+
+  $("input[type=text], textarea").keyup(PCREck.pulsate);
+  $("input[type=checkbox]").change(PCREck.pulsate);
+  $("input[type=radio]").change(PCREck.pulsate);
+  $("textarea").autosize();
+});

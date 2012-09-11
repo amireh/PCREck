@@ -1,3 +1,5 @@
+$LOAD_PATH << File.dirname(__FILE__)
+
 gem 'sinatra'
 gem 'sinatra-content-for'
 gem "dm-core", ">=1.2.0"
@@ -15,47 +17,21 @@ require 'dm-mysql-adapter'
 
 configure do
 
+  @@engines = {}
+
   def log(msg)
     if settings.development? then
       puts "[D] #{msg}"
     end
   end
 
-  class PCREck
-
-    # Executes PCREck.lua with the given pattern and subject and
-    # returns the last line of the output
-    def self.query(pattern, subject)
-      res = nil
-      IO.popen(["PCREck.lua", 
-                "--pattern=#{pattern.to_json}", 
-                "--subject=#{subject.to_json}",
-                "--decode", 
-                "--compact", :err=>[:child, :out]]) {|io|
-        res = io.read
-        # log "---- PCREck's output:"
-        # log res
-        # log "---- END OF PCRECK'S OUTPUT"
-        res = res.split("\n").last.strip
-      }
-      res
-    end
-
-    # Decodes the output received from PCREck.query. If @dont_encode
-    # is set to true, the returned result will _not_ be JSON encoded.
-    def self.reportable_result(pcreck_res, dont_encode = false)
-      json_result = JSON.parse(pcreck_res)
-
-      if json_result.class != Array && json_result.has_key?("error")
-        json_result = [ false, json_result["error"] ]
-      end
-
-      log json_result.inspect
-
-      dont_encode ? json_result : json_result.to_json
-    end
-
+  def register_engine(e)
+    @@engines[e.language] = e
   end
+
+  log "Loading engines"
+  require 'lib/engine'
+  Dir.glob("lib/**/*.rb").each { |e| require e }
 
   class Permalink
     include DataMapper::Resource
@@ -69,6 +45,7 @@ configure do
     property :subject, Text, default: ""
     property :options, String, default: ""
     property :mode, String, default: "simple"
+    property :engine, String, default: "PCRE"
     property :created_at, DateTime, default: lambda { |*_| DateTime.now }
 
     def self.gen_token
@@ -115,6 +92,7 @@ get '/modes/advanced' do
     pattern: params[:p] || "",
     subject: { 0 => (params[:s] || "") }.to_json,
     options: params[:o] || "",
+    engine: params[:e] || "PCRE",
     mode: "advanced"
   })
 
@@ -133,7 +111,8 @@ get '/' do
   @link = Permalink.new({
     pattern: params[:p] || "",
     subject: params[:s] || "",
-    options: params[:o] || ""
+    options: params[:o] || "",
+    engine:  params[:e] || "PCRE"
   })
 
   erb :"modes/simple"
@@ -154,11 +133,18 @@ end
 
 post '/' do
   ptrn = params[:pattern]
-  text = params[:text]
+  subj = params[:subject]
+  opts = params[:options]
+  engine = params[:engine] || "PCRE"
 
-  halt 400 if !ptrn || !text
+  halt 400, "Missing pattern" unless ptrn
+  halt 400, "Missing subject" unless subj
+  halt 400, "Missing options" unless opts
+  halt 400, "#{engine} is not supported." if !@@engines[engine]
 
-  return 200, PCREck.reportable_result(PCREck.query(ptrn, text))
+  puts "Querying using engine #{@@engines[engine].language}"
+
+  return 200, @@engines[engine].query(ptrn, subj, opts)
 end
 
 post '/modes/advanced' do
@@ -171,7 +157,7 @@ post '/modes/advanced' do
   collective_result = {}
   params[:subjects].each_pair { |idx, subject|
     res = PCREck.query(params[:pattern], subject)
-    collective_result[idx] = PCREck.reportable_result(res, true)
+    collective_result[idx] = @@engines['PCRE'].query(ptrn, text, nil, false)
   }
 
   collective_result.to_json
@@ -195,6 +181,7 @@ post '/permalink' do
     pattern: params[:pattern],
     subject: subject,
     options: params[:options],
+    engine: params[:engine],
     mode: params[:mode]
   })
 

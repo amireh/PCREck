@@ -22,7 +22,8 @@
         data: {
           pattern: "(?" + $("#PCREck_pattern_options").attr("value") + ")" + 
                    $("#PCREck_pattern").attr("value"),
-          text: $("#PCREck_subject").attr("value")
+          text: $("#PCREck_subject").attr("value"),
+          engine: $("PCREck_engine :checked").attr("value")
         },
         success: function(PCREck_result) {
           if (!PCREck_result || PCREck_result.length == 0) {

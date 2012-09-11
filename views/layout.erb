@@ -18,17 +18,6 @@
     <script src="/js/PCREck.js"></script>
     <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
-      PCREck = PCREck();
-      $(function() {
-        PCREck.setup();
-
-        $("input[type=text], textarea").keyup(PCREck.pulsate);
-        $("input[type=checkbox]").change(PCREck.pulsate);
-        $("textarea").autosize();
-      });
-    </script>
-
     <% yield_content :scripts %>
     <%= erb :"_google_analytics" %>
   </head>
