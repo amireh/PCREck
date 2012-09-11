@@ -1,0 +1,7 @@
+<h2>Available dialects</h2>
+
+<ol>
+  <% @@dialects.each do |d| %>
+    <li><a href="/<%= d %>"><%= d %></a></li>
+  <% end %>
+</ol>

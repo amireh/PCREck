@@ -18,6 +18,7 @@ require 'dm-mysql-adapter'
 configure do
 
   @@engines = {}
+  @@dialects = []
 
   def log(msg)
     if settings.development? then
@@ -27,6 +28,7 @@ configure do
 
   def register_engine(e)
     @@engines[e.dialect] = e
+    @@dialects << e.dialect
   end
 
   log "Loading engines"
@@ -78,12 +80,6 @@ helpers do
     "<input tabindex=\"-1\" type=\"checkbox\" name=\"pcre[options]\" \
             value=\"#{key}\" #{"checked=\"checked\"" if @link.options.include?(key)} />"
   end
-
-  def dialects
-    out = []
-    @@engines.each_pair { |d,_| out << d }
-    out
-  end
 end
 
 def show_dialect(dialect, mode)
@@ -123,36 +119,15 @@ end
   end
 }
 
-get '/:dialect/cheetsheet' do |dialect|
+get '/:dialect/cheatsheet' do |dialect|
   @fullview = true
   erb :"cheatsheets/#{dialect}", layout: :"minimal_layout"
 end
 
-get '/modes/simple' do
-  redirect '/'
-end
-
-get '/modes/advanced' do
-  show_dialect("PCRE", "advanced")
-  # log params.inspect
-  # # Accept initial values from the URL parameters, if any
-  # @link = Permalink.new({
-  #   pattern: params[:p] || "",
-  #   subject: { 0 => (params[:s] || "") }.to_json,
-  #   options: params[:o] || "",
-  #   dialect: params[:e] || "PCRE",
-  #   mode: "advanced"
-  # })
-
-  # log @link.inspect
-
-  # erb :"modes/advanced"
-end
-
-get '/' do
-  # Backwards-compatibility
-  show_dialect("PCRE", "simple")
-end
+# Backwards-compatibility
+get '/'               do show_dialect("PCRE", "simple") end
+get '/modes/simple'   do redirect '/' end
+get '/modes/advanced' do show_dialect("PCRE", "advanced") end
 
 def query_simple(dialect)
   p = params[:pattern]
@@ -198,6 +173,10 @@ end
 
 post '/:dialect/advanced' do |dialect|
   query_advanced(dialect)
+end
+
+get '/dialects' do
+  erb :"/dialects", layout: :"minimal_layout"
 end
 
 # Permalink capturer

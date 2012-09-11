@@ -1,5 +1,7 @@
 <article class="part spanner">
-  <a id="cheatsheet_opener" href="/<%= @dialect %>/cheatsheet" target="_blank">&darr; view in a separate page</a>
+  <% unless @fullview %>
+    <a id="cheatsheet_opener" href="/<%= @dialect %>/cheatsheet" target="_blank">&darr; view in a separate page</a>
+  <% end %>
   <section class="part left">
     <h2>PCRE Characters</h2>
 
