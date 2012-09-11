@@ -1,0 +1,26 @@
+<%= erb :"options/_hooks" %>
+
+<section id="PCRE_options"> 
+  <fieldset>
+    <legend>JavaScript Options</legend>
+    <label title="makes matching case insensitive">
+      <%= pattern_option("i") %>
+      Caseless <code>/i</code>
+    </label>
+    <label title="whitespace in the pattern will be ignored">
+      <%= pattern_option("m") %>
+      Multi-line* <code>/m</code>
+    </label>
+    <label title="matches all occurences of the pattern across the entire subject">
+      <%= pattern_option("g") %>
+      Global <code>/g</code>
+    </label>
+    <p style="margin: 5px 0 0 0;">
+      <small>
+        <em>* The <code>m</code> doesn't seem to really work in any JavaScript implementation.
+        </em>
+      </small>
+    </p>
+  </fieldset>
+  
+</section>

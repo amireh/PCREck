@@ -16,6 +16,9 @@
     <script type="text/javascript" src="/js/jquery.autosize.js"></script>
     <script type="text/javascript" src="/js/dynamism.js"></script>
     <script type="text/javascript" src="/js/PCREck.js"></script>
+    <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>PCREck.dialect = "<%= @dialect %>";</script>
 
     <% yield_content :scripts %>
     <%= erb :"_google_analytics" %>
@@ -30,14 +33,26 @@
         <h2 class="description">a realtime <a href="http://www.pcre.org/pcre.txt">PCRE</a> regular expression editor</h2>
       </hgroup>
       <nav>
-        &gt;&gt;
+        <!-- &gt;&gt; -->
+        <span class="current_dialect"><%= @dialect %></span> -
         <% if @link && @link.mode == "simple" %>
-          <span>Simple mode</span> &brvbar;
-          <a title="The advanced mode provides features useful for complex and large expressions" href="/modes/advanced">Advanced mode</a>
+          <span>simple mode</span> 
+          <a title="The advanced mode provides features useful for complex and large expressions" href="/<%= @dialect %>/advanced">advanced mode</a>
         <% else %>
-          <a href="/">Simple mode</a> &brvbar;
-          <span>Advanced mode</span>
+          <a href="/<%= @dialect %>">simple mode</a>
+          <span>advanced mode</span>
         <% end %>
+
+        <div id="dialects">
+          <a title="The dialect of the regular expression"
+             data-placement="left"
+             class="listlike" href="/dialects">Dialects</a>
+          <ol class="listlike">
+            <% dialects.each do |d| %>
+              <li><a <%= 'class="disabled"' if @link.dialect == d %> href="/<%=d%><%=@mode == 'simple' ? '' : "/#{@mode}" %>"><%= d %></a></li>
+            <% end %>
+          </ol>
+        </div>
       </nav>
       <!-- <p>
         PCREck is a <a href="http://www.pcre.org/pcre.txt">PCRE</a>
@@ -51,7 +66,10 @@
       <img src="/images/ajax-loader.gif" />
       <span>loading...</span>
     </div>
+
     <%= yield %>
+
+    <!-- <div id="actionbar"></div> -->
 
     <footer>
       <small><a href="http://www.pcreck.com">PCREck</a> is free software.

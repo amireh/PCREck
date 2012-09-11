@@ -1,11 +1,12 @@
 module PCREck
   class Engine
-    attr_reader :language
+    attr_reader :dialect
+    attr_reader :options # the options the engine supports
 
     def initialize()
-      @language = self.class.name.split('::').last
+      @dialect = self.class.name.split('::').last
 
-      puts "Engine: #{@language}"
+      puts "Engine: #{@dialect}"
 
       register_engine self
 

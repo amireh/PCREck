@@ -26,7 +26,7 @@ configure do
   end
 
   def register_engine(e)
-    @@engines[e.language] = e
+    @@engines[e.dialect] = e
   end
 
   log "Loading engines"
@@ -45,7 +45,7 @@ configure do
     property :subject, Text, default: ""
     property :options, String, default: ""
     property :mode, String, default: "simple"
-    property :engine, String, default: "PCRE"
+    property :dialect, String, default: "PCRE"
     property :created_at, DateTime, default: lambda { |*_| DateTime.now }
 
     def self.gen_token
@@ -79,6 +79,53 @@ helpers do
             value=\"#{key}\" #{"checked=\"checked\"" if @link.options.include?(key)} />"
   end
 
+  def dialects
+    out = []
+    @@engines.each_pair { |d,_| out << d }
+    out
+  end
+end
+
+def show_dialect(dialect, mode)
+  @dialect = dialect
+  @mode    = mode
+
+  if mode == "advanced"
+    params[:s] = { 0 => (params[:s] || "") }.to_json
+  end
+
+  # Accept initial values from the URL parameters, if any:
+  # => p for pattern
+  # => s for subject
+  # => o for options
+  # => d for dialect
+  @link ||= Permalink.new({
+    pattern: params[:p] || "",
+    subject: params[:s] || "",
+    options: params[:o] || "",
+    dialect: dialect,
+    mode:    mode
+  })
+
+  erb :"modes/#{mode}"
+end
+
+[ '/:dialect', '/:dialect/advanced' ].each { |r|
+  get r do |dialect|
+    mode = request.path.include?("advanced") ? "advanced" : "simple"
+    @@engines.each_pair { |d, _|
+      if d == dialect then
+        return show_dialect(d, mode)
+      end
+    }
+
+    pass
+  end
+}
+
+get '/cheatsheets/PCRE' do
+  @fullview = true
+  erb :"cheatsheets/PCRE", layout: :"minimal_layout"
 end
 
 get '/modes/simple' do
@@ -86,75 +133,54 @@ get '/modes/simple' do
 end
 
 get '/modes/advanced' do
-  log params.inspect
-  # Accept initial values from the URL parameters, if any
-  @link = Permalink.new({
-    pattern: params[:p] || "",
-    subject: { 0 => (params[:s] || "") }.to_json,
-    options: params[:o] || "",
-    engine: params[:e] || "PCRE",
-    mode: "advanced"
-  })
+  show_dialect("PCRE", "advanced")
+  # log params.inspect
+  # # Accept initial values from the URL parameters, if any
+  # @link = Permalink.new({
+  #   pattern: params[:p] || "",
+  #   subject: { 0 => (params[:s] || "") }.to_json,
+  #   options: params[:o] || "",
+  #   dialect: params[:e] || "PCRE",
+  #   mode: "advanced"
+  # })
 
-  log @link.inspect
+  # log @link.inspect
 
-  erb :"modes/advanced"
+  # erb :"modes/advanced"
 end
 
 get '/' do
-  # log params.inspect
-
-  # Accept initial values from the URL parameters, if any:
-  # => p for pattern
-  # => s for subject
-  # => o for options
-  @link = Permalink.new({
-    pattern: params[:p] || "",
-    subject: params[:s] || "",
-    options: params[:o] || "",
-    engine:  params[:e] || "PCRE"
-  })
-
-  erb :"modes/simple"
+  # Backwards-compatibility
+  show_dialect("PCRE", "simple")
 end
 
-get '/cheatsheets/PCRE' do
-  erb :"cheatsheets/PCRE", layout: :"minimal_layout"
+def query_simple(dialect)
+  p = params[:pattern]
+  s = params[:subject]
+  o = params[:options] || ""
+  e = @@engines[dialect]
+
+  halt 400, "Missing pattern" unless p
+  halt 400, "Missing subject" unless s
+  halt 400, "#{dialect} is not supported." if !e
+
+  puts "Simple query using engine #{dialect}"
+
+  return 200, e.query(p,s,o)
 end
 
-# Permalink capturer
-get '/:token' do |token|
-  return if token == "favicon.ico" # ...
-
-  @link = Permalink.get(token) || Permalink.new
-
-  erb :"modes/#{@link.mode}"
-end
-
-post '/' do
-  ptrn = params[:pattern]
-  subj = params[:subject]
-  opts = params[:options] || ""
-  engine = params[:engine] || "PCRE"
-
-  halt 400, "Missing pattern" unless ptrn
-  halt 400, "Missing subject" unless subj
-  halt 400, "#{engine} is not supported." if !@@engines[engine]
-
-  puts "Querying using engine #{@@engines[engine].language}"
-
-  return 200, @@engines[engine].query(ptrn, subj, opts)
-end
-
-post '/modes/advanced' do
+def query_advanced(dialect)
   log params.inspect
   p = params[:pattern]
   s = params[:subjects]
   o = params[:options] || ""
-  e = @@engines[ params[:engine] || "PCRE" ]
+  e = @@engines[dialect]
 
   halt 400, "Missing pattern" if !p
   halt 400, "Missing subject(s)" if !s || s.empty?
+  halt 400, "#{dialect} is not supported." if !e
+
+  puts "Advanced query using engine #{dialect}"
 
   # The returned result looks something like this:
   # { 0: []|{}, ..., n: []|{} } where n is the number of subjects
@@ -166,7 +192,24 @@ post '/modes/advanced' do
   resultset.to_json
 end
 
-post '/permalink' do
+post '/:dialect' do |dialect|
+  query_simple(dialect)
+end
+
+post '/:dialect/advanced' do |dialect|
+  query_advanced(dialect)
+end
+
+# Permalink capturer
+get '/:token' do |token|
+  return if token == "favicon.ico" # ...
+
+  @link = Permalink.get(token) || Permalink.new
+  show_dialect(@link.dialect, @link.mode)
+  # erb :"modes/#{@link.mode}"
+end
+
+post '/:dialect/permalink' do |dialect|
   log params.inspect
 
   halt 400 if !params[:pattern] || (!params[:subject] && !params[:subjects])
@@ -184,7 +227,7 @@ post '/permalink' do
     pattern: params[:pattern],
     subject: subject,
     options: params[:options],
-    engine: params[:engine],
+    dialect: dialect,
     mode: params[:mode]
   })
 

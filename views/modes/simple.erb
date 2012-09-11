@@ -20,7 +20,6 @@
       <code>(?</code>
       <input type="text" id="PCREck_pattern_options"
         style="width: 70px; font-size: 12px"
-        placeholder="imsxUX"
         value="<%= @link.options %>" />
       <code>)</code>
     </div>
@@ -50,12 +49,11 @@
   </div>
 </section>
 
-<%= erb :"_options" %>
+<%= erb :"options/#{@dialect}" %>
 
 <section id="PCREck_actions">
   <button id="gen_permalink">&hearts; Permanent link</button>
   <span id="permalink"></span>
 </section>
 
-<%= erb :"_cheatsheet" %>
-<%= erb :"_references" %>
+<%= erb :"cheatsheets/#{@dialect}" %>

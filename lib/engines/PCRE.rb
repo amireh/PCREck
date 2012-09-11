@@ -12,9 +12,9 @@ module PCREck
                 "--decode", 
                 "--compact", :err=>[:child, :out]]) {|io|
         res = io.read
-        puts "---- PCREck's output:"
-        puts res
-        puts "---- END OF PCRECK'S OUTPUT"
+        # puts "---- PCREck's output:"
+        # puts res
+        # puts "---- END OF PCRECK'S OUTPUT"
         res = res.split("\n").last.strip
       }
 

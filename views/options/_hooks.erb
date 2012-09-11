@@ -24,43 +24,14 @@
             $(this).attr("checked", "checked");
         });
       });
+
+      // Populate the placeholder of the options based
+      // on the supported options of the current engine
+      var opts = [];
+      $("#PCRE_options input[type=checkbox]").each(function() {
+        opts.push($(this).attr("value"));
+      });
+      $("#PCREck_pattern_options").attr("placeholder", opts.join(''));
     });
   </script>
 <% end %>
-
-<%= erb :"_engines" %>
-
-<section id="PCRE_options"> 
-  <fieldset>
-    <legend>PCRE Options</legend>
-    <label title="makes matching case insensitive">
-      <%= pattern_option("i") %>
-      Caseless <code>/i</code>
-    </label>
-    <label title="captures will span line feeds">
-      <%= pattern_option("m") %>
-      Multi-line <code>/m</code>
-    </label>
-    <label title="makes .* match everything, including control characters">
-      <%= pattern_option("s") %>
-      Dot-ALL <code>/s</code>
-    </label>
-    <label>
-      <%= pattern_option("x") %>
-      Extended <code>/x</code>
-    </label>
-    <label>
-      <%= pattern_option("U") %>
-      Ungreedy <code>/U</code>
-    </label>
-    <label>
-      <%= pattern_option("X") %>
-      Extra <code>/X</code>
-    </label>
-    <label>
-      <%= pattern_option("J") %>
-      Duplicate names <code>/J</code>
-    </label>
-
-  </fieldset>
-</section>

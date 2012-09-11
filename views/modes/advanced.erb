@@ -19,15 +19,14 @@
       PCREck.advanced.query();
     });
 
-
   </script>
 <% end %>
 
-<p>The advanced mode supports a few extra features you might find handy:</p>
+<!-- <p>The advanced mode supports a few extra features you might find handy:</p>
 <ol>
   <li>multiple subjects can be defined to test your pattern against simultaneously</li>
   <li>the pattern and subject fields are converted to smart textareas for improved large expression support</li>
-</ol>
+</ol> -->
 
 <section class="PCREck">
   <div class="part spanner">
@@ -37,7 +36,6 @@
       <input type="text" id="PCREck_pattern_options"
         name="options"
         style="width: 70px; font-size: 12px"
-        placeholder="imsxUX"
         value="<%= @link.options %>" />
       <code>)</code>
     </div>
@@ -50,7 +48,9 @@
     </div>
   </div>
 </section>
-<%= erb :"_options" %>
+
+<%= erb :"options/#{@dialect}" %>
+
 <% 
   subjects = [ "" ]
   if @link && @link.mode == "advanced" && @link.subject && !@link.subject.empty?
@@ -92,12 +92,11 @@
     </div>
   <% end %>
 </section>
-<button id="add_subject" data-dyn-target="subjects">&uarr; Add another subject</button>
+<button id="add_subject" data-dyn-target="subjects">&plus; Add another subject</button>
 
 <section id="PCREck_actions">
   <button id="gen_permalink">&hearts; Permanent link</button>
   <span id="permalink"></span>
 </section>
 
-<%= erb :"_cheatsheet" %>
-<%= erb :"_references" %>
+<%= erb :"cheatsheets/#{@dialect}" %>
