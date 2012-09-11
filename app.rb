@@ -1,13 +1,16 @@
 gem 'sinatra'
 gem 'sinatra-content-for'
-gem "data_mapper", ">=1.2.0"
+gem "dm-core", ">=1.2.0"
+gem "dm-migrations", ">=1.2.0"
+gem "dm-mysql-adapter", ">=1.2.0"
 
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/content_for'
 require 'json'
 require 'base64'
-require 'data_mapper'
+require 'dm-core'
+require 'dm-migrations'
 require 'dm-mysql-adapter'
 
 configure do
@@ -26,7 +29,8 @@ configure do
       res = nil
       IO.popen(["PCREck.lua", 
                 "--pattern=#{pattern.to_json}", 
-                "--subject=#{subject.to_json}", 
+                "--subject=#{subject.to_json}",
+                "--decode", 
                 "--compact", :err=>[:child, :out]]) {|io|
         res = io.read
         # log "---- PCREck's output:"
