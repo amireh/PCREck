@@ -16,28 +16,27 @@
 
 local cli = require "cliargs"
 
-print(cli.version)
 cli:set_name("PCREck")
-cli:add_opt("--pattern=PTRN", "PCRE regular expression pattern", nil, ".*")
+cli:add_opt("--pattern=PTRN", "PCRE regular expression pattern", nil, "")
 cli:add_opt("--subject=TEXT", "subject to test using the pattern", "subject", "")
 cli:add_flag("--compact", "output will be compact")
-cli:add_flag("--raw", "pattern and subject will be treated as raw instead of JSON")
+cli:add_flag("--decode", "pattern and subject will be decoded from JSON")
 cli:add_flag("-d, --daemonize", "run PCREck as a daemon")
 cli:add_opt("-i, --interface", "the interface to bind to when daemonized", "interface", "127.0.0.1")
 cli:add_opt("-p, --port", "the port to bind to when daemonized", "port", 8942)
 cli:add_opt("-c, --concurrency", "the maximum number of clients at any time", nil, 256)
 
-local args = cli:parse_args(true)
+local args = cli:parse_args()
 if not args then return end
 
 require 'rex_pcre'
 local json = require 'dkjson'
 
-function test_subject(pattern, subject, dont_decode)
+function test_subject(pattern, subject, decode)
   print("Testing pattern: [" .. pattern .. "]")
   print("Testing subject: [" .. subject .. "]")
 
-  if not dont_decode then
+  if decode then
     pattern = json.decode(pattern)
     subject = json.decode(subject)
   end
@@ -52,7 +51,7 @@ function test_subject(pattern, subject, dont_decode)
 end
 
 if not args["d"] then
-  local encoded, err = test_subject(args["pattern"], args["subject"], args["raw"])
+  local encoded, err = test_subject(args["pattern"], args["subject"], args["decode"])
 
   if args["compact"] then
     if encoded then
