@@ -22,7 +22,7 @@ You can get all the dependencies using [luarocks](http://www.luarocks.org/). The
 
 * lrexlib-pcre
 * lua_cliargs
-* json4lua
+* dkjson
 * luasocket (only when using the daemonized mode)
 * luasignal (only when using the daemonized mode)
 
@@ -49,10 +49,15 @@ point the jQuery dependency can be safely removed.
 
 ## Licensing
 
-Regarding my own code, it's free to use, re-distribute, and modify. 
-
-Feel free to host PCREck on your own intranet server. That's mainly the reason I'm sharing
-the application; I'm hosting it on my small private server and might not be able
+Feel free to host PCREck on your own intranet server. I'm hosting it on my humble private server which might not be able
 to accomodate all the traffic.
 
-Finally, if you find it useful and use it in any way, please drop me a message on my email. :)
+The code is released under the MIT terms.
+
+Copyright (c) 2011-2012 Ahmad Amireh
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
