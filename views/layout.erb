@@ -51,14 +51,12 @@
     <%= erb :"_footer" %>
 
     <% if settings.development? %>
-      <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
       <script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
       <script type="text/javascript" src="/js/jquery.autosize.js"></script>
       <script type="text/javascript" src="/js/dynamism.js"></script>
       <script type="text/javascript" src="/js/PCREck.js"></script>
       <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
     <% else %>
-      <link href="/css/PCREck.min.css" rel="stylesheet" type="text/css" />
       <script type="text/javascript" src="/js/PCREck.min.js"></script>
       <%= erb :"_google_analytics" %>
     <% end %>
