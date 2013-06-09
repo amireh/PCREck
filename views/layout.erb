@@ -9,13 +9,21 @@
 
     <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" src="/js/jquery.1.7.1.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.autosize.js"></script>
-    <script type="text/javascript" src="/js/dynamism.js"></script>
-    <script type="text/javascript" src="/js/PCREck.js"></script>
-    <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <% if settings.development? %>
+      <script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
+      <script type="text/javascript" src="/js/jquery.autosize.js"></script>
+      <script type="text/javascript" src="/js/dynamism.js"></script>
+      <script type="text/javascript" src="/js/PCREck.js"></script>
+      <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <% else %>
+      <script type="text/javascript" src="/js/PCREck.min.js"></script>
+    <% end %>
 
-    <script>PCREck.dialect = "<%= @dialect %>";</script>
+    <script>
+    $(function() {
+      window.PCREck.dialect = "<%= @dialect %>";
+    });
+    </script>
 
     <%= yield_content :scripts %>
     <%= erb :"_google_analytics" if settings.production? %>
