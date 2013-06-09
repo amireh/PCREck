@@ -7,26 +7,13 @@
 
     <title>PCREck - a multi-dialect regular expression editor</title>
 
-    <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
 
     <% if settings.development? %>
-      <script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
-      <script type="text/javascript" src="/js/jquery.autosize.js"></script>
-      <script type="text/javascript" src="/js/dynamism.js"></script>
-      <script type="text/javascript" src="/js/PCREck.js"></script>
-      <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+      <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
     <% else %>
-      <script type="text/javascript" src="/js/PCREck.min.js"></script>
+      <link href="/css/PCREck.min.css" rel="stylesheet" type="text/css" />
     <% end %>
 
-    <script>
-    $(function() {
-      window.PCREck.dialect = "<%= @dialect %>";
-    });
-    </script>
-
-    <%= yield_content :scripts %>
-    <%= erb :"_google_analytics" if settings.production? %>
   </head>
 
   <body>
@@ -55,12 +42,32 @@
     </nav>
 
     <div hidden="hidden" id="indicator">
-      <img src="/images/ajax-loader.gif" />
+      <img src="/images/ajax-loader.gif" width="31" height="31" alt="Loader" />
       <span>loading...</span>
     </div>
 
     <%= yield %>
 
     <%= erb :"_footer" %>
+
+    <% if settings.development? %>
+      <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
+      <script type="text/javascript" src="/js/jquery.autosize.js"></script>
+      <script type="text/javascript" src="/js/dynamism.js"></script>
+      <script type="text/javascript" src="/js/PCREck.js"></script>
+      <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <% else %>
+      <link href="/css/PCREck.min.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="/js/PCREck.min.js"></script>
+      <%= erb :"_google_analytics" %>
+    <% end %>
+
+    <script>
+      $(function() {
+        window.PCREck.dialect = "<%= @dialect %>";
+      });
+    </script>
+    <%= yield_content :scripts %>
   </body>
 </html>
