@@ -1,4 +1,4 @@
 require 'rubygems'
 
-require './app'
+require './config/boot'
 run Sinatra::Application

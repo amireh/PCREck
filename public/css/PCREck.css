@@ -12,23 +12,31 @@ body {
   font-size: 16px;
   background: #fff;
   color: #2E2633;
-  font-family: Arial, "ProximaNova-Light", Helvetica, Verdana;
+  font-family: Arial, Helvetica, Verdana;
   width: 960px;
   margin: 0 auto;
   letter-spacing: 1px;
 }
 
-a,a:visited {
+a {
   color: #00A0B0;
+}
+
+a, a:visited {
   -webkit-transition: color 0.2s ease 0s;  /* Saf3.2+, Chrome */
   -moz-transition: color 0.2s ease 0s;  /* FF4+ */
   -ms-transition: color 0.2s ease 0s;  /* IE10 */
   -o-transition: color 0.2s ease 0s;  /* Opera 10.5+ */
-  transition: color 0.2s ease 0s;  
+  transition: color 0.2s ease 0s;
 }
+
+a:visited {
+  color: purple;
+}
+
 a:hover {
   text-decoration: none;
-  color: orange;  
+  color: orange;
 }
 
 header {
@@ -98,13 +106,13 @@ pre#PCREck_capture,
 pre.match,
 pre.capture,
 pre em {
-  font-family: "ProximaNova-Light", Arial, Helvetica, Verdana;  
+  font-family: "ProximaNova-Light", Arial, Helvetica, Verdana;
   min-height: 40px;
   white-space: pre-wrap; /* css-3 */
   white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
   white-space: -pre-wrap; /* Opera 4-6 */
   white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word; /* Internet Explorer 5.5+ */  
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 input[type^=text],
 textarea,
@@ -224,7 +232,7 @@ span#curly {
 .PCREck_subject {
   float: left;
   width: 48%;
-  position: relative; 
+  position: relative;
   /*border-bottom: 1px solid #ddd;*/
   /*padding-bottom: 10px;*/
   /*margin-bottom: 10px;*/
@@ -274,7 +282,7 @@ button {
   border-radius:1px;
   -moz-border-radius:1px;
   -webkit-border-radius:1px;
-  border: 1px solid #fff;    
+  border: 1px solid #fff;
   box-shadow: 0px 0px 1px 1px #111;
 
 }
@@ -335,14 +343,14 @@ a.listlike.selected {
   color: orange;
 }
 
-ol.listlike { 
+ol.listlike {
   min-width: 120px;
   background: white;
 
-  display: none; 
-  position: absolute; 
+  display: none;
+  position: absolute;
   list-style-type: none;
-  margin: 0; 
+  margin: 0;
   padding: 0;
   z-index: 101; /* to be active on top of the page action bar */
   right: 0%;
@@ -401,7 +409,7 @@ ol.listlike li a { display: block; width: 100%; line-height: inherit; height: au
   -moz-transition:    opacity 0.25s ease 0s;
   -ms-transition:     opacity 0.25s ease 0s;
   -o-transition:      opacity 0.25s ease 0s;
-  transition:         opacity 0.25s ease 0s;  
+  transition:         opacity 0.25s ease 0s;
 }
 .tooltip.in {
   opacity: 0.9;

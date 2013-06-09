@@ -1,21 +1,32 @@
 $LOAD_PATH << File.dirname(__FILE__)
 
-gem 'sinatra'
-gem 'sinatra-content-for'
-gem "dm-core", ">=1.2.0"
-gem "dm-migrations", ">=1.2.0"
-gem "dm-mysql-adapter", ">=1.2.0"
+$ROOT ||= File.join( File.dirname(__FILE__), '..' )
+$LOAD_PATH << $ROOT
 
 require 'rubygems'
-require 'sinatra'
-require 'sinatra/content_for'
-require 'json'
+require 'bundler/setup'
 require 'base64'
-require 'dm-core'
-require 'dm-migrations'
-require 'dm-mysql-adapter'
+
+Bundler.require(:default)
 
 configure do
+  require 'lib/version'
+
+  puts "---- PCREck #{PCREck::VERSION} ----"
+  puts ">> Booting..."
+
+  # --------------------------------------------------------
+  # Validate that configuration files exist and are readable
+  config_files = [ 'database' ]
+  config_files.each { |config_file|
+    unless File.exists?(File.join($ROOT, 'config', "%s.yml" %[config_file] ))
+      raise "Missing required config file: config/%s.yml" %[config_file]
+    end
+  }
+  config_files.each { |cf| config_file './%s.yml' %[cf] }
+  # --------------------------------------------------------
+
+  set :root, $ROOT
 
   @@engines = {}
   @@dialects = []
@@ -33,15 +44,15 @@ configure do
 
   log "Loading engines"
   require 'lib/engine'
-  Dir.glob("lib/**/*.rb").each { |e| require e }
+  Dir.glob("#{$ROOT}/lib/**/*.rb").each { |e| require e }
 
   class Permalink
     include DataMapper::Resource
 
-    property :id, String, 
-      key: true, 
-      unique: true, 
-      length: 24, 
+    property :id, String,
+      key: true,
+      unique: true,
+      length: 24,
       default: lambda { |*_| Permalink.gen_token }
     property :pattern, Text, default: ""
     property :subject, Text, default: ""
@@ -55,12 +66,7 @@ configure do
     end
   end
 
-  log "connecting to the MySQL backend"
-
-  # DataMapper::Logger.new($stdout, :debug)
-  DataMapper.setup(:default, 'mysql://root@localhost/PCREck')
-  DataMapper.finalize
-  DataMapper.auto_upgrade!
+  require 'config/initializers/datamapper'
 end
 
 helpers do

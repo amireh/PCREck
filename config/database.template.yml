@@ -1,0 +1,15 @@
+development:
+  database: &common
+    host: 'localhost'
+    un:   'root'
+    pw:   ''
+    db:   'PCREck'
+
+test:
+  database:
+    <<: *common
+    db: 'PCREck_test'
+
+production:
+  database:
+    <<: *common

@@ -1,11 +1,15 @@
 module PCREck
   class JavaScript < Engine
+    def script
+      'PCREck.js'
+    end
+
     def query(pattern, subject, options = "", encode = true)
       res = nil
-      IO.popen(["PCREck.js", 
-                "#{pattern.to_json}", 
+      IO.popen(["PCREck.js",
+                "#{pattern.to_json}",
                 "#{subject.to_json}",
-                "#{options.to_json}", 
+                "#{options.to_json}",
                 :err=>[:child, :out]]) {|io|
         res = io.read
         # puts "---- PCREck.js output:"

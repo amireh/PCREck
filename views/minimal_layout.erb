@@ -2,37 +2,18 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="description" 
+    <meta name="description"
           content="PCREck is an interface for editing, testing, and validating PCRE regular expressions.">
 
     <title>PCREck - a PCRE regular expression editor</title>
-
-    <% if has_proximanova? then %>
-      <link href="/css/fonts/proximanova.css" rel="stylesheet" type="text/css" />
-    <% end %>
-
     <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
 
-    <%= erb :"_google_analytics" %>
+    <%= erb :"_google_analytics" if settings.production? %>
   </head>
 
   <body>
-    <header>
-      <hgroup>
-        <h1>
-          <a href="/">PCRE<em style="font-style: normal; color: orange">ck</em></a>
-        </h1>
-        <h2 class="description">a realtime <a href="http://www.pcre.org/pcre.txt">PCRE</a> regular expression editor</h2>
-      </hgroup>
-    </header>
-
+    <%= erb :"_header" %>
     <%= yield %>
-
-    <footer>
-      <small><a href="http://www.pcreck.com">PCREck</a> is free software.
-        <a href="https://github.com/amireh/PCREck.git">Fork it</a> on Github,
-        or pay its <a href="http://www.mxvt.net">author</a> a visit.
-      </small>
-    </footer>
+    <%= erb :"_footer" %>
   </body>
 </html>
