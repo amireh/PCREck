@@ -47,7 +47,7 @@ function test_subject(pattern, subject, decode)
   end
 
   local match = { rex_pcre.find(subject, rex_or_msg) }
-  
+
   -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
   if match[1] then
     match[1] = match[1] - 1
@@ -143,8 +143,13 @@ while running do
       break
     end
 
-    local ptrn = decoded[1]
-    local str = decoded[2]
+    local ptrn  = decoded.pattern
+    local str   = decoded.subject
+
+    if not ptrn or not str then
+      print("bad pattern or subject: " .. d .. ", ignoring")
+      break
+    end
 
     -- local res, msg = pcall(rex_pcre.new, ptrn)
     local encoded, err = test_subject(ptrn, str)
