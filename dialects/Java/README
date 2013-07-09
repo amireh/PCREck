@@ -1,0 +1,13 @@
+The Java PCREck dialect engine is built using Maven.
+
+To build the engine:
+
+`mvn compile`
+
+And to package it:
+
+`mvn package`
+
+Running it:
+
+`java -cp lib/*:target/* com.algollabs.PCREck`
