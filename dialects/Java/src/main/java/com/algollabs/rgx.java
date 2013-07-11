@@ -1,18 +1,18 @@
 /**
- * This file is part of PCREck.
+ * This file is part of rgx.
  *
- * PCREck is free software: you can redistribute it and/or modify
+ * rgx is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PCREck is distributed in the hope that it will be useful,
+ * rgx is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+ * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.algollabs;
@@ -54,7 +54,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.HelpFormatter;
 
-public class PCREck implements Container {
+public class rgx implements Container {
 
   /**
    * Indicates a request containing an unsupported attributes.
@@ -172,7 +172,7 @@ public class PCREck implements Container {
 
     // create the Options
     options.addOption( "h", "help", false, "print this help message" );
-    options.addOption( "d", "daemonize", false, "run PCREck:Java as a daemon" );
+    options.addOption( "d", "daemonize", false, "run rgx:Java as a daemon" );
     options.addOption( OptionBuilder.withLongOpt( "pattern" )
                                     .withDescription( "Java regular expression raw pattern" )
                                     .hasArg()
@@ -223,7 +223,7 @@ public class PCREck implements Container {
         host = cli.getOptionValue( "interface" );
       }
 
-      Container     container   = new PCREck();
+      Container     container   = new rgx();
       Server        server      = new ContainerServer(container);
       Connection    connection  = new SocketConnection(server);
       SocketAddress address     = new InetSocketAddress(host, Integer.parseInt(port));
@@ -256,7 +256,7 @@ public class PCREck implements Container {
 
   private static void printHelp() {
     HelpFormatter formatter = new HelpFormatter();
-    formatter.printHelp( "PCREck:Java", options );
+    formatter.printHelp( "rgx:Java", options );
   }
 
   private static final JsonParser parser_ = new JsonParser();
@@ -285,12 +285,12 @@ public class PCREck implements Container {
   }
 
   /**
-   * An implementation of the PCREck Dialect Construct specification.
+   * An implementation of the rgx Dialect Construct specification.
    *
    * Constructs take a regular expression pattern, compile it, test it against
    * a subject, and provide a JSON-encoded result.
    *
-   * @see https://www.pagehub.org/amireh/PCREck/spec
+   * @see https://www.pagehub.org/amireh/rgx/spec
    */
   private static class Construct {
 
@@ -401,7 +401,7 @@ public class PCREck implements Container {
      */
     public interface ConstructRC {
       /**
-       * Return a JSON-encoded PCREck Dialect Construct response.
+       * Return a JSON-encoded rgx Dialect Construct response.
        */
       public abstract String serialize(Construct c);
     };

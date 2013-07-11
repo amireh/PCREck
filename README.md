@@ -1,7 +1,7 @@
-# PCREck
+# rgx
 
 An interface for writing and checking [PCRE](http://www.pcre.org) regular expressions.
-[PCREck](http://www.pcreck.com) is similar to what [Rubular](http://www.rubular.com) is for Ruby's regexes.
+[rgx](http://www.rgx.com) is similar to what [Rubular](http://www.rubular.com) is for Ruby's regexes.
 
 ## The Lua part
 
@@ -29,7 +29,7 @@ You can get all the dependencies using [luarocks](http://www.luarocks.org/). The
 ## The Ruby part
 
 A minial Sinatra Ruby server that accepts `GET '/'` for displaying
-the HTML interface, and `POST '/'` for invoking `PCREck.lua` in
+the HTML interface, and `POST '/'` for invoking `rgx.lua` in
 the compact mode and passing the result back as JSON.
 
 **Dependencies**
@@ -49,17 +49,17 @@ point the jQuery dependency can be safely removed.
 
 ## Licensing
 
-This file is part of PCREck.
+This file is part of rgx.
 
-PCREck is free software: you can redistribute it and/or modify
+rgx is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-PCREck is distributed in the hope that it will be useful,
+rgx is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+along with rgx. If not, see <http://www.gnu.org/licenses/>.

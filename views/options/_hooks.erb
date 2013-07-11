@@ -4,7 +4,7 @@
       // append or remove a toggled pattern option into the pattern option box
       $("#PCRE_options input[type=checkbox]").change(function() {
         var el = $(this);
-        var opts = $("#PCREck_pattern_options");
+        var opts = $("#rgx_pattern_options");
         var curr_opts = opts.attr("value");
         if (el.is(":checked")) {
           opts.attr("value", curr_opts + el.attr("value"));
@@ -15,7 +15,7 @@
 
       // update the pattern options' :checked state when the user
       // manually writes options in the pattern option box
-      $("#PCREck_pattern_options").keyup(function() {
+      $("#rgx_pattern_options").keyup(function() {
         var opts = $(this).attr("value").split('');
         $("#PCRE_options input[type=checkbox]").attr("checked", null);
         $("#PCRE_options input[type=checkbox]").each(function() {
@@ -31,7 +31,7 @@
       $("#PCRE_options input[type=checkbox]").each(function() {
         opts.push($(this).attr("value"));
       });
-      $("#PCREck_pattern_options").attr("placeholder", opts.join(''));
+      $("#rgx_pattern_options").attr("placeholder", opts.join(''));
     });
   </script>
 <% end %>

@@ -1,23 +1,23 @@
 #!/usr/bin/env lua
 ------------------
 --
--- This file is part of PCREck.
+-- This file is part of rgx.
 --
--- PCREck is free software: you can redistribute it and/or modify
+-- rgx is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU Affero General Public License as published by
 -- the Free Software Foundation, either version 3 of the License, or
 -- (at your option) any later version.
 --
--- PCREck is distributed in the hope that it will be useful,
+-- rgx is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 -- GNU Affero General Public License for more details.
 --
 -- You should have received a copy of the GNU Affero General Public License
--- along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+-- along with rgx. If not, see <http://www.gnu.org/licenses/>.
 --
 --
--- PCREck.lua:
+-- rgx.lua:
 -- Uses lrexlib's pcre module to test a PCRE pattern on a subject.
 --
 -- The script can be invoked with a pattern and a subject to
@@ -30,18 +30,15 @@
 --
 ------------------
 
-local cli = require "cliargs"
-local rex_pcre = require 'rex_pcre'
-local json = require 'dkjson'
+local cli       = require "cliargs"
+local rex_pcre  = require 'rex_pcre'
+local json      = require 'dkjson'
 
-cli:set_name("PCREck")
+cli:set_name("rgx")
 cli:add_arg("dialect", "the dialect of the regex [Lua|PCRE]")
 cli:add_opt("--pattern=PTRN", "the regex pattern")
 cli:add_opt("--subject=TEXT", "subject to test using the pattern")
 cli:add_opt("--flags=FLAGS",  "regex compilation flags")
-
-local args = cli:parse_args()
-if not args then return end
 
 local function test_pcre_construct(pattern, subject, flags)
   print("Testing pattern: [" .. pattern .. "]")
@@ -85,8 +82,8 @@ end
 
 local RC_MATCH, RC_NOMATCH, RC_BADPATTERN = 'RC_MATCH', 'RC_NOMATCH', 'RC_BADPATTERN'
 
-if not PCREck then
-  PCREck = { }
+if not rgx then
+  rgx = { }
 end
 
 local function test_construct(json_construct, type)
@@ -157,9 +154,9 @@ local function test_construct(json_construct, type)
   end)())
 end
 
-PCREck.PCRE = {}
+rgx.PCRE = {}
 
-function PCREck.PCRE.test(json_construct)
+function rgx.PCRE.test(json_construct)
   return test_construct(json_construct, 'pcre')
 end
 
@@ -173,19 +170,22 @@ local pcre_flags = {
   ["J"] = "Duplicate names"
 }
 
-function PCREck.PCRE.flags()
+function rgx.PCRE.flags()
   return json.encode(pcre_flags)
 end
 
-PCREck.Lua = {}
+rgx.Lua = {}
 local lua_flags = {}
-function PCREck.Lua.test(json_construct)
+function rgx.Lua.test(json_construct)
   return test_construct(json_construct, 'lua')
 end
 
-function PCREck.Lua.flags()
+function rgx.Lua.flags()
   return json.encode(lua_flags)
 end
+
+local args = cli:parse_args()
+if not args then return end
 
 if #args["pattern"] > 0 and #args["subject"] > 0 then
   local request = {

@@ -1,17 +1,17 @@
 #!/usr/bin/env js
 
-/// PCREck.js
+/// rgx.js
 ///
-/// PCREck::JavaScript engine that allows for executing
+/// rgx::JavaScript engine that allows for executing
 /// JavaScript regexes and returns their matches and captures
 ///
 /// Input pattern, subject, and options are expected to be JSON
 /// encoded. Output is _always_ JSON encoded.
 ///
-/// Usage: ./PCREck.js "pattern" "subject" "options"
+/// Usage: ./rgx.js "pattern" "subject" "options"
 
 var display_usage = function() {
-  print('Usage: ./PCREck.js "pattern" "subject" "options"');
+  print('Usage: ./rgx.js "pattern" "subject" "options"');
 }
 
 /**

@@ -1,18 +1,18 @@
 /**
- * This file is part of PCREck.
+ * This file is part of rgx.
  *
- * PCREck is free software: you can redistribute it and/or modify
+ * rgx is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PCREck is distributed in the hope that it will be useful,
+ * rgx is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+ * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
  * Copyright (C) 2013 Ahmad Amireh <ahmad@algollabs.com>
@@ -38,8 +38,8 @@ using algol::string_t;
 
 int print_help()
 {
-  std::cout << "Usage: ./PCREck\n";
-  std::cout << "To configure PCREck, see ../PCREck.cfg.in or visit https://github.com/amireh/PREck\n";
+  std::cout << "Usage: ./rgx\n";
+  std::cout << "To configure rgx, see ../rgx.cfg.in or visit https://github.com/amireh/PREck\n";
   return 1;
 }
 
@@ -56,10 +56,10 @@ int main(int argc, char**)
 
   xmlInitParser();
 
-  algol::algol_init("PCREck", "0", "6", "0", "rc1");
+  algol::algol_init("rgx", "0", "6", "0", "rc1");
 
   {
-    pcreck::kernel kernel_;
+    rgx::kernel kernel_;
     kernel_.init();
 
     // run kernel in background thread
@@ -86,7 +86,7 @@ int main(int argc, char**)
     }*/
     kernel_.configure("");
 
-    boost::thread t(boost::bind(&pcreck::kernel::run, &kernel_));
+    boost::thread t(boost::bind(&rgx::kernel::run, &kernel_));
 
     // restore previous signals
     pthread_sigmask(SIG_SETMASK, &old_mask, 0);

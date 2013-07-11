@@ -12,7 +12,7 @@ Bundler.require(:default)
 configure do
   require 'lib/version'
 
-  puts "---- PCREck #{PCREck::VERSION} ----"
+  puts "---- rgx #{rgx::VERSION} ----"
   puts ">> Booting..."
 
   # --------------------------------------------------------
@@ -73,7 +73,7 @@ helpers do
 
   # ProximaNova, the font I use, is not compatible with an open-source
   # license and so I've excluded it from the public repository and include
-  # it only when running the main site www.pcreck.com
+  # it only when running the main site www.rgx.com
   #
   # The CSS falls back to Arial in the case this one isn't available
   def has_proximanova?

@@ -1,4 +1,4 @@
-module PCREck
+module rgx
   class Engine
     attr_reader :dialect
     attr_reader :options # the options the engine supports
@@ -28,7 +28,7 @@ module PCREck
     protected
 
     # Override this in implementation
-    # @return the PCREck script the dialect engine uses
+    # @return the rgx script the dialect engine uses
     def script
       raise "Missing implementation in dialect engine #{@dialect}"
     end

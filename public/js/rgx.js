@@ -1,6 +1,6 @@
 (function() {
   var
-  PCREck = function() {
+  rgx = function() {
     var mode = null,
         pattern_el = null,
         options_el = null,
@@ -14,7 +14,7 @@
     function hide_list_callback(e) {
       e.preventDefault();
 
-      PCREck.lists.hide($(".listlike.selected:visible"));
+      rgx.lists.hide($(".listlike.selected:visible"));
 
       return false;
     }
@@ -23,20 +23,20 @@
 
     function mode_operation(op) {
       if (mode != "simple" && mode != "advanced") {
-        console.log("Error: an invalid PCREck mode '" + mode + "' has been set, unable to query.")
+        console.log("Error: an invalid rgx mode '" + mode + "' has been set, unable to query.")
         return false;
       }
 
-      return PCREck[mode][op]();
+      return rgx[mode][op]();
     }
 
     /**
      * format_result():
-     *  Decodes the PCREck response, injects (and highlights) matched and captured values
+     *  Decodes the rgx response, injects (and highlights) matched and captured values
      *  in the respective elements.
      *
      * Parameters:
-     *  1. result; a JSON object containing the PCREck result
+     *  1. result; a JSON object containing the rgx result
      *  2. subject; the subject (text) the result applies to
      *  3. match_el; jQuery handle to the element that contains the matches
      *  4. capture_el; jQuery handle to the element that contains the captures
@@ -45,16 +45,16 @@
     function format_result(result, subject, match_el, capture_el, subject_idx) {
       if (result.length == 0) {
         mode == "simple"
-          ? PCREck.simple.reset_status("No match.")
-          : PCREck.advanced.reset_status(subject_idx, "No match.");
+          ? rgx.simple.reset_status("No match.")
+          : rgx.advanced.reset_status(subject_idx, "No match.");
 
         return;
       }
 
       if (result.error) {
         mode == "simple"
-          ? PCREck.simple.reset_status("Error: " + result.error)
-          : PCREck.advanced.reset_status(subject_idx, "Error: " + result.error);
+          ? rgx.simple.reset_status("Error: " + result.error)
+          : rgx.advanced.reset_status(subject_idx, "Error: " + result.error);
 
         return;
       }
@@ -83,20 +83,20 @@
       dialect: dialect,
       setup: function() {
         // these are constant across all modes
-        pattern_el = $("#PCREck_pattern"),
-        options_el = $("#PCREck_pattern_options");
+        pattern_el = $("#rgx_pattern"),
+        options_el = $("#rgx_pattern_options");
       },
       /** accepted modes: "simple"|"advanced" */
       set_mode: function(in_mode) {
         mode = in_mode;
 
         if (in_mode == "simple") {
-          subject_el = $("#PCREck_subject");
+          subject_el = $("#rgx_subject");
         }
       },
       pulsate: function() {
         if (tt) { clearTimeout(tt); }
-        tt = setTimeout("PCREck.query()", pulse);
+        tt = setTimeout("rgx.query()", pulse);
       },
       // mode-agnostic helpers
       query: function() {
@@ -129,12 +129,12 @@
           if ($(this).parent("[disabled],:disabled,.disabled").length > 0)
             return false;
 
-          PCREck.lists.hide($("a.listlike.selected"));
+          rgx.lists.hide($("a.listlike.selected"));
 
           $(this).next("ol").show();
             // .css("left", $(this).position().left);
           $(this).addClass("selected");
-          $(this).unbind('click', PCREck.lists.show);
+          $(this).unbind('click', rgx.lists.show);
           $(this).add($(window)).bind('click', hide_list_callback);
 
           return false;
@@ -144,14 +144,14 @@
           $(el).removeClass("selected");
           $(el).next("ol").hide();
           $(el).add($(window)).unbind('click', hide_list_callback);
-          $(el).bind('click', PCREck.lists.show);
+          $(el).bind('click', rgx.lists.show);
         }
       },
 
       simple: {
         reset_status: function(text) {
-          $("#PCREck_match").empty().html(text || "");
-          $("#PCREck_capture").empty();
+          $("#rgx_match").empty().html(text || "");
+          $("#rgx_capture").empty();
         },
         query: function() {
           var p = pattern_el.attr("value"),
@@ -159,17 +159,17 @@
               s = subject_el.attr("value");
 
           if (p.length == 0) {
-            PCREck.simple.reset_status();
+            rgx.simple.reset_status();
             return false;
           }
 
           $.ajax({
-            url: "/" + PCREck.dialect,
+            url: "/" + rgx.dialect,
             type: "POST",
             data: { pattern: p, subject: s, options: o },
             success: function(result) {
               result = JSON.parse(result);
-              return format_result(result, s, $("#PCREck_match"), $("#PCREck_capture"));
+              return format_result(result, s, $("#rgx_match"), $("#rgx_capture"));
             }
           });
 
@@ -180,14 +180,14 @@
           var p = pattern_el.attr("value"),
               o = options_el.attr("value"),
               s = subject_el.attr("value");
-              // e  = $("#PCREck_engine :checked").attr("value");
+              // e  = $("#rgx_engine :checked").attr("value");
 
           if (p.length == 0 && s.length == 0) {
             return;
           }
 
           $.ajax({
-            url: "/" + PCREck.dialect + "/permalink",
+            url: "/" + rgx.dialect + "/permalink",
             type: "POST",
             data: { pattern: p, subject: s, options: o, mode: "simple" },
             success: function(url) {
@@ -210,7 +210,7 @@
 
         query: function(pattern, options, subjects) {
           if (pattern_el.attr("value").length == 0) {
-            PCREck.advanced.reset_status();
+            rgx.advanced.reset_status();
             return false;
           }
 
@@ -223,7 +223,7 @@
           })
 
           $.ajax({
-            url: "/" + PCREck.dialect + "/advanced",
+            url: "/" + rgx.dialect + "/advanced",
             type: "POST",
             data: { pattern: p, subjects: s, options: o },
             success: function(resultset) {
@@ -251,7 +251,7 @@
           params += "&mode=advanced";
 
           $.ajax({
-            url: "/" + PCREck.dialect + "/permalink",
+            url: "/" + rgx.dialect + "/permalink",
             type: "POST",
             data: params,
             success: function(url) {
@@ -263,23 +263,23 @@
     }
   }();
 
-  // PCREck = PCREck();
+  // rgx = rgx();
   $(function() {
-    PCREck.setup();
+    rgx.setup();
 
-    $(document).ajaxStart(PCREck.status.mark_pending);
-    $(document).ajaxComplete(PCREck.status.mark_ready);
+    $(document).ajaxStart(rgx.status.mark_pending);
+    $(document).ajaxComplete(rgx.status.mark_ready);
 
-    $("input[type=text], textarea").keyup(PCREck.pulsate);
-    $("input[type=checkbox]").change(PCREck.pulsate);
-    $("input[type=radio]").change(PCREck.pulsate);
+    $("input[type=text], textarea").keyup(rgx.pulsate);
+    $("input[type=checkbox]").change(rgx.pulsate);
+    $("input[type=radio]").change(rgx.pulsate);
     $("textarea").autosize();
 
-    $("a.listlike:not(.selected)").bind('click', PCREck.lists.show);
+    $("a.listlike:not(.selected)").bind('click', rgx.lists.show);
     $("ol.listlike li, ol.listlike li *").click(function() {
       var anchor = $(this).parent().prev("a.listlike");
       if (anchor.hasClass("selected")) {
-        PCREck.lists.hide(anchor);
+        rgx.lists.hide(anchor);
       }
 
       return true; // let the event propagate
@@ -290,5 +290,5 @@
     $("[title]").tooltip({ animation: false, placement: "bottom" });
   });
 
-  window.PCREck = PCREck;
+  window.rgx = rgx;
 })();

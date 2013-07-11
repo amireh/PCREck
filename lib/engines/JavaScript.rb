@@ -1,20 +1,20 @@
-module PCREck
+module rgx
   class JavaScript < Engine
     def script
-      'PCREck.js'
+      'rgx.js'
     end
 
     def query(pattern, subject, options = "", encode = true)
       res = nil
-      IO.popen(["PCREck.js",
+      IO.popen(["rgx.js",
                 "#{pattern.to_json}",
                 "#{subject.to_json}",
                 "#{options.to_json}",
                 :err=>[:child, :out]]) {|io|
         res = io.read
-        # puts "---- PCREck.js output:"
+        # puts "---- rgx.js output:"
         # puts res
-        # puts "---- END OF PCREck.js OUTPUT"
+        # puts "---- END OF rgx.js OUTPUT"
         res = res.split("\n").last.strip
       }
 

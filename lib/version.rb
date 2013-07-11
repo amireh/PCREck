@@ -1,3 +1,3 @@
-module PCREck
+module rgx
   VERSION = '1.0.0'
 end

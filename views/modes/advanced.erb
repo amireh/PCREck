@@ -1,8 +1,8 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     $(function() {
-      PCREck.set_mode("advanced");
-      $("#gen_permalink").click(PCREck.advanced.gen_permalink);
+      rgx.set_mode("advanced");
+      $("#gen_permalink").click(rgx.advanced.gen_permalink);
 
       dyn_register_callback(function(clone, action) {
         if (clone && action == "add") {
@@ -12,11 +12,11 @@
           }
 
           clone.find("textarea").autosize();
-          clone.find("textarea").keyup(PCREck.pulsate);
+          clone.find("textarea").keyup(rgx.pulsate);
         }
       });
 
-      PCREck.advanced.query();
+      rgx.advanced.query();
     });
 
   </script>
@@ -28,12 +28,12 @@
   <li>the pattern and subject fields are converted to smart textareas for improved large expression support</li>
 </ol> -->
 
-<section class="PCREck">
+<section class="rgx">
   <div class="part spanner">
-    <label for="PCREck_pattern">Your regular expression:</label>
+    <label for="rgx_pattern">Your regular expression:</label>
     <div class="part left" style="width: 120px; margin-right: 0">
       <code>(?</code>
-      <input type="text" id="PCREck_pattern_options"
+      <input type="text" id="rgx_pattern_options"
         name="options"
         style="width: 70px; font-size: 12px"
         value="<%= @link.options %>" />
@@ -41,7 +41,7 @@
     </div>
     <div class="part right" style="width: 840px; border-left: none">
      <textarea 
-        id="PCREck_pattern"
+        id="rgx_pattern"
         name="pattern"
         autofocus="autofocus"
         placeholder="^(banana)+s? (.*)$"><%= @link.pattern %></textarea>
@@ -62,12 +62,12 @@
   end
 %>
 
-<section class="PCREck" id="PCREck_subjects">
+<section class="rgx" id="rgx_subjects">
 
   <% subjects.each_with_index do |subject, idx| %>
     <% curr_idx = idx - 1 %>
     <div  data-dyn-entity="subjects" data-dyn-index="<%= curr_idx %>"
-          class="PCREck_subject <%= 'odd' if idx != 0 && (curr_idx) % 2 != 0 %>" >
+          class="rgx_subject <%= 'odd' if idx != 0 && (curr_idx) % 2 != 0 %>" >
       <h3>Subject #<span data-dyn-substitute="index"><%= curr_idx %></span></h3>
       <button tabindex="-1" data-dyn-target="subjects" data-dyn-target-index="<%= curr_idx %>" data-dyn-action="remove">X</button>
       <div class="part spanner">
@@ -94,7 +94,7 @@
 </section>
 <button id="add_subject" data-dyn-target="subjects">&plus; Add another subject</button>
 
-<section id="PCREck_actions">
+<section id="rgx_actions">
   <button id="gen_permalink">&hearts; Permanent link</button>
   <span id="permalink"></span>
 </section>

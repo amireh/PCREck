@@ -7,14 +7,14 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class PCREckTest extends TestCase
+public class rgxTest extends TestCase
 {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public PCREckTest( String testName )
+    public rgxTest( String testName )
     {
         super( testName );
     }
@@ -24,13 +24,13 @@ public class PCREckTest extends TestCase
      */
     public static Test suite()
     {
-        return new TestSuite( PCREckTest.class );
+        return new TestSuite( rgxTest.class );
     }
 
     /**
      * Rigourous Test :-)
      */
-    public void testPCREck()
+    public void testrgx()
     {
         assertTrue( true );
     }

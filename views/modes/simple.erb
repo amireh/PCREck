@@ -2,56 +2,56 @@
   <script type="text/javascript">
 
     $(function() {
-      PCREck.set_mode("simple");
+      rgx.set_mode("simple");
 
-      $("#gen_permalink").click(PCREck.simple.gen_permalink);
+      $("#gen_permalink").click(rgx.simple.gen_permalink);
 
       // force a query if the fields were initialized with a custom value
-      PCREck.simple.query();
+      rgx.simple.query();
     });
 
   </script>
 <% end %>
 
-<section id="PCREck" class="PCREck">
+<section id="rgx" class="rgx">
   <div class="part spanner">
-    <label for="PCREck_pattern">Your regular expression:</label>
+    <label for="rgx_pattern">Your regular expression:</label>
     <div class="part left" style="width: 120px; margin-right: 0">
       <code>(?</code>
-      <input type="text" id="PCREck_pattern_options"
+      <input type="text" id="rgx_pattern_options"
         style="width: 70px; font-size: 12px"
         value="<%= @link.options %>" />
       <code>)</code>
     </div>
     <div class="part right" style="width: 840px; border-left: none">
       <input 
-        type="text" id="PCREck_pattern" 
+        type="text" id="rgx_pattern" 
         autofocus="autofocus"
         placeholder="^(banana)+s? (.*)$"
         value="<%= @link.pattern %>"/>
     </div>
   </div>
   <div class="part left">
-    <label for="PCREck_subject">Your test string:</label>
-    <textarea id="PCREck_subject" placeholder="bananas in the car"><%= @link.subject %></textarea>
+    <label for="rgx_subject">Your test string:</label>
+    <textarea id="rgx_subject" placeholder="bananas in the car"><%= @link.subject %></textarea>
   </div>
   
   <div class="part right">
     <label>
       Matches:
     </label>
-    <pre id="PCREck_match">--</pre>
+    <pre id="rgx_match">--</pre>
     <label>
       Captured subpatterns:
     </label>
-    <pre id="PCREck_capture">--</pre>
+    <pre id="rgx_capture">--</pre>
 
   </div>
 </section>
 
 <%= erb :"options/#{@dialect}" %>
 
-<section id="PCREck_actions">
+<section id="rgx_actions">
   <button id="gen_permalink">&hearts; Permanent link</button>
   <span id="permalink"></span>
 </section>

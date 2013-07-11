@@ -3,14 +3,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description"
-          content="PCREck is a multi-dialect regular expression editor.">
+          content="rgx is a multi-dialect regular expression editor.">
 
-    <title>PCREck - a multi-dialect regular expression editor</title>
+    <title>rgx - a multi-dialect regular expression editor</title>
 
     <% if settings.development? %>
-      <link href="/css/PCREck.css" rel="stylesheet" type="text/css" />
+      <link href="/css/rgx.css" rel="stylesheet" type="text/css" />
     <% else %>
-      <link href="/css/PCREck.min.css" rel="stylesheet" type="text/css" />
+      <link href="/css/rgx.min.css" rel="stylesheet" type="text/css" />
     <% end %>
 
   </head>
@@ -53,16 +53,16 @@
       <script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
       <script type="text/javascript" src="/js/jquery.autosize.js"></script>
       <script type="text/javascript" src="/js/dynamism.js"></script>
-      <script type="text/javascript" src="/js/PCREck.js"></script>
+      <script type="text/javascript" src="/js/rgx.js"></script>
       <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
     <% else %>
-      <script type="text/javascript" src="/js/PCREck.min.js"></script>
+      <script type="text/javascript" src="/js/rgx.min.js"></script>
       <%= erb :"_google_analytics" %>
     <% end %>
 
     <script>
       $(function() {
-        window.PCREck.dialect = "<%= @dialect %>";
+        window.rgx.dialect = "<%= @dialect %>";
       });
     </script>
     <%= yield_content :scripts %>

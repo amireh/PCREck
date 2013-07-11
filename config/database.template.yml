@@ -3,12 +3,12 @@ development:
     host: 'localhost'
     un:   'root'
     pw:   ''
-    db:   'PCREck'
+    db:   'rgx'
 
 test:
   database:
     <<: *common
-    db: 'PCREck_test'
+    db: 'rgx_test'
 
 production:
   database:

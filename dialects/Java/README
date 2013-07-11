@@ -1,4 +1,4 @@
-The Java PCREck dialect engine is built using Maven.
+The Java rgx dialect engine is built using Maven.
 
 To build the engine:
 
@@ -10,4 +10,4 @@ And to package it:
 
 Running it:
 
-`java -cp lib/*:target/* com.algollabs.PCREck`
+`java -cp lib/*:target/* com.algollabs.rgx`

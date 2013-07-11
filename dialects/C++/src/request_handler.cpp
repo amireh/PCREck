@@ -1,18 +1,18 @@
 /**
- * This file is part of PCREck.
+ * This file is part of rgx.
  *
- * PCREck is free software: you can redistribute it and/or modify
+ * rgx is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PCREck is distributed in the hope that it will be useful,
+ * rgx is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+ * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "request_handler.hpp"
@@ -20,7 +20,7 @@
 #include <algol/timer.hpp>
 #include <boost/bind.hpp>
 
-namespace pcreck {
+namespace rgx {
 
   enum {
     MODE_CPP,
@@ -74,12 +74,12 @@ namespace pcreck {
       if (req_.method == "GET" && req_.uri.find("flags") != string_t::npos) {
         switch(mode) {
           case MODE_LUA:
-            lua_engine_.invoke("PCREck.Lua.flags", [&](lua_State* lua) -> void {
+            lua_engine_.invoke("rgx.Lua.flags", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
             }, 1, "std::string", &req_.body);
           break;
           case MODE_PCRE:
-            lua_engine_.invoke("PCREck.PCRE.flags", [&](lua_State* lua) -> void {
+            lua_engine_.invoke("rgx.PCRE.flags", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
             }, 1, "std::string", &req_.body);
           break;
@@ -90,12 +90,12 @@ namespace pcreck {
       else if (req_.method == "POST") {
         switch(mode) {
           case MODE_LUA:
-            lua_engine_.invoke("PCREck.Lua.test", [&](lua_State* lua) -> void {
+            lua_engine_.invoke("rgx.Lua.test", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
             }, 1, "std::string", &req_.body);
           break;
           case MODE_PCRE:
-            lua_engine_.invoke("PCREck.PCRE.test", [&](lua_State* lua) -> void {
+            lua_engine_.invoke("rgx.PCRE.test", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
             }, 1, "std::string", &req_.body);
           break;

@@ -1,18 +1,18 @@
 /**
- * This file is part of PCREck.
+ * This file is part of rgx.
  *
- * PCREck is free software: you can redistribute it and/or modify
+ * rgx is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PCREck is distributed in the hope that it will be useful,
+ * rgx is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+ * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <ctime>
@@ -24,11 +24,11 @@
 #include "kernel.hpp"
 #include "connection.hpp"
 
-namespace pcreck {
+namespace rgx {
 
   kernel::kernel()
-  : configurable({"PCREck"}),
-    logger("PCREck"),
+  : configurable({"rgx"}),
+    logger("rgx"),
     io_service_(),
     strand_(io_service_),
     acceptor_(io_service_),
@@ -74,7 +74,7 @@ namespace pcreck {
 
     string_t data = json_data;
     if (data.empty()) {
-      std::ifstream cfg_stream(algol::path_t(algol::file_manager::singleton().bin_path() / "PCREck.cfg").make_preferred().string());
+      std::ifstream cfg_stream(algol::path_t(algol::file_manager::singleton().bin_path() / "rgx.cfg").make_preferred().string());
       if (cfg_stream.is_open() && cfg_stream.good()) {
         cfg_stream.seekg(0, std::ios::end);
         data.reserve(cfg_stream.tellg());
@@ -117,14 +117,14 @@ namespace pcreck {
     for (std::size_t i = 0; i < config_.nr_workers; ++i)
       workers_.create_thread(boost::bind(&kernel::work, boost::ref(this)));
 
-    log_->infoStream() << "PCREck running:";
+    log_->infoStream() << "rgx running:";
     log_->infoStream() << "\taccepting connections on " << config_.nr_workers << " threads";
     log_->infoStream() << "\tconnections will time out every " << connection::get_timeout() << "s";
 
     running_ = true;
 
     lua_engine_.start();
-    lua_engine_.run((file_manager::singleton().root_path() / "../PCRE/" / "PCREck.lua").string());
+    lua_engine_.run((file_manager::singleton().root_path() / "../PCRE/" / "rgx.lua").string());
 
     // wait for all threads in the pool to exit
     workers_.join_all();
@@ -297,9 +297,9 @@ namespace pcreck {
       connection::set_timeout(ts.tv_sec);
     }
     else {
-      log_->warnStream() << "unknown PCREck config setting '"
+      log_->warnStream() << "unknown rgx config setting '"
         << key << "' => '" << value << "', discarding";
     }
   }
 
-} // namespace pcreck
+} // namespace rgx

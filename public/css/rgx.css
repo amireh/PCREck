@@ -1,5 +1,5 @@
 /* ------
- * PCREck
+ * rgx
  * ------ */
 
 * {
@@ -101,8 +101,8 @@ pre {
   padding: 10px;
   margin: 0;
 }
-pre#PCREck_match,
-pre#PCREck_capture,
+pre#rgx_match,
+pre#rgx_capture,
 pre.match,
 pre.capture,
 pre em {
@@ -171,7 +171,7 @@ td:first-of-type {
   padding-right: 5px
 }
 
-.PCREck label {
+.rgx label {
   box-shadow: 0 3px 3px 0px rgba(0,0,0,0.5);
   display: block;
   /*background: #EFFFCD;*/
@@ -184,14 +184,14 @@ td:first-of-type {
   position: relative;
   width: 100.5%;
 }
-#PCREck_pattern_options,
-#PCREck_pattern {
+#rgx_pattern_options,
+#rgx_pattern {
   height: 43px;
   min-height: 43px;
   vertical-align: middle;
 }
 
-#PCREck_subject {
+#rgx_subject {
   min-height: 130px;
 }
 
@@ -229,7 +229,7 @@ span#curly {
   display: none;
 }
 
-.PCREck_subject {
+.rgx_subject {
   float: left;
   width: 48%;
   position: relative;
@@ -237,31 +237,31 @@ span#curly {
   /*padding-bottom: 10px;*/
   /*margin-bottom: 10px;*/
 }
-.PCREck_subject h3:first-child {
+.rgx_subject h3:first-child {
   color: #99173C;
 }
-.PCREck_subject.odd {
+.rgx_subject.odd {
   float: right;
 }
-.PCREck_subject:not(.odd) {
+.rgx_subject:not(.odd) {
   clear: both;
 }
 
-.PCREck_subject label:first-of-type {
+.rgx_subject label:first-of-type {
   margin-top: 0;
 }
-.PCREck_subject label {
+.rgx_subject label {
   /* much easier on the eyes */
   background: #EEE;
   color: #111;
   box-shadow: 0 3px 3px 0px rgba(0, 0, 0, 0.05);
 }
 
-.PCREck_subject .part.spanner {
+.rgx_subject .part.spanner {
   margin-bottom: 10px;
 }
 
-.PCREck_subject button {
+.rgx_subject button {
   position: absolute;
   top: 15px;
   right: -2px;

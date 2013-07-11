@@ -1,22 +1,22 @@
 /**
- * This file is part of PCREck.
+ * This file is part of rgx.
  *
- * PCREck is free software: you can redistribute it and/or modify
+ * rgx is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PCREck is distributed in the hope that it will be useful,
+ * rgx is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with PCREck. If not, see <http://www.gnu.org/licenses/>.
+ * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_PCREck_KERNEL_H
-#define H_PCREck_KERNEL_H
+#ifndef H_rgx_KERNEL_H
+#define H_rgx_KERNEL_H
 
 #include <string>
 #include <vector>
@@ -35,13 +35,13 @@
 #include <algol/file_manager.hpp>
 #include <algol/lua/engine.hpp>
 
-#include "PCREck.hpp"
+#include "rgx.hpp"
 
 using algol::string_t;
 using algol::logger;
 using algol::configurable;
 
-namespace pcreck {
+namespace rgx {
 
   class connection;
   typedef boost::shared_ptr<connection> connection_ptr;
@@ -156,6 +156,6 @@ namespace pcreck {
   };
 
 
-} // namespace pcreck
+} // namespace rgx
 
-#endif // H_PCREck_KERNEL_H
+#endif // H_rgx_KERNEL_H
