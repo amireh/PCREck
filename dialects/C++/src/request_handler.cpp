@@ -76,11 +76,13 @@ namespace rgx {
           case MODE_LUA:
             lua_engine_.invoke("rgx.Lua.flags", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
+              lua_remove(lua, lua_gettop(lua));
             }, 1, "std::string", &req_.body);
           break;
           case MODE_PCRE:
             lua_engine_.invoke("rgx.PCRE.flags", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
+              lua_remove(lua, lua_gettop(lua));
             }, 1, "std::string", &req_.body);
           break;
           case MODE_CPP:
@@ -92,11 +94,13 @@ namespace rgx {
           case MODE_LUA:
             lua_engine_.invoke("rgx.Lua.test", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
+              lua_remove(lua, lua_gettop(lua));
             }, 1, "std::string", &req_.body);
           break;
           case MODE_PCRE:
             lua_engine_.invoke("rgx.PCRE.test", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
+              lua_remove(lua, lua_gettop(lua));
             }, 1, "std::string", &req_.body);
           break;
           case MODE_CPP:

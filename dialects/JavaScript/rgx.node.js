@@ -77,7 +77,7 @@ handle = function(pattern, subject, flags) {
 /** The current response stream */
 res,
 address = process.argv[2] || '127.0.0.1',
-port    = process.argv[3] || 1337;
+port    = process.argv[3] || 9400;
 
 if ((process.argv[2]||'').indexOf('help') > -1) {
   return console.log("usage: rgx.js [ADDRESS] [PORT]");

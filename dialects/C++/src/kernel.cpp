@@ -42,8 +42,8 @@ namespace rgx {
 
     pause_cb_(nullptr)
   {
-    config_.nr_workers = 1;
-    config_.listen_interface = "0.0.0.0";
+    config_.nr_workers = 4;
+    config_.listen_interface = "127.0.0.1";
     config_.port = "9400";
   }
 
@@ -95,6 +95,8 @@ namespace rgx {
 
   void kernel::run()
   {
+    algol::path_t root = file_manager::singleton().root_path();
+
     log_->infoStream() << "binding at: " << config_.listen_interface << ":" << config_.port;
 
     init_ = true;
@@ -114,6 +116,12 @@ namespace rgx {
       accept();
     }
 
+    if (lua_engine_.start((root / "../rgx_helpers.lua").string())) {
+      lua_engine_.invoke("rgx_export", 0);
+      lua_engine_.run((root / "../PCRE/" / "rgx.lua").string());
+      lua_engine_.run((root / "../Lua/" / "rgx.lua").string());
+    }
+
     for (std::size_t i = 0; i < config_.nr_workers; ++i)
       workers_.create_thread(boost::bind(&kernel::work, boost::ref(this)));
 
@@ -122,9 +130,6 @@ namespace rgx {
     log_->infoStream() << "\tconnections will time out every " << connection::get_timeout() << "s";
 
     running_ = true;
-
-    lua_engine_.start();
-    lua_engine_.run((file_manager::singleton().root_path() / "../PCRE/" / "rgx.lua").string());
 
     // wait for all threads in the pool to exit
     workers_.join_all();

@@ -15,51 +15,33 @@
 -- You should have received a copy of the GNU Affero General Public License
 -- along with rgx. If not, see <http://www.gnu.org/licenses/>.
 --
--- rgx.lua:
--- Uses lrexlib's pcre module to test a PCRE pattern on a subject.
---
 ------------------
 
--- local rgx       = require 'rgx_helpers'
-local rgx       = rgx
-local rex_pcre  = require 'rex_pcre'
+-- local rgx = require 'rgx_helpers'
+local rgx = rgx
 
 if not rgx or not rgx.test_construct then
   return error("rgx.lua: _G['rgx'] or rgx.test_construct implementation is missing!")
 end
 
+local flags = {}
 local function matcher(pattern, subject, flags)
-  -- embed the compilation flags inline-style
-  pattern = '(?' .. (flags or '') .. ':' .. pattern .. ')'
-
-  local success, rex_or_msg = pcall(rex_pcre.new, pattern)
-  if not success then
-    return nil, "invalid regular expression; " .. rex_or_msg
-  end
-
-  -- local match = { rex_pcre:find(subject, rex_or_msg) }
-  local match = { rex_or_msg:tfind(subject) }
+  local match = { subject:find(pattern) }
+  local cstruct = {}
 
   -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
   if match[1] then
-    match[1] = match[1] - 1
-    match[2] = match[2] - 1
+    match = {
+      table.remove(match, 1) -1, -- the match begin offset
+      table.remove(match, 1) -1, -- the match end offset
+      match -- the captures, if any
+    }
   end
 
   return match
 end
 
-local flags = {
-  ["i"] = "makes matching case insensitive",
-  ["m"] = "matching will span across line feeds",
-  ["s"] = "makes .* match everything, including control characters",
-  ["x"] = "Extended",
-  ["U"] = "Ungreedy",
-  ["X"] = "Extra",
-  ["J"] = "Duplicate names"
-}
-
-rgx.PCRE = {
+rgx.Lua = {
   test = function(json_construct)
     return rgx.test_construct(json_construct, matcher)
   end,
