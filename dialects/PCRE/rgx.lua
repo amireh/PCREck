@@ -20,9 +20,9 @@
 --
 ------------------
 
--- local rgx       = require 'rgx_helpers'
 local rgx       = rgx
 local rex_pcre  = require 'rex_pcre'
+local json      = require 'dkjson'
 
 if not rgx or not rgx.test_construct then
   return error("rgx.lua: _G['rgx'] or rgx.test_construct implementation is missing!")

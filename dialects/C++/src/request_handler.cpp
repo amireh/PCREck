@@ -59,9 +59,9 @@ namespace rgx {
     {
       int mode;
 
-      if (req_.uri.find("lua") != string_t::npos) {
+      if (utility::ci_find_substr(req_.uri, "lua") != string_t::npos) {
         mode = MODE_LUA;
-      } else if (req_.uri.find("PCRE") != string_t::npos) {
+      } else if (utility::ci_find_substr(req_.uri, "pcre") != string_t::npos) {
         mode = MODE_PCRE;
       } else {
         mode = MODE_CPP;
