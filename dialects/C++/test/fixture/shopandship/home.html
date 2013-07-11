@@ -1,0 +1,1374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0039)http://www.shopandship.com/default.aspx -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="http://www.shopandship.com/images/shopnship.ico"><link rel="image_src" href="http://www.shopandship.com/images/shopnship.ico"><link href="./shopandship_home_files/ShopnshipExternal.min.css" rel="stylesheet" type="text/css">
+    <script src="./shopandship_home_files/jquery.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/jquery-ui-1.7.3.custom.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/script.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/jquery.gritter.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/defaultMaster.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/Toolbox.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/supersleight.plugin.min.js" type="text/javascript"></script>
+    <script src="./shopandship_home_files/lhnvisitor.aspx" type="text/javascript"></script><style type="text/css" media="screen">#objShopandShipLoggedInBanner {visibility:hidden}#objShopandShipLoggedOutBanner {visibility:hidden}</style><script>window["_GOOG_TRANS_EXT_VER"] = "1";</script></head><body><a href="http://www.shopandship.com/default.aspx#" onclick="OpenLHNChat();return false;"><img width="0" height="0" alt="Live Help" id="lhnchatimg" border="0" nocache="" src="./shopandship_home_files/imageserver.ashx"></a>
+    <title>
+	Shop and Ship :: Home
+</title><link type="text/css" rel="stylesheet" href="./shopandship_home_files/demo_table.english.min.css"><link type="text/css" rel="stylesheet" href="./shopandship_home_files/tabs.english.min.css"><link type="text/css" rel="stylesheet" href="./shopandship_home_files/shopnship.english.min.css"><script type="text/javascript" src="./shopandship_home_files/jslib.axd"></script><meta name="description" content="Shop online from US and UK sites using Shop and Ship and get your shipment delivered to your front door"><meta name="keywords" content="شراء, Amazon , buy online, Online Shopping, Shop online, التسوق">
+<script type="text/javascript">
+
+    function ChangeLanguage(selectedLanguae) {
+        
+        //debugger;
+        var lang = selectedLanguae.toLowerCase()
+        if (lang == "arabic")
+        {
+        __doPostBack('ctl00','ar-JO')
+        }
+        else{
+        if (lang == "english")
+        {
+        __doPostBack('ctl00','en-US')
+        }
+        else
+        __doPostBack('ctl00','fr-FR')
+        
+        }
+    }
+
+    function LogOutUser()
+    {
+        __doPostBack('ctl00','LogOut')
+    }
+
+    function SetForgetLinkURL(emailValue) {
+
+        var link = document.getElementById('ctl00_lnkForgetPassword');
+
+        link.href = link.href + '&forgotEmail=' + emailValue;
+    }
+
+     
+        function OpenPopupChat() {
+
+            var _Email = '';
+
+            chatpopup(_Email);
+        }
+
+         $(document).ready(function () {
+
+         $('#dvLogo').supersleight({shim: '/images/trnsp.gif'});
+         
+         });              // End document ready
+ 
+</script>
+
+    <h1 id="ctl00_HeadInBody" style="display: none;">Shop and Ship :: Home</h1>
+    <div class="top_navigation">
+        <div class="links_container">
+            <div class="top_links" id="dvtoplinks" clientidmode="Static">
+                <ul>
+                    <li id="shop_sub_menu">
+                        <span id="ctl00_lblShop" title="Shop">Shop</span>
+                    </li>
+                    <li id="ship_sub_menu">
+                        <span id="ctl00_lblShip" title="Ship">Ship</span>
+                    </li>
+                    <li id="login_btn" name="login_btn">
+                        <span id="ctl00_lblLogin" title="Login"><b>Login</b></span>
+                    </li>
+                    
+                    <li id="language_btn">
+                        <span id="ctl00_lblLanguages" title="Languages">Languages</span>
+                    </li>
+                    <li></li>
+                </ul>
+                <form id="login_box" action="https://www.shopandship.com/login.aspx" method="post" style="display: none; ">
+                <div class="login_box_inner" dir="ltr">
+                    <table id="ctl00_LoginTable" width="240px" style="text-align:left;">
+	<tbody><tr class="login_fields">
+		<td width="95px">
+                                <label for="username">
+                                    Username:</label>
+                            </td>
+		<td>
+                                <input name="ctl00$txtUsername" type="text" id="ctl00_txtUsername" class="text_class" onblur="SetForgetLinkURL(this.value);">
+                            </td>
+	</tr>
+	<tr class="login_fields">
+		<td width="95px">
+                                <label for="password">
+                                    Password:&nbsp;</label>
+                            </td>
+		<td>
+                                <input name="ctl00$txtPassword" type="password" id="ctl00_txtPassword" class="text_class" style="border: #e2dfdf 1px solid;">
+                            </td>
+	</tr>
+	<tr class="login_fields">
+		<td width="75px">
+                                &nbsp;
+                            </td>
+		<td>
+                                <input name="ctl00$chkRemeberMe" type="checkbox" id="ctl00_chkRemeberMe" class="checkboxInput noBorder" style="margin-left: 5px;">
+                                <label for="rememberme">
+                                    Remember Me</label>
+                            </td>
+	</tr>
+	<tr class="login_fields">
+		<td colspan="2">
+                                <div class="space_up">
+                                </div>
+                            </td>
+	</tr>
+	<tr>
+		<td colspan="2">
+                                <a href="https://www.shopandship.com/login.aspx?Forgot=1" id="ctl00_lnkForgetPassword" class="forgot_pass">
+                                    Forgot password?</a>
+                                &nbsp;&nbsp;&nbsp;
+                                <input name="ctl00$btnLogin" type="submit" id="ctl00_btnLogin" class="btn_class" value="Login" style="float:right;">
+                                <div class="clear">
+                                </div>
+                            </td>
+	</tr>
+</tbody></table>
+
+                </div>
+                <div class="login_box_bottom">
+                </div>
+                </form>
+                <div id="language_box" style="display: none; ">
+                    <div class="language_box_inner">
+                        <ul class="language_fields">
+                            
+                                    <a id="ctl00_rptLanguages_ctl00_lnkLanguage" title="English" onclick="ChangeLanguage(&#39;English&#39;)">
+                                        English
+                                    </a>
+                                    <br>
+                                
+                        </ul>
+                        <div class="space_up">
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div id="ctl00_divLanguageBoxBottom" class="language_box_bottom" style="bottom:10px;">
+                    </div>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="splitter no_margin">
+        </div>
+        <div id="sub_menu">
+            <div class="shop_sub_menu right" dir="rtl" style="display: none; ">
+                <a href="http://www.shopandship.com/shopandship-bits" id="lnkSNSBitsMaster">
+                    <span id="ctl00_lblShopNShipSBits" title="Shop and Ship BITS">Shop and Ship BITS</span>
+                </a><a href="http://www.shopandship.com/hot-deals" id="lnkHotDealsMaster" class="before_last">
+                    <span id="ctl00_lblSNSHotDeals" title="Hot Deals">Hot Deals</span>
+                </a><a href="http://www.shopandship.com/shopping-directory" id="lnkShoppingDirectoryMaster">
+                    <span id="ctl00_lblSNSDirectory" title="Shopping Directory">Shopping Directory</span>
+                </a>
+            </div>
+            <div class="ship_sub_menu right" dir="rtl" style="display: none; ">
+                <a href="http://www.shopandship.com/Ship/about.aspx">
+                    <span id="ctl00_lblAboutSNS" title="Who We Are">Who We Are</span>
+                </a><a href="http://www.shopandship.com/Ship/how-does-it-work.aspx">
+                    <span id="ctl00_lblHowItWorks" title="How We Roll">How We Roll</span>
+                </a><a href="http://www.shopandship.com/my-shopandship/agreement.aspx" id="ctl00_lnkHeaderOpenNewAccount">
+                    <span id="ctl00_lblOpenAccount" title="Open Account">Open Account</span>
+                </a><a href="http://www.shopandship.com/service-updates" id="lnkServiceUpdatesMaster" class="before_last">
+                    <span id="ctl00_lblServiceUpdates" title="Service Updates">Service Updates</span>
+                </a><a href="http://www.shopandship.com/Ship/countries-rates.aspx">
+                    <span id="ctl00_lblCountryRates" title="Country Rates">Country Rates</span>
+                </a>
+            </div>
+        </div>
+        <div class="clear" style="width: 930px; height: 1px">
+        </div>
+    </div>
+    <div id="mainContainer">
+        
+<div class="header">
+    <div id="dvLogo" class="logo">
+        <a href="./shopandship_home_files/shopandship_home.html" id="ctl00_ctlSiteHeader1_imgLogoLink">
+            <img src="./shopandship_home_files/sns-150.png" id="ctl00_ctlSiteHeader1_imgLogo" title="Shop and Ship is all about buying it online over there and getting it over here" alt="Shop and Ship Logo image"></a>
+    </div>
+    <div class="ads">
+        
+<script type="text/javascript" src="./shopandship_home_files/swfobject.js"></script>
+<script type="text/javascript">
+
+
+    swfobject.registerObject("objShopandShipLoggedInBanner", "9.0.115", "expressInstall.swf");
+    swfobject.registerObject("objShopandShipLoggedOutBanner", "9.0.115", "expressInstall.swf");
+     
+</script>
+
+<div id="ctl00_ctlSiteHeader1_ctlMainBanner1_pnlLoggedOut" style="height:155px;width:715px;white-space:nowrap;">
+	
+    <object id="objShopandShipLoggedOutBanner" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="715" height="155" style="visibility: visible; ">
+        <param name="movie" value="/images/banners/MainBanner_SNS_logged_Out.swf">
+        <param name="wmode" value="transparent">
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="http://www.shopandship.com/images/banners/MainBanner_SNS_logged_Out.swf" width="715" height="155">
+            <param name="wmode" value="transparent">
+            <!--<![endif]-->
+            <a href="http://www.shopandship.com/my-shopandship/agreement.aspx" id="ctl00_ctlSiteHeader1_ctlMainBanner1_lnkLoggedOut" title="Logged Out" alt="Logged Out image">
+                <img src="./shopandship_home_files/MainBanner_SNS_Logged_Out.png" id="ctl00_ctlSiteHeader1_ctlMainBanner1_imgLoggedOut" width="715" height="155">
+            </a>
+            <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+    </object>
+    <script type="text/javascript" src="./shopandship_home_files/ieupdate.min.js"></script>
+
+</div>
+
+        
+    </div>
+</div>
+
+        <span class="clear"></span>
+        <div id="leftCol">
+            
+<script type="text/javascript">
+
+    function ClickTabLink(index) {
+       
+        // get handle to the api (must have been constructed before this call)
+        var api = $("ul.tabs").data("tabs");
+        // click the correct tab
+        api.click(index);
+       
+    }
+
+</script>
+<div id="ctl00_ctlLoginStatus1_LoggedOut" class="slogan">
+    
+    <p class="details" dir="ltr">
+         Shop and Ship is all about buying it online over there and getting it over here ....
+        <a href="http://www.shopandship.com/Ship/about.aspx" style="color: #ec202d; line-height: 18.72px; font-size: 14px;
+            width: 202px; margin-top: 20px;">
+            more</a>
+    </p>
+</div>
+
+<div class="clear">
+</div>
+<div class="space_up">
+</div>
+
+            <div id="ctl00_dvCardDeals">
+          
+            <div id="ctl00_dvMasterCard"><div class="mastercard"><a href="http://www.shopandship.com/service-updates/41599/e-tailers-in-china"><img src="./shopandship_home_files/Deals1.png" title="E-tailers in China" width="198" height="45" alt="E-tailers in China image"></a></div></div><div id="ctl00_dvDeals"><div class="deals01"><a href="http://www.shopandship.com/shopping-directory/"><img src="./shopandship_home_files/Deals2.png" title="Shopping Directory" width="96" height="45" alt="Shopping Directory image"></a></div><div class="deals02"><a href="http://www.shopandship.com/service-updates/42319/visa-cardholders-get-special-benefits"><img src="./shopandship_home_files/Deals3.png" title="SnS PARTNERSHIPS" width="96" height="45" alt="SnS PARTNERSHIPS image"></a></div></div><div></div></div>
+        </div>
+        <!-- end leftCol -->
+        <div id="rightCol">
+            <div id="ctl00_dvBanners" class="Banners">
+               
+            <div class="banner"><a href="http://www.shopandship.com/faqs"><img src="./shopandship_home_files/Banner1.png" title="FAQ" width="175" height="65" alt="FAQ image"></a></div><div class="banner"><a href="http://itunes.apple.com/ae/app/shop-and-ship/id448828267?mt=8" rel="nofollow" target="_blank"><img src="./shopandship_home_files/Banner2.png" title="Shop and Ship iPhone App" width="175" height="65" alt="Shop and Ship iPhone App image"></a></div><div class="banner"><a href="http://www.shopandship.com/service-updates/41767/sns-now-in-china"><img src="./shopandship_home_files/Banner3.png" title="Shop and Ship in Chinese" width="175" height="65" alt="Shop and Ship in Chinese image"></a></div><div class="banner lastBanner"><a href="http://www.shopandship.com/service-updates/42145/sns-bits"><img src="./shopandship_home_files/Banner4.png" title="Shop and Ship Bits" width="175" height="65" alt="Shop and Ship Bits image"></a></div><div class="clear"></div></div>
+            <!-- end boxes-->
+            <div class="Banners">
+                <div id="ctl00_dvHowitWorksButton" class="banner bottom_banner_margin" style="width:150px; height: 101px;">
+                    <a href="http://www.shopandship.com/Ship/how-does-it-work.aspx">
+                        <img src="./shopandship_home_files/snsbtn.jpg" id="ctl00_imgHowItWorks" border="0" width="150" height="101" alt="How Does Shop And Ship Work image" title="How Does Shop And Ship Work"></a>
+                </div>
+                <div class="lastBanner">
+                    
+
+<div class="how_it_works">
+
+    <a href="http://www.shopandship.com/ship/about.aspx" id="ctl00_ctlHowitWorksImage1_lnkHowItWorks">
+        <img src="./shopandship_home_files/how_it_works.png" id="ctl00_ctlHowitWorksImage1_imgHowItWorks" title="Who We Are" alt="Who We Are image" width="450" height="101" class="steps">
+    </a> 
+
+    <a href="http://www.shopandship.com/my-shopandship/agreement.aspx" id="ctl00_ctlHowitWorksImage1_lnkGetYourAccount" class="get_shop">
+        <img src="./shopandship_home_files/join.png" id="ctl00_ctlHowitWorksImage1_imgJoin" class="get_shop how_it_works_button" title="Click here to Join" alt="Click here to Join image">
+    </a>
+</div>
+
+                </div>
+            </div>
+              <div class="clear"></div>
+        </div>
+        <!-- end rightCol-->
+    </div>
+    <!-- end mainContainer -->
+   
+       <div class="content">
+        <span class="space_up"></span>
+        <span class="space_up">
+     
+     </span>
+        
+        <div id="left_side" class="Double_Margin_Fix">
+            
+        
+<script type="text/javascript">
+
+    function OpenPopupChat() {
+
+        var _Email = '';
+
+        chatpopup(_Email);
+    }
+</script>
+<div class="help_box">
+    <div class="help_box_icon">
+    </div>
+    <div class="help_box_top">
+    </div>
+    <div class="outter_box">
+        <div class="help_box_inner">
+            <p class="title">
+                Help Box
+            </p>
+            <div class="live_chat help_box_tool">
+                <div class="expand_block">
+                    <span class="expand"></span><b class="bold12">
+                        Live Chat
+                    </b>
+                </div>
+                <div class="block_actions" style="display: none; ">
+                    <div class="chat_help">
+                        
+                        <div id="ctl00_ctl23_pnlChatTextLoggedOut">
+	
+                            How can we help you?<br>Please <a href="https://www.shopandship.com/login.aspx" style="color: #ec202d">login</a> to chat with our SnS representative. 
+                        
+</div>
+                    </div>
+                    <input name="ctl00$ctl23$hidemail" type="hidden" id="ctl00_ctl23_hidemail">
+                    
+                </div>
+            </div>
+            <div class="sns_msgs_box help_box_tool">
+                <div class="space_up">
+                </div>
+                <div class="expand_block">
+                    <span class="expand"></span><b class="bold12">
+                        Unacceptable Material 
+                    </b>
+                </div>
+                <div class="block_actions" style="display: none; ">
+                    <div class="sns_msg">
+                        <div class="more">
+                            <a href="https://www.shopandship.com/service-updates/40004/list-of-unacceptable-items" runat="server" id="lnkUnacceptableMaterial">To view click here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="service_updates_box help_box_tool">
+                <div class="space_up">
+                </div>
+                <div class="expand_block">
+                    <span class="expand"></span><b class="bold12">
+                        Service Updates
+                    </b>
+                </div>
+                <div class="block_actions" style="display: none; ">
+                    <div class="service_update_msg">
+                        <a href="http://www.shopandship.com/service-updates/43505/Congratulations-Amazin-SnS-Promo-Winners">Congratulations Amazin SnS Promo Winners<br></a><a href="http://www.shopandship.com/service-updates/43493/Follow-%40shopandship-to-track-your-shipments">Follow @shopandship to track your shipments<br></a><a href="http://www.shopandship.com/service-updates/43476/New-KSA-Customs-Regulation">New KSA Customs Regulation<br></a>
+                        <div class="more">
+                            <a href="http://www.shopandship.com/service-updates" id="ctl00_ctl23_lnkServiceUpdateMoreLink">
+                                more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cusomter_support_box help_box_tool">
+                <div class="space_up">
+                </div>
+                <div class="expand_block">
+                    <span class="expand"></span><b class="bold12">
+                        Customer Support
+                    </b>
+                </div>
+                <div class="block_actions" style="display: none; ">
+                    <div>
+                        <div id="ctl00_ctl23_pnlSupportLoggedOut">
+	
+                            <p>
+                                For inquiries about your shipments please <a href="https://www.shopandship.com/login.aspx" style="color: #DD2821;">login</a> to your SnS  account &amp; submit a customer care request,  by clicking on the link available at the bottom of the Shipment Tracking page. For additional support, please contact your local <a href="http://www.shopandship.com/ship/offices.aspx" style="color: #DD2821;">Shop and Ship Office</a>
+                            </p>
+                            <a href="mailto:" id="ctl00_ctl23_lnkMailTo" class="mailto">
+                                
+                            </a>
+                        
+</div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="faq_box help_box_tool">
+                <div class="space_up">
+                </div>
+                <div class="expand_block">
+                    <span class="expand"></span><b class="bold12">
+                        FAQs
+                    </b>
+                </div>
+                <div class="block_actions" style="display: none; ">
+                    <div class="faq_msg">
+                        <a href="http://www.shopandship.com/faqs/43061/Are-there-any-restrictions-or-limitations-on-certa">Are there any restrictions or limitations on certa<br></a><a href="http://www.shopandship.com/faqs/41307/What-is-my-Shop-and-Ship-UK-Address-%3f">What is my Shop and Ship UK Address ? <br></a><a href="http://www.shopandship.com/faqs/41304/What-is-my-Shop-and-Ship-US-Address%3f">What is my Shop and Ship US Address?<br></a>
+                        <div class="more">
+                            <a href="http://www.shopandship.com/faqs" id="ctl00_ctl23_lnkFAQMoreLink">
+                                more
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="help_box_bottom">
+    </div>
+</div>
+
+<div class="twitter_box">
+    <div class="box_top">
+    </div>
+    <div class="box_inner">
+        
+        <div class="Box_Text"><div class="bits_row"><div><div class="block_title"><b>Follow us on Twitter @ShopandShip and:</b></div><div class="info">* Enjoy real-time feedback from our team 
+<br>* Be the earliest bird to catch special promotions and offers
+<br>* Chirp about something
+<br>* Witness connections fly among SnSers
+<br></div></div><div class="clear"></div></div></div>
+        <a id="ctl00_ctl25_lnkTwitterJoin" class="twitter_id">
+         
+        </a>
+        <div class="clear"> </div>
+          <div class="Box_Text">
+                Follow us on
+            </div>
+             <div class="Box_Text">
+            <a href="http://www.facebook.com/#!/pages/Shop-and-Ship/202058273140429?sk=wall&filter=1" id="ctl00_ctl25_lnkFollowUsFacebook" class="facebook" target="_blank"></a><a href="http://twitter.com/#!/ShopandShip" id="ctl00_ctl25_lnkFollowUsTwitter" class="twitter" target="_blank"></a>
+               
+             </div>
+              
+    </div>
+    <div class="box_bottom">
+    </div>
+</div>
+
+<div class="follow_us_box">
+    <div class="box_top">
+    </div>
+    <div class="box_inner">
+        <div class="follow_us">
+        
+            <div id="ctl00_ctl26_dviPhoneApp">
+
+            <div>
+              <ul id="ctl00_ctl26_ulIPhoneAppMsg" class="iPhone_App_Msg">
+                    <li class="Box_Text">
+                        The new SnS App for the iPhone &amp; iPad is loaded with handy features to further enhance your online shopping experience. Click on the App button to download
+                    </li>
+                </ul>
+            </div>
+              
+                <div id="ctl00_ctl26_dvSNSBadge" class="SnS_Badge" style="text-align: center">
+                <a href="http://itunes.apple.com/ae/app/shop-and-ship/id448828267?mt=8" id="ctl00_ctl26_lnkSNSBadge" target="_blank">
+                    <img id="imgSNSBadge" src="./shopandship_home_files/SnS_Badge.png" title="Shop and Ship Badge" alt="Shop and Ship Badge image" height="78" width="78">
+                         </a>
+                </div>
+               <span class="clear"> </span>
+                <div class="Box_Text">
+                    <a href="http://itunes.apple.com/ae/app/shop-and-ship/id448828267?mt=8" id="ctl00_ctl26_lnkiPhoneApp" class="iPhone_App_link" target="_blank">
+                        <img id="imgSNSAppLogo" src="./shopandship_home_files/iPhone_APP.png" title="Shop and Ship iPhone App Logo" alt="Shop and Ship iPhone App Logo image" height="49" width="120">
+                    </a>
+                    <div class="SnS_Badge">
+                      <img id="imgSNSAppQRCode" src="./shopandship_home_files/SnS-QR-78.png" title="Shop and Ship iPhone App QR Code" alt="Shop and Ship iPhone App QR Code image" height="78" width="78">
+                    </div>
+                    <br>
+                </div>
+                
+            </div>
+            <div class="clear"> </div>
+          
+        </div>
+    </div>
+    <div class="box_bottom">
+    </div>
+</div>
+</div>
+        <div id="ctl00_middle_side" class="middle_side Double_Margin_Fix">
+            
+            
+
+    <form name="aspnetForm" method="post" action="./shopandship_home_files/shopandship_home.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+OneStat_Pageview('','', '');SetClientIDs('ctl00_ctl24_txtRatesWeight','ctl00_ctl24_dvRateResults','ctl00_ctl24_ddlRatesDestinations','ctl00_ctl24_ddlRatesUnit','ctl00_ctl24_txtConversionAmount','ctl00_ctl24_txtAmountExchanged','ctl00_ctl24_ddlFromCurrency','ctl00_ctl24_ddlToCurrency','ctl00_ctl24_dvOfficeResults','ctl00_ctl24_txtTrackShipment','ctl00_ctl24_dvTrackingResults');//]]>
+</script><img id="ONESTAT_TAG" border="0" width="1" height="1" src="./shopandship_home_files/stat.aspx">
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="jFY5RYjiPeYdodirttDPvd2DBMhxf3noaqrLxkBzIKn0Fu1ca0V62wW5+Klem8/GTx96dTsSwUxAgM8gDvYdn1d7eZ3zp32iCyVvSn/daMW/elz8hQ/6PHblswfwD+x3fDgLVw7QNQjoxKM6z/RaOaHu1lo=">
+</div>
+
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+SetLiveHelpOfflineLink('http://www.shopandship.com/service-updates/42530/live-chat');//]]>
+</script>
+</form>
+
+
+            <div class="clear">
+            </div>
+            
+        
+<script src="./shopandship_home_files/Toolbox.js" type="text/javascript"></script>
+<div id="tool_box" style="min-height:500px;height:auto !important;margin-top:-3px;">
+    <div class="box_title">
+        Shop and Ship<sup style="font-size: 0.6em">™ </sup> Tool Box
+    </div>
+    <!-- Track your shipment tool-->
+    <div class="tool_box_block" id="track_shipment">
+        <div class="expand_block" style="color: Black;">
+            Track your shipment
+        </div>
+        <div class="short_desc2" style="color: Black; margin-left: 0px; margin-right: 0px;">
+            Track by Shipment or Supplier Number.
+        </div>
+        <div class="expanded" dir="ltr">
+            To track multiple shipments, enter shipment numbers up to 10 separated by a new line.
+            <textarea name="ctl00$ctl24$txtTrackShipment" id="ctl00_ctl24_txtTrackShipment" class="text_class_multiline" style="width: 264px;" cols="29" rows="4" maxlength="500"></textarea><br>
+            <div dir="rtl" align="right">
+                <input name="ctl00$ctl24$btnTrack" type="button" id="ctl00_ctl24_btnTrack" class="btn_class" onclick="TrackShipments(&#39;middle&#39;);" style="width: 50px; right: 0px;" value=" Track">
+                <img id="imgProcessingTracking" alt="Processing..." src="./shopandship_home_files/icon_animated_busy2.gif" style="display: none;">
+            </div>
+            <div class="clear">
+            </div>
+            <div class="space_up">
+            </div>
+            <div id="ctl00_ctl24_dvTrackingResults">
+            </div>
+            <div class="clear">
+            </div>
+            <div class="space_up">
+            </div>
+            <div class="splitter">
+            </div>
+        </div>
+    </div>
+    <!-- Rates Calculator tool-->
+    <div class="tool_box_block" id="rates_calc">
+        <div class="expand_block" title="Click to Expand/Collapse">
+            <span class="expnad"></span>
+            Rates Calculator
+        </div>
+        <div class="short_desc2">
+            Find how much it would cost to ship with us.
+        </div>
+        <div class="block_actions" dir="ltr" align="left" style="display: none; ">
+            <table>
+                <tbody><tr>
+                    <td colspan="3">
+                        <span id="ctl00_ctl24_lblRatesDestination">Destination</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <select name="ctl00$ctl24$ddlRatesDestinations" id="ctl00_ctl24_ddlRatesDestinations" class="list_class" style="width: 256px;">
+	<option selected="selected" value="">- Select One -</option>
+	<option value="AZ">Azerbaijan</option>
+	<option value="BH">Bahrain</option>
+	<option value="BD">Bangladesh</option>
+	<option value="BG">Bulgaria</option>
+	<option value="CY">Cyprus</option>
+	<option value="CZ">Czech Republic</option>
+	<option value="EG">Egypt</option>
+	<option value="ET">Ethiopia</option>
+	<option value="GE">Georgia</option>
+	<option value="GH">Ghana</option>
+	<option value="GR">Greece</option>
+	<option value="HK">Hong Kong</option>
+	<option value="IN">India</option>
+	<option value="IQ">Iraq</option>
+	<option value="JO">Jordan</option>
+	<option value="KE">Kenya</option>
+	<option value="KW">Kuwait</option>
+	<option value="LB">Lebanon</option>
+	<option value="LY">Libya</option>
+	<option value="LT">Lithuania</option>
+	<option value="MV">Maldives</option>
+	<option value="MU">Mauritius</option>
+	<option value="OM">Oman</option>
+	<option value="QA">Qatar</option>
+	<option value="SA">Saudi Arabia</option>
+	<option value="SG">Singapore</option>
+	<option value="LK">Sri Lanka</option>
+	<option value="CH">Switzerland</option>
+	<option value="TR">Turkey</option>
+	<option value="UG">Uganda</option>
+	<option value="AE">United Arab Emirates</option>
+</select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left_small_block">
+                        <span id="ctl00_ctl24_lblRatesWeight">Weight</span>
+                    </td>
+                    <td class="right_small_block">
+                        <span id="ctl00_ctl24_lblRatesUnit">Unit</span>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left_small_block">
+                        <input name="ctl00$ctl24$txtRatesWeight" type="text" id="ctl00_ctl24_txtRatesWeight" class="text_class" maxlength="6">
+                    </td>
+                    <td class="right_small_block">
+                        <select name="ctl00$ctl24$ddlRatesUnit" id="ctl00_ctl24_ddlRatesUnit" class="list_class" style="width: 50px;">
+	<option value="0">KG</option>
+	<option value="1">LB</option>
+</select>
+                    </td>
+                    <td align="right">
+                        <img id="imgRatesCalc" alt="Processing..." src="./shopandship_home_files/icon_animated_busy2.gif" style="display: none;">
+                        <input name="ctl00$ctl24$btnCalculateRate" type="button" id="ctl00_ctl24_btnCalculateRate" onclick="CalculateRates();" class="btn_class" value=" Calculate">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="clear">
+                        </div>
+                        <div class="space_up">
+                            Shipping Fees
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div id="ctl00_ctl24_dvRateResults" align="left" style="font-size:11px;font-family:Arial;color:Black;float:left;" dir="ltr">
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+    <!-- Offices locator tool-->
+    <div class="tool_box_block" id="office_locator">
+        <div class="expand_block" title="Click to Expand/Collapse">
+            <span class="expand"></span>
+            Offices Locator
+        </div>
+        <div class="short_desc2">
+            Find the closest Shop and Ship office near you.
+        </div>
+        <div class="block_actions" dir="ltr" align="left" style="display: none; ">
+            <div class="space_up">
+            </div>
+            <table>
+                <tbody><tr>
+                    <td colspan="2">
+                        <a href="http://www.shopandship.com/Ship/offices.aspx" class="red">
+                            Take me to office locator
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="space_up">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="ctl00_ctl24_lblCountry">Country:</span>
+                    </td>
+                    <td>
+                        <select name="ctl00$ctl24$ddlCountries" id="ctl00_ctl24_ddlCountries" class="list_class" style="width: 200px;" onchange="CountryChanged(this.value)">
+	<option value="">- Select One -</option>
+	<option value="AZ">Azerbaijan</option>
+	<option value="BH">Bahrain</option>
+	<option value="BD">Bangladesh</option>
+	<option value="BG">Bulgaria</option>
+	<option value="CY">Cyprus</option>
+	<option value="CZ">Czech Republic</option>
+	<option value="EG">Egypt</option>
+	<option value="ET">Ethiopia</option>
+	<option value="GE">Georgia</option>
+	<option value="GH">Ghana</option>
+	<option value="GR">Greece</option>
+	<option value="HK">Hong Kong</option>
+	<option value="IN">India</option>
+	<option value="IQ">Iraq</option>
+	<option value="JO">Jordan</option>
+	<option value="KE">Kenya</option>
+	<option value="KW">Kuwait</option>
+	<option value="LB">Lebanon</option>
+	<option value="LY">Libya</option>
+	<option value="LT">Lithuania</option>
+	<option value="MV">Maldives</option>
+	<option value="MT">Malta</option>
+	<option value="MU">Mauritius</option>
+	<option value="OM">Oman</option>
+	<option value="QA">Qatar</option>
+	<option value="SA">Saudi Arabia</option>
+	<option value="SG">Singapore</option>
+	<option value="LK">Sri Lanka</option>
+	<option value="CH">Switzerland</option>
+	<option value="TR">Turkey</option>
+	<option value="UG">Uganda</option>
+	<option value="AE">United Arab Emirates</option>
+</select>
+                        <img id="imgOffices" alt="Processing..." src="./shopandship_home_files/icon_animated_busy2.gif" style="display: none;">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="space_up">
+                        </div>
+                        <div class="space_up">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="locate_result">
+                            <span id="ctl00_ctl24_lblMainOffices">Main Offices</span>
+                            <div class="space_up">
+                            </div>
+                            <div id="ctl00_ctl24_dvOfficeResults" style="font-size: 11px; font-family: Arial">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+    <!-- Exchange Currency tool-->
+    <div class="tool_box_block" id="exchange_currency">
+        <div class="expand_block" title="Click to Expand/Collapse">
+            <span class="expand"></span>
+            Exchange Currency
+        </div>
+        <div class="short_desc2">
+            Our exchanger will give you the exact rates.
+        </div>
+        <div class="block_actions" dir="ltr" align="left" style="display: none; ">
+            <table>
+                <tbody><tr>
+                    <td colspan="2">
+                        <div class="clear">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span id="ctl00_ctl24_lblFromCurrency">From this currency</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <select name="ctl00$ctl24$ddlFromCurrency" id="ctl00_ctl24_ddlFromCurrency" class="list_class" style="width: 256px;">
+	<option value="SSP">SSP-South Sudanese Pound</option>
+	<option value="AED">AED-Dirham</option>
+	<option value="AFA">AFA-Afghani</option>
+	<option value="ALL">ALL-Lek</option>
+	<option value="AMD">AMD-Dram</option>
+	<option value="ANG">ANG-Antillean Guilder</option>
+	<option value="AOK">AOK-Kwanza</option>
+	<option value="ARS">ARS-Argentine Peso</option>
+	<option value="ATS">ATS-Austrian Schilling</option>
+	<option value="AUD">AUD-Australian Dollar</option>
+	<option value="AWG">AWG-Aruban Florin</option>
+	<option value="BAD">BAD-Bosnian Dinar</option>
+	<option value="BBD">BBD-Barbadian Dollar</option>
+	<option value="BDT">BDT-Taka</option>
+	<option value="BEF">BEF-Belgian Franc</option>
+	<option value="BGL">BGL-Lev</option>
+	<option value="BHD">BHD-Bahraini Dinar</option>
+	<option value="BIF">BIF-Burundi Franc</option>
+	<option value="BMD">BMD-Bermudian Dollar</option>
+	<option value="BND">BND-Bruneian Dollar</option>
+	<option value="BOB">BOB-Boliviano</option>
+	<option value="BRE">BRE-Cruzeiro</option>
+	<option value="BTN">BTN-Ngultrum</option>
+	<option value="BWP">BWP-Pula</option>
+	<option value="BZD">BZD-Belizean Dollar</option>
+	<option value="CAD">CAD-Canadian Dollar</option>
+	<option value="CHF">CHF-Swiss Franc</option>
+	<option value="CID">CID-Caymanian Dollar</option>
+	<option value="CLP">CLP-Chilean Peso</option>
+	<option value="CNY">CNY-Yuan</option>
+	<option value="COP">COP-Colombian Peso</option>
+	<option value="CRC">CRC-Costa Rican Colon</option>
+	<option value="CUP">CUP-Cuban Peso</option>
+	<option value="CVE">CVE-Cape Verdean Escudo</option>
+	<option value="CYP">CYP-Cypriot Pound</option>
+	<option value="CZK">CZK-Koruna</option>
+	<option value="DEM">DEM-Deutsche Mark</option>
+	<option value="DJF">DJF-Djibouti Franc</option>
+	<option value="DKK">DKK-Danish Krone</option>
+	<option value="DOP">DOP-Dominican Peso</option>
+	<option value="DZD">DZD-Algerian Dinar</option>
+	<option value="ECS">ECS-Sucre</option>
+	<option value="EEK">EEK-Kroon</option>
+	<option value="EGP">EGP-Egyptian Pound</option>
+	<option value="ERB">ERB-Birr</option>
+	<option value="ESP">ESP-Peseta</option>
+	<option value="ETB">ETB-Birr</option>
+	<option value="FIM">FIM-Markka</option>
+	<option value="FJD">FJD-Fijian Dollar</option>
+	<option value="FKP">FKP-Falkland Pound</option>
+	<option value="FRF">FRF-French Franc</option>
+	<option value="GBP">GBP-British Pound</option>
+	<option value="GEK">GEK-Lari</option>
+	<option value="GHC">GHC-Cedi</option>
+	<option value="GIP">GIP-Gibraltar Pound</option>
+	<option value="GMD">GMD-Dalasi</option>
+	<option value="GNS">GNS-Syli</option>
+	<option value="GRD">GRD-Drachma</option>
+	<option value="GTQ">GTQ-Quetzal</option>
+	<option value="GWP">GWP-Guinea-Bissauan Peso</option>
+	<option value="GYD">GYD-Guyanese Dollar</option>
+	<option value="HKD">HKD-Hong Kong Dollar</option>
+	<option value="HNL">HNL-Lempira</option>
+	<option value="HRK">HRK-Kuna</option>
+	<option value="HTG">HTG-Gourde</option>
+	<option value="HUF">HUF-Forint</option>
+	<option value="IDR">IDR-Indonesian Rupiah</option>
+	<option value="IEP">IEP-Irish Pound</option>
+	<option value="ILS">ILS-New Israeli Shekel</option>
+	<option value="INR">INR-Indian Rupee</option>
+	<option value="IQD">IQD-Iraqi Dinar</option>
+	<option value="IRR">IRR-Iranian Rial</option>
+	<option value="ISK">ISK-Krona</option>
+	<option value="ITL">ITL-Italian Lira</option>
+	<option value="JMD">JMD-Jamaican Dollar</option>
+	<option value="JOD">JOD-Jordanian Dinar</option>
+	<option value="JPY">JPY-Yen</option>
+	<option value="KES">KES-Kenyan Shilling</option>
+	<option value="KGS">KGS-Som</option>
+	<option value="KHR">KHR-Riel</option>
+	<option value="KMF">KMF-Comoran Franc</option>
+	<option value="KPW">KPW-Won</option>
+	<option value="KRW">KRW-Won</option>
+	<option value="KWD">KWD-Kuwaiti Dinar</option>
+	<option value="KZT">KZT-Tenge</option>
+	<option value="LAK">LAK-New Kip</option>
+	<option value="LBP">LBP-Lebanese Pound</option>
+	<option value="LKR">LKR-Sri Lankan Rupee</option>
+	<option value="LRD">LRD-Liberian Dollar</option>
+	<option value="LSL">LSL-Loti</option>
+	<option value="LTL">LTL-Litas</option>
+	<option value="LUF">LUF-Luxembourg Franc</option>
+	<option value="LVL">LVL-Lat</option>
+	<option value="LYD">LYD-Libyan Dinar</option>
+	<option value="MAD">MAD-Moroccan Dirham</option>
+	<option value="MDL">MDL-Leu</option>
+	<option value="MGF">MGF-Ariary</option>
+	<option value="MKD">MKD-Denar</option>
+	<option value="MLF">MLF-C.F.A. Franc</option>
+	<option value="MMK">MMK-Kyat</option>
+	<option value="MNT">MNT-Tughrik</option>
+	<option value="MOP">MOP-Pataca</option>
+	<option value="MRO">MRO-Ouguiya</option>
+	<option value="MTL">MTL-Maltese Lira</option>
+	<option value="MUR">MUR-Mauritian Rupee</option>
+	<option value="MVR">MVR-Rufiyaa</option>
+	<option value="MWK">MWK-Malawian Kwacha</option>
+	<option value="MXN">MXN-Nuevo Peso</option>
+	<option value="MYR">MYR-Ringgit</option>
+	<option value="MZM">MZM-Metical</option>
+	<option value="NAD">NAD-Namibian Dollar</option>
+	<option value="NGN">NGN-Naira</option>
+	<option value="NIC">NIC-Gold Cordoba</option>
+	<option value="NLG">NLG-Netherlands Guilder</option>
+	<option value="NOK">NOK-Norwegian Krone</option>
+	<option value="NPR">NPR-Nepalese Rupee</option>
+	<option value="NZD">NZD-New Zealand Dollar</option>
+	<option value="OMR">OMR-Omani Rial</option>
+	<option value="PAB">PAB-Balboa</option>
+	<option value="PEN">PEN-Nuevo Sol</option>
+	<option value="PGK">PGK-Kina</option>
+	<option value="PHP">PHP-Philippine Peso</option>
+	<option value="PKR">PKR-Pakistani Rupee</option>
+	<option value="PLZ">PLZ-New Zloty</option>
+	<option value="PTE">PTE-Portuguese Escudo</option>
+	<option value="PYG">PYG-Guarani</option>
+	<option value="QAR">QAR-Qatari Riyal</option>
+	<option value="ROL">ROL-Leu</option>
+	<option value="RUR">RUR-Ruble</option>
+	<option value="RWF">RWF-Rwandan Franc</option>
+	<option value="SAR">SAR-Saudi Riyal</option>
+	<option value="SAT">SAT-Tala</option>
+	<option value="SBD">SBD-Solomon Islands Dollar</option>
+	<option value="SCR">SCR-Seychelles Rupee</option>
+	<option value="YTL">YTL-Turkish Lira</option>
+	<option value="SEK">SEK-Swedish Krona</option>
+	<option value="SGD">SGD-Singapore Dollar</option>
+	<option value="SHP">SHP-Pound</option>
+	<option value="SIT">SIT-Tolar</option>
+	<option value="SKK">SKK-Koruna</option>
+	<option value="SLL">SLL-Leone</option>
+	<option value="SOS">SOS-Somali Shilling</option>
+	<option value="SPP">SPP-Spanish Peseta</option>
+	<option value="SRG">SRG-Surinamese Guilder</option>
+	<option value="STD">STD-Dobra</option>
+	<option value="SVC">SVC-Salvadoran Colon</option>
+	<option value="SYP">SYP-Syrian Pound</option>
+	<option value="SZL">SZL-Lilangeni</option>
+	<option value="THB">THB-Baht</option>
+	<option value="TMM">TMM-Manat</option>
+	<option value="TND">TND-Tunisian Dinar</option>
+	<option value="TOP">TOP-Pa'anga</option>
+	<option value="TRL">TRL-Turkish Lira</option>
+	<option value="TTD">TTD-Trinidad &amp; Tobago Dollar</option>
+	<option value="TWD">TWD-New Taiwan Dollar</option>
+	<option value="TZS">TZS-Tanzanian Shilling</option>
+	<option value="UAK">UAK-Hryvnia</option>
+	<option value="UGX">UGX-Ugandan Shilling</option>
+	<option value="USD">USD-United States Dollar</option>
+	<option value="UYP">UYP-New Uruguayan Peso</option>
+	<option value="VEB">VEB-Bolivar</option>
+	<option value="VND">VND-New Dong</option>
+	<option value="VUV">VUV-Vatu</option>
+	<option value="XAF">XAF-C.F.A. Franc</option>
+	<option value="XCD">XCD-East Caribbean Dollar</option>
+	<option value="XOF">XOF-C.F.A. Franc</option>
+	<option value="XPF">XPF-C.F.A. Franc</option>
+	<option value="YER">YER-North Yemeni Riyal</option>
+	<option value="YUN">YUN-New Dinar</option>
+	<option value="ZAR">ZAR-Rand</option>
+	<option value="ZMK">ZMK-Zambian Kwacha</option>
+	<option value="ZRN">ZRN-New Zaire</option>
+	<option value="ZWD">ZWD-Zimbabwean Dollar</option>
+	<option value="EUR">EUR-Euro</option>
+	<option value="MXP">MXP-Nuevo Peso</option>
+	<option value="NIS">NIS-New Israeli Sheikel
+</option>
+	<option value="SDD">SDD-Sudanese Dinar</option>
+	<option value="UAH">UAH-Hryvnia</option>
+	<option value="SDG">SDG-Sudanese Geneh</option>
+	<option value="AZN">AZN-Manat</option>
+	<option value="RSD">RSD-Serbia Dinar</option>
+	<option value="GHS">GHS-New Cedi</option>
+	<option value="KSH">KSH-Kenyan Shilling</option>
+</select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span id="ctl00_ctl24_lblToCurrency">To this currency</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <select name="ctl00$ctl24$ddlToCurrency" id="ctl00_ctl24_ddlToCurrency" class="list_class" style="width: 256px;">
+	<option value="SSP">SSP-South Sudanese Pound</option>
+	<option value="AED">AED-Dirham</option>
+	<option value="AFA">AFA-Afghani</option>
+	<option value="ALL">ALL-Lek</option>
+	<option value="AMD">AMD-Dram</option>
+	<option value="ANG">ANG-Antillean Guilder</option>
+	<option value="AOK">AOK-Kwanza</option>
+	<option value="ARS">ARS-Argentine Peso</option>
+	<option value="ATS">ATS-Austrian Schilling</option>
+	<option value="AUD">AUD-Australian Dollar</option>
+	<option value="AWG">AWG-Aruban Florin</option>
+	<option value="BAD">BAD-Bosnian Dinar</option>
+	<option value="BBD">BBD-Barbadian Dollar</option>
+	<option value="BDT">BDT-Taka</option>
+	<option value="BEF">BEF-Belgian Franc</option>
+	<option value="BGL">BGL-Lev</option>
+	<option value="BHD">BHD-Bahraini Dinar</option>
+	<option value="BIF">BIF-Burundi Franc</option>
+	<option value="BMD">BMD-Bermudian Dollar</option>
+	<option value="BND">BND-Bruneian Dollar</option>
+	<option value="BOB">BOB-Boliviano</option>
+	<option value="BRE">BRE-Cruzeiro</option>
+	<option value="BTN">BTN-Ngultrum</option>
+	<option value="BWP">BWP-Pula</option>
+	<option value="BZD">BZD-Belizean Dollar</option>
+	<option value="CAD">CAD-Canadian Dollar</option>
+	<option value="CHF">CHF-Swiss Franc</option>
+	<option value="CID">CID-Caymanian Dollar</option>
+	<option value="CLP">CLP-Chilean Peso</option>
+	<option value="CNY">CNY-Yuan</option>
+	<option value="COP">COP-Colombian Peso</option>
+	<option value="CRC">CRC-Costa Rican Colon</option>
+	<option value="CUP">CUP-Cuban Peso</option>
+	<option value="CVE">CVE-Cape Verdean Escudo</option>
+	<option value="CYP">CYP-Cypriot Pound</option>
+	<option value="CZK">CZK-Koruna</option>
+	<option value="DEM">DEM-Deutsche Mark</option>
+	<option value="DJF">DJF-Djibouti Franc</option>
+	<option value="DKK">DKK-Danish Krone</option>
+	<option value="DOP">DOP-Dominican Peso</option>
+	<option value="DZD">DZD-Algerian Dinar</option>
+	<option value="ECS">ECS-Sucre</option>
+	<option value="EEK">EEK-Kroon</option>
+	<option value="EGP">EGP-Egyptian Pound</option>
+	<option value="ERB">ERB-Birr</option>
+	<option value="ESP">ESP-Peseta</option>
+	<option value="ETB">ETB-Birr</option>
+	<option value="FIM">FIM-Markka</option>
+	<option value="FJD">FJD-Fijian Dollar</option>
+	<option value="FKP">FKP-Falkland Pound</option>
+	<option value="FRF">FRF-French Franc</option>
+	<option value="GBP">GBP-British Pound</option>
+	<option value="GEK">GEK-Lari</option>
+	<option value="GHC">GHC-Cedi</option>
+	<option value="GIP">GIP-Gibraltar Pound</option>
+	<option value="GMD">GMD-Dalasi</option>
+	<option value="GNS">GNS-Syli</option>
+	<option value="GRD">GRD-Drachma</option>
+	<option value="GTQ">GTQ-Quetzal</option>
+	<option value="GWP">GWP-Guinea-Bissauan Peso</option>
+	<option value="GYD">GYD-Guyanese Dollar</option>
+	<option value="HKD">HKD-Hong Kong Dollar</option>
+	<option value="HNL">HNL-Lempira</option>
+	<option value="HRK">HRK-Kuna</option>
+	<option value="HTG">HTG-Gourde</option>
+	<option value="HUF">HUF-Forint</option>
+	<option value="IDR">IDR-Indonesian Rupiah</option>
+	<option value="IEP">IEP-Irish Pound</option>
+	<option value="ILS">ILS-New Israeli Shekel</option>
+	<option value="INR">INR-Indian Rupee</option>
+	<option value="IQD">IQD-Iraqi Dinar</option>
+	<option value="IRR">IRR-Iranian Rial</option>
+	<option value="ISK">ISK-Krona</option>
+	<option value="ITL">ITL-Italian Lira</option>
+	<option value="JMD">JMD-Jamaican Dollar</option>
+	<option value="JOD">JOD-Jordanian Dinar</option>
+	<option value="JPY">JPY-Yen</option>
+	<option value="KES">KES-Kenyan Shilling</option>
+	<option value="KGS">KGS-Som</option>
+	<option value="KHR">KHR-Riel</option>
+	<option value="KMF">KMF-Comoran Franc</option>
+	<option value="KPW">KPW-Won</option>
+	<option value="KRW">KRW-Won</option>
+	<option value="KWD">KWD-Kuwaiti Dinar</option>
+	<option value="KZT">KZT-Tenge</option>
+	<option value="LAK">LAK-New Kip</option>
+	<option value="LBP">LBP-Lebanese Pound</option>
+	<option value="LKR">LKR-Sri Lankan Rupee</option>
+	<option value="LRD">LRD-Liberian Dollar</option>
+	<option value="LSL">LSL-Loti</option>
+	<option value="LTL">LTL-Litas</option>
+	<option value="LUF">LUF-Luxembourg Franc</option>
+	<option value="LVL">LVL-Lat</option>
+	<option value="LYD">LYD-Libyan Dinar</option>
+	<option value="MAD">MAD-Moroccan Dirham</option>
+	<option value="MDL">MDL-Leu</option>
+	<option value="MGF">MGF-Ariary</option>
+	<option value="MKD">MKD-Denar</option>
+	<option value="MLF">MLF-C.F.A. Franc</option>
+	<option value="MMK">MMK-Kyat</option>
+	<option value="MNT">MNT-Tughrik</option>
+	<option value="MOP">MOP-Pataca</option>
+	<option value="MRO">MRO-Ouguiya</option>
+	<option value="MTL">MTL-Maltese Lira</option>
+	<option value="MUR">MUR-Mauritian Rupee</option>
+	<option value="MVR">MVR-Rufiyaa</option>
+	<option value="MWK">MWK-Malawian Kwacha</option>
+	<option value="MXN">MXN-Nuevo Peso</option>
+	<option value="MYR">MYR-Ringgit</option>
+	<option value="MZM">MZM-Metical</option>
+	<option value="NAD">NAD-Namibian Dollar</option>
+	<option value="NGN">NGN-Naira</option>
+	<option value="NIC">NIC-Gold Cordoba</option>
+	<option value="NLG">NLG-Netherlands Guilder</option>
+	<option value="NOK">NOK-Norwegian Krone</option>
+	<option value="NPR">NPR-Nepalese Rupee</option>
+	<option value="NZD">NZD-New Zealand Dollar</option>
+	<option value="OMR">OMR-Omani Rial</option>
+	<option value="PAB">PAB-Balboa</option>
+	<option value="PEN">PEN-Nuevo Sol</option>
+	<option value="PGK">PGK-Kina</option>
+	<option value="PHP">PHP-Philippine Peso</option>
+	<option value="PKR">PKR-Pakistani Rupee</option>
+	<option value="PLZ">PLZ-New Zloty</option>
+	<option value="PTE">PTE-Portuguese Escudo</option>
+	<option value="PYG">PYG-Guarani</option>
+	<option value="QAR">QAR-Qatari Riyal</option>
+	<option value="ROL">ROL-Leu</option>
+	<option value="RUR">RUR-Ruble</option>
+	<option value="RWF">RWF-Rwandan Franc</option>
+	<option value="SAR">SAR-Saudi Riyal</option>
+	<option value="SAT">SAT-Tala</option>
+	<option value="SBD">SBD-Solomon Islands Dollar</option>
+	<option value="SCR">SCR-Seychelles Rupee</option>
+	<option value="YTL">YTL-Turkish Lira</option>
+	<option value="SEK">SEK-Swedish Krona</option>
+	<option value="SGD">SGD-Singapore Dollar</option>
+	<option value="SHP">SHP-Pound</option>
+	<option value="SIT">SIT-Tolar</option>
+	<option value="SKK">SKK-Koruna</option>
+	<option value="SLL">SLL-Leone</option>
+	<option value="SOS">SOS-Somali Shilling</option>
+	<option value="SPP">SPP-Spanish Peseta</option>
+	<option value="SRG">SRG-Surinamese Guilder</option>
+	<option value="STD">STD-Dobra</option>
+	<option value="SVC">SVC-Salvadoran Colon</option>
+	<option value="SYP">SYP-Syrian Pound</option>
+	<option value="SZL">SZL-Lilangeni</option>
+	<option value="THB">THB-Baht</option>
+	<option value="TMM">TMM-Manat</option>
+	<option value="TND">TND-Tunisian Dinar</option>
+	<option value="TOP">TOP-Pa'anga</option>
+	<option value="TRL">TRL-Turkish Lira</option>
+	<option value="TTD">TTD-Trinidad &amp; Tobago Dollar</option>
+	<option value="TWD">TWD-New Taiwan Dollar</option>
+	<option value="TZS">TZS-Tanzanian Shilling</option>
+	<option value="UAK">UAK-Hryvnia</option>
+	<option value="UGX">UGX-Ugandan Shilling</option>
+	<option value="USD">USD-United States Dollar</option>
+	<option value="UYP">UYP-New Uruguayan Peso</option>
+	<option value="VEB">VEB-Bolivar</option>
+	<option value="VND">VND-New Dong</option>
+	<option value="VUV">VUV-Vatu</option>
+	<option value="XAF">XAF-C.F.A. Franc</option>
+	<option value="XCD">XCD-East Caribbean Dollar</option>
+	<option value="XOF">XOF-C.F.A. Franc</option>
+	<option value="XPF">XPF-C.F.A. Franc</option>
+	<option value="YER">YER-North Yemeni Riyal</option>
+	<option value="YUN">YUN-New Dinar</option>
+	<option value="ZAR">ZAR-Rand</option>
+	<option value="ZMK">ZMK-Zambian Kwacha</option>
+	<option value="ZRN">ZRN-New Zaire</option>
+	<option value="ZWD">ZWD-Zimbabwean Dollar</option>
+	<option value="EUR">EUR-Euro</option>
+	<option value="MXP">MXP-Nuevo Peso</option>
+	<option value="NIS">NIS-New Israeli Sheikel
+</option>
+	<option value="SDD">SDD-Sudanese Dinar</option>
+	<option value="UAH">UAH-Hryvnia</option>
+	<option value="SDG">SDG-Sudanese Geneh</option>
+	<option value="AZN">AZN-Manat</option>
+	<option value="RSD">RSD-Serbia Dinar</option>
+	<option value="GHS">GHS-New Cedi</option>
+	<option value="KSH">KSH-Kenyan Shilling</option>
+</select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="clear">
+                        </div>
+                        <div class="space_up">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="left_small_block">
+                            <span id="ctl00_ctl24_lblCurrencyAmount">Amount</span></span>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="left_small_block">
+                            <input name="ctl00$ctl24$txtConversionAmount" type="text" id="ctl00_ctl24_txtConversionAmount" class="text_class" maxlength="11"></span>
+                    </td>
+                    <td align="right">
+                        <span>
+                            <img id="imgConverter" alt="Processing..." src="./shopandship_home_files/icon_animated_busy2.gif" style="display: none;">
+                            <input name="ctl00$ctl24$btnConvertCurrency" type="button" id="ctl00_ctl24_btnConvertCurrency" onclick="ConvertCurrencies();" class="btn_class" value=" Exchange">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="clear">
+                        </div>
+                        <div class="space_up">
+                        <span id="ctl00_ctl24_lblAmountExchanged">Amount exchanged</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="ctl00_ctl24_txtAmountExchanged" name="txtAmountExchanged" style="font-size: 11px; 
+                            font-family: Arial; color: Black">
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+    </div>
+</div>
+</div>
+        <div id="ctl00_right_side" class="right_side Double_Margin_Fix">
+            <form id="frmShopNShipBITS" action="http://www.shopandship.com/Default.aspx" method="post">
+            
+            </form>
+            <div class="clear">
+            </div>
+            
+        
+<script type="text/javascript">
+    function SubscribeToLetter() {
+       
+        var hdnSubscribeData = document.getElementById("ctl00_ctl27_hdnSubscribeData");
+        var hdnSubscribeValue = hdnSubscribeData.value; // customer guid
+        var hdnAction = document.getElementById("ctl00_ctl27_hdnAction");
+        var hdnActionValue = hdnAction.value;
+
+        if (hdnSubscribeValue != '') {
+
+            $.get("/HomePageHandler.aspx"
+                , { ServiceType: 'handlesubscribe',
+                    Param1: hdnSubscribeValue,
+                    Param2: hdnActionValue,
+                    Param3: '',
+                    Param4: ''
+                }
+                , function (data) {
+                    debugger;
+                    var ArrayResult = data.split("|");
+                    var dvSubscribeResults = document.getElementById('ctl00_ctl27_dvSubscribeResults');
+                    dvSubscribeResults.innerHTML = ArrayResult[0];
+
+                    var btnSubscribe = document.getElementById("ctl00_ctl27_btnSubscribe");
+                    if (ArrayResult[1] == "") { btnSubscribe.disabled = true; }
+                    else {
+                        btnSubscribe.value = ArrayResult[1];
+                        hdnAction.value = ArrayResult[2];
+                    }
+
+                });
+        }
+        else {
+
+
+            var _LoginLink = 'https://www.shopandship.com/login.aspx';
+            _LoginLink = _LoginLink + "?T=/my-shopandship/news-letter-confirm.aspx";
+            window.location = _LoginLink;
+
+        }
+
+        //alert(hdnSubscribeData.value);
+    }
+</script>
+<div id="bits_box" class="Double_Margin_Fix">
+    <div class="box_title">
+        <a href="http://www.shopandship.com/shopandship-bits" id="ctl00_ctl27_lnkBits">
+            Shop and Ship<sup style="font-size: 0.6em">™ </sup> BITS
+        </a>
+    </div>
+    <p class="bold12">Great Offers from around the web.</p>
+    <div>We've got you bits and bobs of shopping opportunities from a host of exciting destinations</div> 
+    <div class="splitter">
+    </div>
+    <div class="bits_row"><div class="info"><a href="http://www.shopandship.com/shopandship-bits/43284/Deals-at-Target" class="bold12">Deals at Target</a><div>
+<br>Visit target.com now and view their amazing deals on apparel, electronics and much more. For more ...</div></div><div class="photo"><a href="http://www.target.com/HelpContent?help=/sites/html/TargetOnline/help/promotions_sweepstakes_and_discounts/promotions/promotions.html&lnk=Other_0122_TW" rel="nofollow" target="_blank"><img src="./shopandship_home_files/defaultBits.png"></a></div><div class="clear"></div></div><div class="splitter"></div><div class="bits_row"><div class="info"><a href="http://www.shopandship.com/shopandship-bits/43283/WOW-the-one-you-love-with-Express" class="bold12">WOW the one you love with Express</a><div>
+<br>Checkout the amazing Valentine’s day collection by clicking on the BITS logo</div></div><div class="photo"><a href="http://www.express.com/home.jsp" rel="nofollow" target="_blank"><img src="./shopandship_home_files/defaultBits.png"></a></div><div class="clear"></div></div><div class="splitter"></div><div class="bits_row"><div class="info"><a href="http://www.shopandship.com/shopandship-bits/43279/Celebrate-Valentines-with-Victoria's-Secret" class="bold12">Celebrate Valentines with Victoria's Secret</a><div>
+<br>Just enter code SPRING12 at checkout and get $15 Off&nbsp;on $100 Order, $30 Off&nbsp;on $150 Order and $75 ...</div></div><div class="photo"><a href="http://www.victoriassecret.com/" rel="nofollow" target="_blank"><img src="./shopandship_home_files/defaultBits.png"></a></div><div class="clear"></div></div><div class="splitter"></div>
+    <div id="ctl00_ctl27_dvSubscribe" class="subscribe">
+        <span class="News_Letter_Text">
+            Subscribe To Promotional Emails
+        </span>
+        <div class="News_Letter_Button">
+            <input name="ctl00$ctl27$btnSubscribe" type="submit" id="ctl00_ctl27_btnSubscribe" class="btn_class" value="Subscribe" onclick="SubscribeToLetter();">
+        </div>
+    </div>
+    <span class="clear">
+        <input name="ctl00$ctl27$hdnSubscribeData" type="hidden" id="ctl00_ctl27_hdnSubscribeData">
+        <input name="ctl00$ctl27$hdnAction" type="hidden" id="ctl00_ctl27_hdnAction">
+    </span>
+    <div id="ctl00_ctl27_dvSubscribeResults" class="subscribe clear">
+    </div>
+</div>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="footer" dir="ltr">
+        <div class="footer_container" dir="ltr ">
+            
+
+    <div class="footer_block">  
+   <p>
+       
+    Shop and Ship is an online shipping delivery service from <a href="http://aramex.com/" traget="_blank">Aramex</a></p>
+    <p>
+    Copyright © 2012 Aramex International LLC.
+       </p>
+    <p>
+    All rights reserved.
+       </p>
+    <p><a href="http://www.shopandship.com/terms-and-conditions.aspx">
+        </a><a href="http://www.shopandship.com/my-shopandship/agreement.aspx">See Terms and Conditions of Use</a>
+        </p>
+</div>
+
+ <div class="footer_block">
+     <p class="title">
+        <span id="ctl00_ctlSiteFooter1_lblShop" title="Shop">Shop</span></p>
+    <p>
+        <a href="http://www.shopandship.com/shopandship-bits" id="ctl00_ctlSiteFooter1_lnkShopandShipBits">
+            <span id="ctl00_ctlSiteFooter1_lblShopNShipSBits" title="Shop and Ship BITS">Shop and Ship BITS</span></a></p>
+    <p>
+        <a href="http://www.shopandship.com/hot-deals" id="ctl00_ctlSiteFooter1_lnkHotDeals">
+       <span id="ctl00_ctlSiteFooter1_lblSNSHotDeals" title="Hot Deals">Hot Deals</span></a></p>
+   <p>
+        <a href="http://www.shopandship.com/shopping-directory" id="ctl00_ctlSiteFooter1_lnkShoppingDirectories">
+       <span id="ctl00_ctlSiteFooter1_lblSNSDirectory" title="Shopping Directory">Shopping Directory</span></a></p>
+    
+</div>
+
+    <div class="footer_block">
+    <p class="title">
+         <span id="ctl00_ctlSiteFooter1_lblShip" title="Ship">Ship</span></p>
+    <p>
+        <a href="http://www.shopandship.com/Ship/about.aspx">
+         <span id="ctl00_ctlSiteFooter1_lblAboutSNS" title="Who We Are">Who We Are</span></a></p>
+    <p>
+        <a href="http://www.shopandship.com/Ship/how-does-it-work.aspx">
+        <span id="ctl00_ctlSiteFooter1_lblHowItWorks" title="How We Roll">How We Roll</span></a></p>
+    <p>
+        <a href="http://www.shopandship.com/my-shopandship/agreement.aspx" id="ctl00_ctlSiteFooter1_lnkOpenAccount">
+        <span id="ctl00_ctlSiteFooter1_lblOpenAccount" title="Open Account">Open Account</span></a></p>
+    <p>
+        <a href="http://www.shopandship.com/service-updates" id="ctl00_ctlSiteFooter1_lnkServiceUpdates">
+        <span id="ctl00_ctlSiteFooter1_lblServiceUpdates" title="Service Updates">Service Updates</span></a></p>
+   
+        <a href="http://www.shopandship.com/Ship/countries-rates.aspx">
+       <span id="ctl00_ctlSiteFooter1_lblCountryRates" title="Country Rates">Country Rates</span></a><p></p>
+</div>
+
+   <div class="footer_block footer_photo Double_Margin_Fix">
+    <img src="./shopandship_home_files/footer.png" id="ctl00_ctlSiteFooter1_imgFooter" width="219" height="104">
+    </div>
+        </div>
+    </div>
+
+
+</body></html>

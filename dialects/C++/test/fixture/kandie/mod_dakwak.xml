@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<request>
+  <apikey>4edb6da549bd1378a50000a14edb6bf849bd1378a500009e</apikey>
+  <tolang>ar</tolang>
+  <url><![CDATA[/solutions/asset-managers]]></url>
+  <title><![CDATA[Solutions for Asset Managers]]></title>
+  <phrases>
+    <phrase>
+      <orig><![CDATA[solutions for asset managers]]></orig>
+      <xpath><![CDATA[/html/head/title/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[home]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[1]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[solutions]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[2]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[clients]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[3]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[methodology]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[4]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[about]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[5]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[news]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[6]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[blog]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[7]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[contact us]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[1]/div/ul/li[8]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[home]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[1]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[solutions]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[2]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[asset managers]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[2]/ul/li[1]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[index providers]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[2]/ul/li[2]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[brokers/dealers]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[2]/ul/li[3]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[halal food index]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[2]/ul/li[4]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[islamic investor for iphone]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[2]/ul/li[5]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[clients]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[3]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[methodology]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[4]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[about]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[5]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[our team]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[5]/ul/li/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[news]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[6]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[blog]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[7]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[contact us]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[1]/ul/li[8]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[home]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/div[1]/a[1]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[&gt;]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/div[1]/text()[3]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[solutions]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/div[1]/a[2]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[&gt; asset managers]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/div[1]/text()[4]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[asset managers]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/h1/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[the idealratings service is comprised of the largest universe of shariah compliant equities using our unique]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[1]/text()[1]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[hybrid research methodology]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[1]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[covering 42,000 equities in 106 countries, delivered using state of the art technology that helps in universe creation according to multiple user defined rule books, portfolio compliance auditing, back testing, purification, benchmarking against most major islamic indexes, among several other functions that automate most of the shariah compliance related functions in a fund or index.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[1]/text()[2]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[wether you&rsquo;re managing an existing fund or launching a new one, you&rsquo;ll immediately realize the benefits of our service.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[2]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[our key features and benefits include:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[3]/strong/span/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[support for multiple rule books:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[4]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[idealratings provides you with the ability to manage institutional investors with different shariah rule books and investment guidelines.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[4]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[universe creation:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[5]/strong[1]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[select your universe&rsquo;s criteria using our powerful filtering engine, and any of your rule books to choose from&nbsp;]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[5]/text()[1]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[42,000+ equities in 106 countries]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[5]/strong[2]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[then export the resulting compliant universe to excel.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[5]/text()[2]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[portfolio compliance:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[6]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[import your portfolio into idealratings&rsquo; service securely and immediately track the compliance status of the companies you chose, you&rsquo;ll also be able to see and print benchmarking charts against most islamic indexes and perform several portfolio analysis functions.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[6]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[purification]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[7]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[:&nbsp;instead of creating and managing the complex spreadsheets for purification, idealratings&rsquo; accurate purification reports are generated for any time period of your choice, eliminate human error, and improve your team&rsquo;s efficiency.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[7]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[auditing:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[8]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[your shariah board will be confident your shariah fund is abiding by the rules, you&rsquo;ll be able to monitor islamic fund compliance at any frequency your board determines appropriate, compliance was usually a quarterly process, but scholars are now demanding compliance reports over shorter periods. with idealratings, you&rsquo;ll be able to generate daily compliance reports that will satisfy even the toughest boards.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[8]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[dynamic:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[9]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[asset managers managing shariah compliant funds uses idealratings service to be always up to date. idealratings&rsquo; data is&nbsp;updated&nbsp;daily, enabling you to take advantage of new investment opportunities immediately, no more waiting for a shariah compliance approval cycle that may make you miss the opportunity window.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[9]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[investment ideas]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[10]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[: use idealratings&rsquo; unique analytics to quickly discover market movers globally, shariah compliant investment, stocks and sectors are displayed in an intuitive format that enables you to pinpoint islamic investment opportunities anywhere in the world.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[10]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[back testing:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[11]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[idealratings provides you with the ability to back test your conventional funds to track your performance as if these funds where shariah compliant funds. your analysts can provide you with the performance back testing required by your investors, use idealratings to perform shariah compliance back testing.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[11]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[investor due diligence:]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[12]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[instantly respond to your investors&rsquo; questions on specific companies, get instant analysis on any company, and if need be, our research team can deliver detailed analysis.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[12]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[we&rsquo;ll work with your team from the]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[13]/text()[1]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[pre launch]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[13]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[stage, and throughout the life of the shariah fund to insure that the shariah compliance aspects of the business satisfy the requirements of your investors. and because idealratings supports an unlimited number of rulebooks, you can launch new funds with different rulebooks without increasing your operational costs, scale your aum and leverage your shariah investment professionals with no concerns over having to hire more compliance staff.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[13]/text()[2]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[shariah board]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[14]/strong/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[: idealratings is approved and used by the most known scholars in the islamic finance world, and our]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[14]/text()[1]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[partners]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[14]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[include some of the most reputable shariah consulting firms; we can help you recruit a shariah board that your investors know and trust.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[14]/text()[2]]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[contact us]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[15]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[now to learn how we can help you to launch and manage your shariah compliant fund.]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[2]/div[2]/p[15]/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[copyright&nbsp;&copy;&nbsp;2006-2011&nbsp;idealratings&reg;, inc. all rights reserved]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[3]/p/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[home]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[3]/ul/li[1]/a/text()]]></xpath>
+    </phrase>
+    <phrase>
+      <orig><![CDATA[privacy policy]]></orig>
+      <xpath><![CDATA[/html/body/div[2]/div[3]/ul/li[2]/a/text()]]></xpath>
+    </phrase>
+  </phrases>
+</request>

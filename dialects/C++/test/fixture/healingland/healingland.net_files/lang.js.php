@@ -1,0 +1,32 @@
+//Javascript language variables
+
+LANG_JS_LOADCATEGORYTREE = "Wait, Loading Category Tree...";
+LANG_JS_LOADING = "Loading...";
+LANG_JS_FAVORITEADD = "تم ادراج هذا في المفضلة<br />يمكنك عرض المفضلة لديك عن طريق النقر على رابط 'قائمتي المفضلة'.";
+LANG_JS_FAVORITEDEL = "تمت إزالة هذا البند من المفضلة";
+LANG_JS_GOOGLEMAPS_NOTAVAILABLE_ADDRESS = "Google Map is not available for the current address.";
+LANG_JS_CALENDAR_INVALIDDATEFORMAT = "Invalid date format";
+LANG_JS_CALENDAR_INVALIDYEARVALUE = "Invalid year value";
+LANG_JS_CALENDAR_INVALIDMONTHVALUE = "Invalid month value";
+LANG_JS_CALENDAR_INVALIDDAYMONTHVALUE = "Invalid day of month value";
+LANG_JS_CALENDAR_INVALIDHOURSVALUE = "Invalid hours value";
+LANG_JS_CALENDAR_INVALIDMINUTESVALUE = "Invalid minutes value";
+LANG_JS_CALENDAR_INVALIDSECONDSVALUE = "Invalid seconds value";
+LANG_JS_CALENDAR_FORMATACCEPTED = "Format accepted is";
+LANG_JS_CALENDAR_ALLOWEDRANGE = "Allowed range is";
+LANG_JS_CALENDAR_ALLOWEDVALUESUNSIGNEDINTEGERS = "Allowed values are unsigned integers";
+LANG_JS_CALENDAR_NOYEARVALUE = "No year value can be found";
+LANG_JS_CALENDAR_NOMONTHVALUE = "No month value can be found";
+LANG_JS_CALENDAR_NODAYMONTHVALUE = "No day of month value can be found";
+LANG_JS_LABEL_WEAK = "weak";
+LANG_JS_LABEL_BAD = "bad";
+LANG_JS_LABEL_GOOD = "good";
+LANG_JS_LABEL_STRONG = "strong";
+LANG_JS_ACCOUNTSEARCH_PROBLEMRETRIEVING = "There was a problem retrieving the XML data:";
+LANG_JS_ACCOUNTSEARCH_CLICKHERETOSELECT = "Click here to select an account.";
+LANG_JS_ACCOUNTSEARCH_PLEASEPROVIDEATLEAST = "Please provide at least a 3 letter word for the search!";
+LANG_JS_ACCOUNTSEARCH_SERVERRESPONSEFAILURE = "Server response failure!";
+LANG_JS_CLOSE = "إغلاق";
+LANG_JS_COLORPICKER_CLOSEMSG = "اضغط على مفتاح ESC لإغلاق.";
+LANG_JS_LABEL_HIDEMAP = "إخفاء الخريطة";
+LANG_JS_LABEL_SHOWMAP = "إظهار خريطة";

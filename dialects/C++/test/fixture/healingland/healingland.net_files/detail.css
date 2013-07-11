@@ -1,0 +1,395 @@
+/**
+* eDirectory - Style Definitions on Modules Detail
+*
+* This style sheet describes the styles applied for the detail pages
+* of all modules
+*
+* @package		layout
+* @author			Arca Solutions
+* @copyright	Copyright (c) 2009, Arca Solutions Inc.
+*
+* @colordef		#069; standard blue 					(link color and title highlight)
+* @colordef		#333; standard dark gray 			(text colors)
+* @colordef		#666; standard gray 					(notes, complementary information)
+* @colordef		#690; standard green color 		(footer links, members links, search box)
+* @colordef		#C00; standard red 						(standard hover link, highlight label, calendar day's hover, secondary link color)
+* @colordef		#CCC; standard border color
+* @colordef		#EEE; secondary border color
+* @colordef		#FFC; standard yellow color 	(highlight featured, calendar day's hover)
+* @colordef		#F7F7F7; tertiary border color, light gray background color
+* @colordef		#FFFFEF; secondary yellow		 	(showcase background, subcategories' dropdown)
+*/
+
+/**
+* Columns
+*
+* Specific main content extended for detail pages
+*
+* @section				structure
+* @subsection			content
+* @subsubsection	columns-extended
+*/
+
+.mainContent {
+	width:722px;
+	padding:0
+}
+/**
+* Module Detail
+*
+* @section	detail
+*/
+
+.detail {
+	color: #333;
+	height: 100%;
+	overflow: hidden;
+}
+.detailContent {
+	float: right;
+	padding: 1px 0 20px 10px;
+	width: 610px;
+	text-align:right;
+}
+.detailContent p {
+	margin-bottom: 10px;
+	font-size:12pt;
+	line-height:150%;
+	font-weight:bold;
+	padding:0 10px 0 0;
+}
+.detailComplementaryContent {
+	float: left;
+	padding: 5px 0 0 0;
+}
+.baseIconNavbar {
+	background: #F7F7F7;
+	
+	border-bottom: 1px solid #CCC;
+	margin-bottom:10px;
+	border-top: 1px solid #CCC;
+	height: 30px;
+	padding: 0 10px 0 10px;
+	position:relative;
+	z-index:4;
+}
+.socialBookmarkIcons {
+	padding: 5px 0 0 0;
+}
+.claim a, .claim a:visited {
+	background: url(../images/design/bg_claim.gif) no-repeat 0 0;
+	color: #C00;
+	display: block;
+	margin: 5px 0 0 0;
+	padding: 0 0 0 15px;
+}
+.designations {
+	padding: 0;
+	float:left;
+	position:relative;
+	top:-21px;
+	left:-10px;
+	z-index:10;
+}
+
+*+html .designations 
+{position:static;
+	top:auto;
+	z-index:18;
+	left:auto;
+	margin:-19px 0 0 0 ;}
+.detailSpacer {
+}
+/**
+* Detail Typograph
+*
+* @section		detail
+* @subsection	typograph
+*/
+
+.detail h2 {
+	color: #414042;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:30px;
+ 	line-height:30px;
+	font-weight:bold;
+	padding: 5px 0px 0 0;
+	text-align:right;
+}
+.detail address {
+	margin-bottom: 10px;
+	font-size:12pt;
+	line-height:150%;
+	font-weight:bold;
+	padding:0 10px 0 0;
+}
+.detail address span {
+	display: block;
+}
+.detailTitle {
+	color: #fff;
+	background:url("../images/design/bg_top_navigation.gif") repeat scroll 0 0 transparent;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:21px;
+	font-style:italic;
+	font-weight:bold;
+	padding: 5px;
+	border-bottom:2px double #fff;
+ 
+	text-align:right;
+}
+.fb-like {
+	text-align:left;
+	float:left;
+	margin:-24px 0 0 60px;
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.fb-like {
+margin:-42px 0 0 60px; /* This works only in Safari and Google Chrome */
+}
+}
+
+.art2
+{margin:-25px 0 0 60px; }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.art2 {
+margin:-50px 0 0 60px; /* This works only in Safari and Google Chrome */
+}
+}
+
+.detailTitle span {
+}
+.detailTitle .complementaryInfo {
+	position: absolute;
+	right: 0;
+	top: 15px;
+}
+.detailRatings .detailTitle {
+	position: relative;
+}
+.summaryDescription {
+	color: #666;
+	font-size: 11px;
+	padding: 5px 0 5px 0;
+}
+/**
+* Special Style for Article Detail
+*
+* @section		detail
+* @subsection	article-detail
+*/
+
+.articleDetail {
+	text-align: justify;
+	font-size:12pt;
+	font-weight:bold;
+	line-height:150%;
+	margin-bottom:10px;
+	padding:0 10px 0 0;
+}
+.articleDetail p
+{
+	margin:0 0 20px 0;}
+.articleDetail h2 {
+	margin-top: 20px;
+}
+.articleDetail .detailComplementaryContent {
+	padding:1px;
+	margin:0 7px 0 0;
+	background-color:#f5f5f5;
+	border:solid #dfdfdf 1px;
+}
+.articleDetailContent {
+	line-height: normal;
+}
+.articleDetailContent ul, .articleDetailContent ol {
+	list-style: disc inside;
+	padding: 0 0 15px 15px;
+}
+.articleDetailContent ol {
+	list-style-type: decimal;
+}
+/**
+* Detail Media Gallery
+*
+* @section		detail
+* @subsection	gallery
+*/
+
+.imgDetail, .videoDetail {
+	padding: 5px 8px;
+	text-align: center;
+}
+.imgDetail img, .detailGallery img {
+	border: 1px solid #CCC;
+	padding: 2px;
+}
+.imgDetail .noimage {
+	margin: 0 auto 0 auto;
+}
+.detailGallery .complementaryInfo {
+	padding: 0 10px 10px 0;
+	text-align:right;
+	font:10px Tahoma, Geneva, sans-serif;
+}
+.detailGallery .viewMore {
+	margin: 10px 0 0 0;
+}
+.detailGallery ul {
+	height: 100%;
+	overflow: hidden;
+	padding: 5px 0 5px 0;
+}
+.detailGallery li {
+	float: right;
+	padding: 0 10px 0 0;
+}
+/**
+* Google Map
+*
+* @section		detail
+* @subsection	google-maps
+*/
+
+.googleMapsWrapper {
+	position: relative;
+}
+.googleBase {
+	background: #F7F7F7;
+	border: 1px solid #CCC;
+	height: 250px;
+	margin: 0 auto 10px auto;
+	width: 318px;
+	z-index: 1;
+}
+.floatLayer {
+	background: #FFC;
+	border: 1px solid #CCC;
+	height: auto;
+	left: -235px;
+	position: absolute;
+	top: -9px;
+	visibility: hidden;
+	width: 350px;
+	z-index: 2;
+}
+.viewMapInfo {
+	padding: 10px;
+}
+.viewMapInfo img {
+	background: #FFF;
+	border: 1px solid #CCC;
+	float: left;
+	margin: 0 10px 10px 0;
+	padding: 2px;
+}
+.viewMapInfo h1 {
+	color: #414042;
+	font-size: 14px;
+}
+.viewMapInfo p {
+	font-size: 11px;
+}
+.viewMapInfo .googleRating img {
+	border: 0;
+	margin: 0;
+	float: none;
+}
+#map span {
+	font-size: 2px;
+}
+/**
+* Google Map
+*
+* @section		detail
+* @subsection	google-maps
+*/
+
+.formDetail {
+	clear: both;
+}
+.formDetail form {
+	font-size: 11px;
+	line-height: 25px;
+	padding: 10px;
+}
+.formDetail label, .formDetail .captchaImage {
+	clear: right;
+	color: #666;
+	display: block;
+	float: right;
+	padding: 0 10px;
+	direction:ltr;
+	text-align: right;
+	white-space: nowrap;
+	font-size:18px;
+	width: 130px;
+	background:#e8e8e8;
+}
+.formDetail .required {
+	color:#C00;
+	padding: 0 5px 0 0;
+}
+.formDetail .formCaptchaWarning {
+	padding:10px 0 10px 140px;
+	line-height:normal;
+	text-align:right;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:12px;
+}
+.formDetail input, .formDetail textarea {
+
+	float: right;
+	font: normal 12px Arial, Helvetica, sans-serif;
+	margin: 0 5px 5px 0;
+	width: 550px;
+}
+.formDetail .formCode {
+	width: 100px;
+}
+.formDetail ul.standardButton {
+	clear: right;
+	margin:0 0 0 244px;
+	float: left;
+}
+/**
+* Ratings
+*
+* @section		detail
+* @subsection	ratings
+*/
+
+.detailRatings {
+	clear: both;
+	padding: 0 0 10px 0;
+}
+.detailRatings .ratingSeeComment, .detailRatings .rateIt {
+	clear: none;
+	float: right;
+}
+/**
+* Reviews
+*
+* @section		detail
+* @subsection	reviews
+*/
+
+.rateComments {
+	padding: 5px 10px 10px 10px;
+}
+.art {
+	float: right;
+	padding: 0 10px 20px 10px;
+	width: 700px;
+}
+.articleDetail ol li
+{
+	margin:15px 0
+	}
+	.articleDetail ol li strong
+	{
+		margin:0 0 7px 0;
+		color:#1691BD}

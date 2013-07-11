@@ -1,0 +1,250 @@
+POST / HTTP/1.1
+Host: localhost:9090
+Accept: */*
+Content-Type: text/html
+Dakwak-APIKey: 4c320675d1748267bb0001274c320675d1748267bb000125
+Dakwak-ToLang: ar
+Dakwak-TID: 1
+Content-Length: 13374
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Shariah Screening, Purification, Islamic Funds, Islamic Index, IdealRatings</title>
+
+<link rel='stylesheet' id='catablog-stylesheet-css'  href='http://www.idealratings.com/wp-content/plugins/catablog/css/catablog.css?ver=1.2.9.8' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://www.idealratings.com/wp-content/plugins/contact-form-7/styles.css?ver=3.0' type='text/css' media='all' />
+<link rel='stylesheet' id='simplemodal-login-css'  href='http://www.idealratings.com/wp-content/plugins/simplemodal-login/css/default.css?ver=1.0.4' type='text/css' media='screen' />
+<link rel='stylesheet' id='rpx_style-css'  href='http://www.idealratings.com/wp-content/plugins/rpx/files/stylesheet.css?ver=3.2.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.idealratings.com/wp-includes/js/l10n.js?ver=20101110'></script>
+<script type='text/javascript' src='http://www.idealratings.com/wp-includes/js/jquery/jquery.js?ver=1.6.1'></script>
+<script type='text/javascript' src='http://www.idealratings.com/wp-content/plugins/rpx/files/javascript.js?ver=3.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.idealratings.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.idealratings.com/wp-includes/wlwmanifest.xml" />
+<link rel='index' title='IdealRatings Shariah Compliant Screening and Fund Management' href='http://www.idealratings.com' />
+<meta name="generator" content="WordPress 3.2.1" />
+
+<!-- All in One SEO Pack 1.6.13.4 by Michael Torbert of Semper Fi Web Design[266,334] -->
+<meta name="description" content="Shariah Screening, Purification, Funds, Islamic Finance. The Most trusted provider of accurate, timely, Islamic Finance information. Our Shariah screening, purification, fund, index services identify, manage Shariah equities,funds, Sukuk globally." />
+<meta name="keywords" content="shariah screening,  shariah compliant screening, shariah compliant stock screening, shariah compliant fund, Shariah purification, stock purification, index purification,  sharia fund, islamic fund, Islamic index, islamic finance screening, shariah compliant, sharia compliant, purification" />
+<link rel="canonical" href="http://www.idealratings.com/" />
+<!-- /all in one seo pack -->
+<!-- CataBlog 1.2.9.8 LightBox Styles | http://catablog.illproductions.com/ -->
+<style type='text/css'>
+  .catablog-row {min-height:100px; height:auto !important; height:100px;} .catablog-image {width:100px;} .catablog-title {margin:0 0 0 110px !important;} .catablog-description {margin:0 0 0 110px; !important} .catablog-images-column {width:100px;}  .catablog-gallery.catablog-row {width:100px; height:100px;} .catablog-gallery.catablog-row .catablog-image {width:100px; height:100px;} .catablog-gallery.catablog-row .catablog-image img {width:100px; height:100px;} .catablog-gallery.catablog-row .catablog-title {width:90px;}
+</style>
+
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="pragma" content="no-cache"/><style type="text/css">
+/* Janrain Engage plugin dynamic CSS elements */
+.rpx_counter {
+  background-image:url('http://www.idealratings.com/wp-content/plugins/rpx/images/bubble-32.png');
+}
+.rpx_ct_total {
+  background-image:url('http://www.idealratings.com/wp-content/plugins/rpx/images/bubble-short.png');
+}
+.rpx_size30 {
+  background-image:url('http://www.idealratings.com/wp-content/plugins/rpx/images/rpx-icons30.png');
+}
+.rpx_size16 {
+  background-image:url('http://www.idealratings.com/wp-content/plugins/rpx/images/rpx-icons16.png');
+}
+</style>
+
+
+	<link rel="stylesheet" href="http://www.idealratings.com/wp-content/themes/IdealRatings/style.css" type="text/css" media="screen" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+
+  <script src="http://www.idealratings.com/wp-content/themes/IdealRatings/js/jquery.tools.min.js" type="text/javascript"></script>
+  <script src="http://www.idealratings.com/wp-content/themes/IdealRatings/js/jquery.easing.1.3.js" type="text/javascript"></script>
+  <script type="text/javascript" >
+  $(document).ready(function() {
+    $("div.hide").add(".close").hide();
+    $("a.nextPage").click(function() {
+      var tab = $(this).attr('rel');
+      var blah = $("#subpage"+tab).html();
+      $("#subpage").html(blah).prepend("<a href='#' class='prevPage back2menu'>menu</a>");
+      $("a.back2menu").click(function() {
+        $("div.items").animate({"left": "0"}, 600, "swing");
+      });
+      $("div.items").animate({"left": "-932px"}, 600, "swing");
+    });
+    $("a.nextPage").hover(
+      function () {
+        $("a#link_screen").removeClass("first");
+        $(this).addClass("hover");
+      },
+      function () {
+        $(this).removeClass("hover");
+      }
+    );
+    $("ul.tabs").mouseleave(function() {
+      $("a#link_screen").addClass("first");
+    });
+
+    $("#item1").overlay({
+      expose: '#000',
+      effect: 'apple',
+      onBeforeLoad: function() {
+        // grab wrapper element inside content
+        var wrap = this.getContent().find(".contentWrap");
+
+        // load the page specified in the trigger
+        if (wrap.is(":empty")) {
+          wrap.load(this.getTrigger().attr("href"));
+        }
+
+      },
+      onClose: function() {
+        var wrap = this.getContent().find(".contentWrap");
+        wrap.empty();
+      }
+    });
+  });
+  </script>
+<!-- optimizely code was here -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25664968-2']);
+  _gaq.push(['_setDomainName', '.idealratings.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+<body>
+	<div class="simple_overlay hide" id="overlay">
+		<div class="contentWrap"></div>
+	</div>
+	<div id="page">
+
+	<div id="header">
+		<a href="/" title="Ideal Ratings"><img src="http://www.idealratings.com/wp-content/themes/IdealRatings/images/logo_left.png" id="logo" alt="Ideal Ratings" class="dakimg"/></a>
+
+		<div id="menu">
+			<div class="menu_left_bg"></div>
+
+<ul id="mc_menu_2" class="mc_menu mc_depth_0">
+<li id="menu_item_14" class="mc_menu_item external_link "><a href="/" title="" rel="" >Home</a></li>
+<li id="menu_item_11" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/solutions" title="" rel="" >Solutions</a></li>
+<li id="menu_item_12" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/clients-partners" title="" rel="" >Clients</a></li>
+<li id="menu_item_13" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/methodology" title="" rel="" >Methodology</a></li>
+<li id="menu_item_9" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/about" title="" rel="" >About</a></li>
+<li id="menu_item_37" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/news" title="" rel="" >News</a></li>
+<li id="menu_item_35" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/blog" title="" rel="" >Blog</a></li>
+<li id="menu_item_10" class="mc_menu_item wordpress_link "><a href="http://www.idealratings.com/contact" title="" rel="" >Contact Us</a></li>
+</ul>
+			<div class="menu_right_bg"></div>
+		</div>
+	</div>
+<div id="content">
+	<div class="banner">
+
+		<!-- stup show page Banner-->
+						  			<p><iframe height="320" allowTransparency="true" frameborder="0" scrolling="no" style="width:100%;border:none"  src="/SplashScreen5/SplashScreen5.html"></iframe></p>
+
+	</div>
+      <div class="left_panel">
+		<!-- stup show page Sample Data Feed-->
+						  		  	<h1>Stay up to date</h1>
+			<p><a href="http://www.idealratings.com/Newsletter/Islamic-Investor-Newsletter-Q4.html"><img src="http://www.idealratings.com/wp-content/uploads/2011/12/readnewsletter.png" alt="" title="Read Newsletter Q4" width="162" height="60" class="dakimg" /></a><br />
+<a title="Follow us on Twitter" href="http://Twitter.com/IdealRatings" target="_blank"><img class="size-full wp-image-1404 alignleft dakimg" title="Follow us on Twitter" src="http://www.idealratings.com/wp-content/uploads/2011/12/follow_us_twitter.gif" alt="follow_us_twitter" width="158" height="64" /></a><a href="http://www.linkedin.com/company/idealratings?trk=fc_badge"><img src="http://www.idealratings.com/wp-content/uploads/2011/12/btn_cofollow_badge.png" alt="IdealRatings on LinkedIn" class="dakimg" /></a></p>
+<p>&nbsp;</p>
+
+      </div>
+	<div class="two_column">
+
+		<!-- stup show page Who We Are-->
+						  		  	<h1><a  href="http://www.idealratings.com/who-we-are" title="Who We Are" class="title">Who We Are</a></h1>
+			<p><strong>IdealRatings®</strong> is the most trusted provider of accurate, and timely, Islamic Finance information. Our Shariah screening, purification, fund and index management services identify and manage Shariah compliant equities, funds and Sukuk globally.<br />
+Most Islamic index providers, and financial institutions in 12 countries rely on IdealRatings to create and manage their Islamic products.</p>
+
+	<hr />
+
+	<div class="news">
+
+    	<h1>News</h1>
+
+
+    <p>January 16th, 2012</p>
+    <p class="text"><a href="http://www.idealratings.com/news/osk-uob-islamic-fund-management-signs-with-idealratings-as-their-shariah-screening-provider" title="OSK-UOB ISLAMIC FUND MANAGEMENT SIGNS WITH IDEALRATINGS AS THEIR SHARIAH SCREENING PROVIDER">OSK-UOB ISLAMIC FUND MANAGEMENT SIGNS WITH IDEALRATINGS AS THEIR SHARIAH SCREENING PROVIDER</a><p>
+
+
+    <p>November 21st, 2011</p>
+    <p class="text"><a href="http://www.idealratings.com/news/saxo-bank-enables-online-islamic-trading" title="Saxo Bank Enables Online Islamic Trading">Saxo Bank Enables Online Islamic Trading</a><p>
+
+
+    <p>September 9th, 2011</p>
+    <p class="text"><a href="http://www.idealratings.com/news/tapping-a-growing-halal-market-knowledgewharton-today-article" title="Tapping a Growing Halal Market [Knowledge@Wharton Today Article]">Tapping a Growing Halal Market [Knowledge@Wharton Today Article]</a><p>
+
+
+    	<p class="text"><a href="http://www.idealratings.com/news" title="Read more" class="more-link-news">Read more</a></p>
+
+</div>
+	<hr/>
+
+	<div class="news">
+		<h1>IdealRatings Blog</h1>
+					<p>October 24th, 2011</p>
+			<p class="text"><a href="http://www.idealratings.com/new-weekly-shariah-premium-reports-are-out.html" title="New weekly Shariah premium reports are out">New weekly Shariah premium reports are out</a><p>
+					<p>October 10th, 2011</p>
+			<p class="text"><a href="http://www.idealratings.com/shariah-reports-for-lvmh-etisalat-sabic-plus-available.html" title="Shariah reports for LVMH ETISALAT SABIC PLUS Available">Shariah reports for LVMH ETISALAT SABIC PLUS Available</a><p>
+					<p>September 29th, 2011</p>
+			<p class="text"><a href="http://www.idealratings.com/idealratings-shariah-compliance-research-reports-are-now-online.html" title="IdealRatings Shariah compliance research reports are now online">IdealRatings Shariah compliance research reports are now online</a><p>
+				<p class="text"><a href="http://www.idealratings.com/blog" title="Read more" class="more-link-news">Read more</a></p>
+	</div>
+
+	<hr />
+
+	<h1>How can we help?</h1>
+						  			<p>If your investment company has capital that is managed according to Shari&#8217;ah, or is planning on launching Shariah compliant funds, you&#8217;ve come to the right place!</p>
+<p>IdealRatings has a compliance management and Shariah screening service that is approved by most renowned Shariah scholars and that could help you from the fund raising stage to the day to day management processes of your investment.</p>
+<p>You can rely on the service to execute your own board&#8217;s rule books, Islamic law has slightly different implementations that IdealRatings built a powerful rule engine to support.</p>
+<p>The service will generate all the monthly, quarterly and bi annual compliance and purification reports required by your investors and compliance officers, and  will enable you to invest in your choice of 40,000+ equities in 100+ countries and in the currency of your choice while automatically calculating your gains and benchmarking your performance against almost any of the conventional or Islamic Indexes.</p>
+
+	  <div class="two_main_footer_bg"></div>
+	</div>
+
+      <div class="right_panel">
+		<!-- stup show page Testimonial-->
+								  			<h1>Is <a href="http://www.idealratings.com/research"><img src="http://www.idealratings.com/wp-content/uploads/2009/05/apple.jpg" alt="AAPL" title="apple" width="29" height="22" class="alignnone size-full wp-image-2252" /></a>Compliant?</h1>
+			<p>Do you know if AAPL, MSFT, VOD, WOW are Shariah compliant or not?</p>
+<p>Click <a title="Shariah compliant Research" href="http://www.idealratings.com/research">here </a> for the answers</p>
+<p>&nbsp;</p>
+		  		<hr />
+		<!-- stup show page Partners & Clients-->
+						  			<h3 class="rb_title_o">Islamic Investor on iPhone</h3>
+			<p><a href="http://bit.ly/q88TzV"><img class="alignnone size-full wp-image-1446 dakimg" title="" src="http://www.idealratings.com/wp-content/uploads/2011/12/appstorebadge2.png" alt="appstorebadge2" width="180" height="59" /></a></p>
+		  		        </div></div>
+
+    <div id="footer">
+      <p>Copyright&nbsp;©&nbsp;2006-2012&nbsp;IdealRatings®, Inc. All Rights Reserved</p>
+      <ul class="footer_menu">
+
+	  		<li><a href="/" title="home">Home</a></li>
+		<li class="last"><a href="/privacy-policy" title="Privacy Policy">Privacy Policy</a></li>
+	        </ul>
+
+    </div>
+
+    <input type="submit" value="this is a submit button" />
+    <button value="this is a button" />
+    <button>this is an invalid button</button>
+
+  </div>
+
+<!-- OPENTRACKER HTML START -->
+<script src="http://script.opentracker.net/?site=www.idealratings.com"></script> <noscript><a href="http://www.opentracker.net" target="_blank"> <img src="http://img.opentracker.net/?cmd=nojs&site=www.idealratings.com" alt="Web Analytics" border="0"> </a></noscript>
+<!-- OPENTRACKER HTML END -->
+</body>
+
+</html>

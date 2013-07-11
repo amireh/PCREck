@@ -1,0 +1,491 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Gate2play</title>
+<meta name="description" content="Gate2play - Bringing back the middleman" />
+<link href="StyleSheet.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+#slider1 {
+	top: -20px;
+	left: -40px;
+	width: 720px; /* important to be same as image width */;
+	height: 301px; /* important to be same as image height */;
+	position: relative; /* important */;
+	overflow: hidden; /* important */;
+	border: 0px;
+}
+#slider1Content {
+	width: 681px; /* important to be same as image width or wider */;
+	position: absolute;
+	top: 0;
+	margin-left: 0;
+}
+.slider1Image {
+	border: 0px;
+	float: left;
+	position: relative;
+	display: none;
+}
+.slider1Image span {
+	position: absolute;
+	font: 10px/15px Arial, Helvetica, sans-serif;
+	padding: 10px 13px;
+	width: 665px;
+	background-color: #000;
+	filter: alpha(opacity=0);
+	-moz-opacity: 0.0;
+	-khtml-opacity: 0.0;
+	opacity: 0.0;
+	color: #fff;
+	display: none;
+}
+.clear {
+	clear: both;
+}
+.slider1Image span strong {
+	font-size: 14px;
+}
+.left {
+	top: 0;
+	left: 0;
+	width: 110px !important;
+	height: 280px;
+}
+.right {
+	right: 0;
+	bottom: 0;
+	width: 90px !important;
+	height: 290px;
+}
+ul {
+	list-style-type: none;
+}
+</style><!-- JavaScripts-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+<script src="s3Slider.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#slider1').s3Slider({
+            timeOut: 4000
+        });
+    });
+</script>
+<style type="text/css">
+html, body {
+	margin: 0;
+	padding: 0;
+}
+body {
+	text-align: center;
+	margin-bottom: 20px;
+}
+p {
+	margin: 0 10px 10px;
+}
+div#ocontainer {
+	width: 1000px;
+	margin: 0 auto;
+}
+ul.rootnav {
+	position: relative;
+	z-index: 597;
+	float: left;
+	font: normal 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	top: 30px;
+	left: 0px;
+	height: 60px;
+}
+ul.rootnav, ul.rootnav li, ul.rootnav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ul.rootnav li {
+	float: left;
+	line-height: 180px;
+	vertical-align: middle;
+	padding: 0px;
+	color: #000;
+	line-height: normal;
+	background-image: url(images/topmenusep2.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+#MenuBack a {
+	height: 29px;
+	color: White;
+	text-decoration: none;
+}
+ul.rootnav a:link, ul.rootnav a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+ul.rootnav li a {
+	display: block;
+	padding-top: 30px;
+	padding-right: 20px;
+	padding-left: 20px;
+	height: 38px;
+}
+.PageTitle {
+	background-image: url('Images/HeaderTextBox.jpg');
+	background-repeat: no-repeat;
+	width: 188px;
+	height: 56px;
+	color: #fff;
+	text-align: left;
+	padding-left: 45px;
+	padding-top: 15px;
+	font-size: 15pt;
+	vertical-align: middle;
+}
+.style5 {
+	width: 100%;
+}
+.style14 {
+	height: 80px;
+	padding-left: 20px;
+}
+.SlidebarBanner {
+	width: 459px;
+	height: 71px;
+	background-image: url('Images/slidebarbanner.jpg');
+	background-repeat: no-repeat;
+}
+.auto-style10 {
+	color: #40A9DC;
+}
+a:visited {
+	color: #FFFFFF;
+}
+a:active {
+	color: #FFFFFF;
+}
+a:hover {
+	color: #FFFFFF;
+}
+</style><style>
+#nav, #nav ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	list-style-position: outside;
+	position: relative;
+	line-height: 1.5em;
+}
+#nav a:link, #nav a:active, #nav a:visited {
+	display: block;
+	padding: 0px 5px;
+	color: #fff;
+	text-decoration: none;
+}
+#nav a:hover {
+	text-decoration: none;
+	background-image: url('Images/MainMenuOver.jpg');
+	background-repeat: repeat-x;
+	background-position: left top;
+	position: relative;
+	height: 26px;
+	color: #fff;
+}
+#nav li {
+	float: left;
+	position: relative;
+}
+#nav ul {
+	position: absolute;
+	width: 12em;
+	top: 1.5em;
+	display: none;
+	padding-top: 13px;
+	text-align: left;
+	font-size: 15px;
+	margin-top: 3px;
+}
+#nav li ul a {
+	width: 10em;
+	float: left;
+	background-color: #212121;
+	margin-top: 0px;
+}
+#nav ul ul {
+	top: auto;
+}
+#nav li ul ul {
+	left: 12em;
+	margin: 0px 0 0 10px;
+}
+#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li:hover ul ul ul ul {
+	display: none;
+}
+#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li li li li:hover ul {
+	display: block;
+}
+.auto-style11 {
+	width: 90px;
+	text-align: center;
+}
+.auto-style12 {
+	border-width: 0px;
+}
+a {
+	color: #FFFFFF;
+}
+.style25 {
+	text-align: left;
+}
+
+
+.zyngalink {
+	margin-left: 700px;
+	margin-top:-55px
+}
+</style><script>
+    function mainmenu(){
+$(" #nav ul ").css({display: "none"}); // Opera Fix
+$(" #nav li").hover(function(){
+		$(this).find('ul:first').css({visibility: "visible",display: "none"}).show(400);
+		},function(){
+		$(this).find('ul:first').css({visibility: "hidden"});
+		});
+
+}
+
+ $(document).ready(function(){
+	mainmenu();
+});
+    </script>
+
+</head><body style="background-color: #E0E0E0">
+<div id="ocontainer">
+<div style="background-color:white">
+<div id="headerx" style="width: 1000px; height: 100%; background-color:white">
+<div id="container" style="padding-left:20px; padding-right:20px">
+
+<div style=" height:108px">
+                                        <div style="width:458px; height:108px">
+											<a href="index.php">
+											<img style="margin-top:-10px; margin-left:-10px" alt="" height="108" src="Images/Logo.png" width="458"></a></div>
+                                        <div style=" width: 502px;  margin-left:458px; margin-top:-108px; height:108px;">
+                                        <div style="width:85px; height:27px; margin-left:416px; margin-top:82px">
+                                        <div style="height: 16px">
+
+<div style=" width:16px; height:16px; border:0px">
+<a href="http://www.facebook.com/pages/Gate2Play/176116455752936?ref=ts" target="_blank"><img src="Images/faceIcon.png" height="16" border="0"></a>
+</div>
+<div style="width:16px; height:16px; margin-left:23px; margin-top:-16px;">
+<a href="https://twitter.com/gate2play" target="_blank"><img src="Images/tweetIcon.png" height="16" border="0"></a>
+</div>
+<div style="width:16px; height:16px; margin-left:46px; margin-top:-16px">
+<a href="http://www.linkedin.com/groups?gid=3189767&mostPopular=&trk=tyah" target="_blank"><img src="Images/InIcon.png" width="16" border="0"></a>
+</div>
+<div style="width:16px; height:16px; margin-left:67px; margin-top:-16px">
+<a href="https://plus.google.com/110008969848957626000" target="_blank"><img src="Images/g.png" width="16" border="0"></a>
+</div>
+
+
+
+                                    </div>
+                                </div></div>
+                                        </div>
+
+
+<div id="wrapper">
+<div id="content">
+                    <div id="MenuBack">
+                        <table width="960px">
+                            <tr>
+                                <td style="padding-left: 65px">
+                                    <ul id="nav" style="padding-top:20px">
+                                        <li><a href="index.php">
+										<div class="auto-style11">
+											<strong>Home</strong></div>
+										</a>
+										</li>
+                                        <li style="left: 0px; top: 0px; height: 40px"><a href="about_us.php">
+										<div class="auto-style11" style="width: 90px">
+											<strong>About us</strong></div>
+										</a>
+										</li>
+                                        <li><a href="merchants.php">
+										<div class="auto-style11">
+											<strong>Merchants</strong></div>
+										</a>
+										    <ul>
+										        <li>
+
+										            <a href="merchants.php">Our Merchants</a>										        </li>
+										        <li>
+										            <a href="become_a_merchant.php">Become
+ a Merchant</a>
+										        </li>
+										    </ul>
+										</li>
+                                        <li><a href="payments.php">
+										<div class="auto-style11">
+											<strong>Payments</strong></div>
+										</a>
+										    <ul>
+										        <li>
+										            <a href="payments.php">Our Payments</a>
+										        </li>
+										         <li>
+										            <a href="technology.php">Technology Partner</a>
+										        </li>
+										        <li>
+										            <a href="become_a_payment.php">Become
+ a Payment</a>
+										        </li>
+
+										    </ul>
+										</li>
+                                        <li><a href="#">
+										<div class="auto-style13">
+											<strong>Services</strong></div>
+										</a>
+										    <ul>
+										        <li>
+										            <a href="onlinepaymenthub.php">Online Payment Hub</a>
+										        </li>
+										        <li>
+										            <a href="advisory.php">Advisory and Market</a>
+										        </li>
+										        <li>
+										            <a href="onlineServices.php">Online Services</a>
+										        </li>
+										        <li>
+										            <a href="distribution.php">Distribution</a>
+										        </li>
+										    </ul>
+										<li><a href="contact_us.php">
+										<div class="auto-style11">
+											<strong>Contact us</strong></div>
+										</a>
+										</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+<div class="zyngalink " style="width: 174px; height: 32px">
+<a href="http://zynga.gate2play.com/" target="_blank">
+<img src="Images/zynga/link.png" width="174" height="32">
+</a>
+</div>
+
+                    </div>
+</div>
+</div>				<div style="width: 960px; height: 279px">
+					<div id="Slider" style="width: 661px; height: 279px; margin-left: 0px">
+					</div>
+					<div style="width: 279px; height: 279px; margin-left: 672px; margin-top: -279px">
+						<a href="map.php">
+						<img alt="" class="auto-style12" height="279" src="Images/Map.png" width="279"></a></div>
+				</div>
+				<div style="width: 660px; height: 290px; margin-top: 20px; margin-left:10px">
+					<div style="width: 660px">
+						<div style="height: 140px; width: 325px; margin-top: 0px">
+							<a href="onlinepaymenthub.php" target="_self">
+							<img alt="Download" height="140" onmouseout="this.src='Images/online.jpg';" onmouseover="this.src='Images/online_blue.jpg';" src="Images/online.jpg" style="margin-top: -10px; margin-left: -10px; float: left; width: 325px; height: 140px" width="325"></a>
+						</div>
+						<div style="height: 140px; width: 325px; margin-top: 0px; margin-left: 335px; margin-top: -140px">
+							<a href="advisory.php" target="_self">
+							<img alt="Download" height="140" onmouseout="this.src='Images/advisory.jpg';" onmouseover="this.src='Images/advisory_blue.jpg';" src="Images/advisory.jpg" style="margin-top: -10px; margin-left: -10px; float: left; width: 325px; height: 140px" width="325"></a>
+						</div>
+						<div style="width: 660px">
+							<div style="height: 140px; width: 325px; margin-top: 10px">
+								<a href="distribution.php" target="_self">
+								<img alt="Download" height="140" onmouseout="this.src='Images/distrpution.jpg';" onmouseover="this.src='Images/distrpution_blue.jpg';" src="Images/distrpution.jpg" style="margin-top: -10px; margin-left: -10px; float: left; width: 325px; height: 140px" width="325"></a>
+							</div>
+						</div>
+						<div style="height: 140px; width: 325px; margin-top: 10px; margin-left: 335px; margin-top: -140px">
+							<a href="onlineServices.php" target="_self">
+							<img alt="Download" height="140" onmouseout="this.src='Images/online_services.jpg';" onmouseover="this.src='Images/online_services_blue.png';" src="Images/online_services.jpg" style="margin-top: -10px; margin-left: -10px; float: left; width: 325px; height: 140px" width="325"></a>
+						</div>
+					</div>
+					<div style="width: 279px; height: 290px; margin-left: 670px; margin-top: -300px; position: inherit">
+													<div style="width: 0px; height: 230px; margin-top: 0px">
+								<table>
+
+									<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+									<script>
+new TWTR.Widget({
+  type: 'search',
+  search: 'gate2play',
+  version: 2,
+   interval: 6000,
+ title: 'Follow us on Twitter',
+ subject: 'gate2play',
+   width: 276,
+  height: 200,
+  theme: {
+    shell: {
+      background: '#40a9dc',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: true,
+    loop: true,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script>
+
+
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="height: 40px">
+			</div>
+		</div>
+<div style="height:100px; background-image:url('Images/FooterBack.jpg')">
+                    <table class="style5">
+                        <tr>
+                            <td align="left" class="style14" valign="bottom">
+                             <p style="padding-bottom:10px; font-size:xx-small">
+							 &copy; Copyright 2011 <strong>gate<span class="auto-style10">2</span>play</strong></p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+</div></div></div>
+
+
+<script type="text/javascript">
+
+   var _gaq = _gaq || [];
+
+  _gaq.push(['_setAccount', 'UA-25667617-1']);
+
+  _gaq.push(['_trackPageview']);
+
+
+
+  (function() {
+
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+  })();
+</script>
+
+</body>
+</html>

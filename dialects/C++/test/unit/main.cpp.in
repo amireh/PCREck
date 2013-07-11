@@ -1,0 +1,8 @@
+#include "${TEST}/${TEST}.hpp"
+
+using namespace dakwak::api;
+
+int main(int argc, char** argv) {
+    ${TEST} my_test;
+    return my_test.run(argc, argv);
+}

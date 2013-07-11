@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<my_page>
+  <some_element><![CDATA[translate me]]></some_element>
+  <el2 some_attr="hello">
+    <phrase>boycott</phrase>
+    <phrase>boo</phrase>
+    <joints>
+    </joints>
+  </el2>
+  <el3>some text here</el3>
+</my_page>

@@ -1,0 +1,450 @@
+/*
+ ** common style in all pages
+*/
+body{background-color:#eaeaea}
+/***************main sprite images*************/
+.express{
+background-image:url(../images/express.png);
+background-repeat:no-repeat
+}
+/****************search watermarks****************/
+form .home_searchwatermark{color: #939393}
+form .inner_searchwatermark{color: #9F9E9E}
+/*************generic border class*****************/
+.fullBorder{
+-moz-border-radius:7px;
+-webkit-border:7px;
+border-radius:7px;
+}
+#headerWrapper,#mainContent,#footer{
+width:1000px;
+margin:auto
+}
+#mainContent{overflow:hidden}
+#headerWrapper{
+background-color:#fff;
+position:relative;
+-moz-border-radius:10px;
+-webkit-border:10px;
+border-radius:10px;
+}
+#headerWrapper .searchWrapper{background-color:#eaeaea}
+#mainContent{
+padding:30px 28px ;
+width:944px
+}
+.NavCont,.midHeader,.searchBar{padding:0 29px}
+/****************main links (top header)***************/
+.NavCont{
+background-color:#478b9b;
+height:27px;
+border-bottom:1px solid #91b9c3;
+line-height:25px;
+-moz-border-radius:0 0 7px 7px;
+-webkit-border:0 0 7px 7px;
+border-radius:0 0 7px 7px;
+}
+.userGuide .arrow{
+background-position:0 0;
+width:16px;
+height:13px;
+margin-top:7px;
+overflow:hidden
+}
+.userGuide li{
+float:left;
+margin-right:10px
+}
+.userActions a{color:#fff}
+.userActions li{
+float:right;
+margin-left:10px
+}	
+/*******************express logo**********************/
+.logo a{
+display:block;
+width:257px;
+height:99px;
+background:url(../images/logo.png) 0 0 no-repeat;
+margin-top:22px
+}
+/*************white header***************************/
+.midHeader{
+background-color:#fff;
+height:138px;
+-moz-border-radius:10px;
+-webkit-border:10px;
+border-radius:10px;
+}
+/************************login form**************************/
+.userForm {
+margin-top:28px;
+width:380px;
+overflow:hidden
+}
+.userForm ul{overflow:hidden}
+.userForm li{
+float:right;
+padding-left:15px
+}
+.userForm  .emailCont{padding-left:0}
+.userForm .loginSubmit{
+width:62px;
+height:25px;
+border:1px solid #c08931;
+text-align:center;
+font-size:15px;
+font-weight:bold;
+background-color:#fcb542;
+-moz-box-shadow: 0 8px 5px #fcc367 inset;
+-webkit-box-shadow: 0 8px 5px #fcc367 inset;
+box-shadow: 0 8px 5px #fcc367 inset;
+-webkit-appearance: none;
+padding-bottom:3px
+}
+.userForm .loginSubmit:hover,.searchBtn:hover{cursor:pointer}
+.submitCont{width:64px}
+.passCont,.emailCont{width:143px}
+.userForm .password,.userForm .email{
+width:132px;
+height:25px;
+border:1px solid #cbcbcc;
+color:#fcb542 ;
+font-size:15px;
+font-weight:bold;
+padding-left:9px;
+line-height:23px \9
+}
+.passCont input{margin-bottom:10px}
+.remember {
+padding-top:10px;
+color:#939393;
+font-size:13px
+}
+.checkLogin{margin-right:7px}
+.passCont a{
+color:#545557;
+text-decoration:underline;
+font-size:13px;
+line-height:16px
+}
+.fbConnect{
+display:block;
+background:url(../images/fb_login.png);
+width:178px;
+height:25px;
+clear:both;
+margin:17px 0 0 0
+}
+/********************search area in home page*******************/
+.searchBar{
+background-color:#8d8d8d;
+height:50px;
+-moz-border-radius:0 0 5px 5px;
+-webkit-border:0 0 5px 5px;
+border-radius:0 0 5px 5px;
+}
+.searchFrom{width:687px}
+.searchFrom,.noCont{margin-top:8px}
+.noCont .no{line-height:34px}
+.noWrap,.searchCont{
+width:40px;
+height:34px;
+border:1px solid #fff;
+background-color:#fcb542
+}
+.noWrap{margin-right:12px}
+.noIcon{
+display:block;
+background-position:-34px -31px;
+width:25px;
+height:27px;
+margin:3px auto;
+overflow:hidden
+}
+.searchIcon{
+background-position:-32px 0 ;
+width:25px;
+height:26px;
+display:block;
+margin:3px auto
+}
+.noCont{
+font-size:30px;
+font-weight:bold
+}
+.search{
+height:31px;
+width:528px;
+border:1px solid #7b7c7c;
+font-size:16px;
+color:#939393 !important;
+padding-left:13px;
+margin:0 10px;
+line-height:30px \9
+}
+.searchBtn{
+width:82px;
+height:31px;
+border:1px solid #31626d;
+background-color:#488a9a;
+-moz-box-shadow: 0 15px 5px #5a96a4 inset;
+-webkit-box-shadow: 0 15px 5px #5a96a4 inset;
+box-shadow: 0 15px 5px #5a96a4 inset;
+-webkit-appearance: none;
+font-size:17px;
+font-weight:bold;
+text-align:center;
+}
+/********************right content*********************/
+#content{ 
+width:690px
+}
+/***************left content (side navbar)********************/
+#sideBar{width:221px}
+.navBar{line-height:33px}
+.navBar h3 .navBarIcon{
+background-image:url(../images/icons.png);
+background-repeat:no-repeat;
+margin:0 8px 3px 10px;
+overflow:hidden;
+display:block;
+width:33px;
+height:33px
+}
+.navBar h3,.navBar li li,.navBar a{
+width:100%;
+height:34px
+}
+.navBar h3 ,.navBar li{
+-moz-border-radius:5px 0 5px 0;
+-webkit-border:5px 0 5px 0;
+border-radius:5px 0 5px 0;
+}
+.navBar h3 span{float:left}
+.navBar li li span a{padding-left:15px}
+.navBar li{margin-bottom:3px;clear:both}
+.enterIcon .navBarIcon{background-position:0 0}
+.foodIcon .navBarIcon{background-position:0 -35px} 
+.runIcon .navBarIcon{background-position:0 -70px}
+.electIcon .navBarIcon{background-position:0 -105px}
+.otherIcon .navBarIcon{background-position:0 -140px}
+.navBar li li{background-color:#fff;}
+.navBar li li,.navBar li li a,.navBar li li span{
+font-size:16px;
+color:#545456
+}
+.navBar li li a:hover{text-decoration:none}
+.navBar li li a,.navBar span{display:block}
+.navBar .active{width:236px}
+.navBar .active .borderL{
+width:18px;
+height:34px;
+display:block;
+float:left;
+margin-right:17px;
+-moz-border-radius:0 0 5px 0;
+-webkit-border:0 0 5px 0;
+border-radius:0 0 5px 0;
+}
+.enterIcon h3,.enterIcon .active .borderL{background-color:#fcb542}
+.foodIcon h3,.foodIcon .active .borderL{background-color:#488a9a}
+.runIcon h3,.runIcon .active .borderL{background-color:#545557}
+.electIcon h3,.electIcon .active .borderL{background-color:#b6303e}
+.otherIcon h3,.otherIcon .active .borderL{background-color:#679038}
+.enterIcon .active {color:#fcb542}
+.foodIcon .active{color:#488a9a}
+.runIcon .active{color:#545557}
+.electIcon .active{color:#b6303e}
+.otherIcon .active{color:#679038}
+.navTitle{
+background-color:#478b9b;
+-moz-border-radius:0 5px 0 5px;
+-webkit-border:0 5px 0 5px;
+border-radius:0 5px 0 5px;
+height:58px;
+font-size:18px;
+font-weight:bold;
+position:relative;
+margin-bottom:20px
+}
+.navText{
+line-height: 21px;
+padding: 8px 0 0 18px
+}
+.navIcon{
+background-position:0 -15px;
+position:absolute;
+width:32px;
+height:32px;
+bottom:-8px;
+right:23px
+}
+/**********************feedback area***************************/
+.feedback h4{
+font-size:17px;
+font-weight:bold;
+color:#fff;
+padding:10px 0 12px;
+line-height:23px
+}
+.feedback{
+background:url(../images/feedback.png) #488a9a left bottom no-repeat;
+width:224px;
+height:122px;
+text-align:center;
+-moz-border-radius:5px;
+-webkit-border:5px;
+border-radius:5px
+}
+.signUpCont button,.blog a,.feedback button{
+width:212px;
+height:44px;
+border:1px solid #c78f34 ;
+text-align:center;
+font-weight:bold;
+font-size:27px;
+background-color:#fcb542;
+-moz-box-shadow: 0 22px 5px #fcc771 inset;
+-webkit-box-shadow: 0 22px 5px #fcc771 inset;
+box-shadow: 0 22px 5px #fcc771 inset;
+-webkit-appearance: none;
+}
+.feedback button{
+width:189px;
+height:39px;
+font-size:18px;
+font-weight:bold
+}
+/*****************************blog link*****************************/
+.blog{margin:20px 0 10px}
+.blog a{
+display:block;
+width:220px;
+height:48px;
+font-size:15px;
+font-weight:bold;
+color:#fff;
+line-height:46px;
+-moz-box-shadow: 0 26px 5px #fcc771 inset;
+-webkit-box-shadow: 0 26px 5px #fcc771 inset;
+box-shadow: 0 26px 5px #fcc771 inset;
+-webkit-appearance: none;
+}
+.blog a:hover{text-decoration:none}
+#footer{
+color:#545456;
+font-size:12px;
+margin:47px auto 20px;
+overflow:hidden;
+*padding-bottom:20px
+}
+#footer div{
+margin-left:283px;
+}
+#footer li,#footer span{float:left}
+#footer li{margin-left:10px}
+/*******************************phone order image*******************************/
+.orderImage{
+background:url(../images/order.png) 0 0 no-repeat;
+width:103px;
+height:80px;
+position:absolute;
+top:0;
+right:180px;
+*right:200px
+}
+/**order details**/
+.details{
+font-family:Trebuchet MS;
+font-size:9px;
+color:#545456;
+text-align:right;
+margin-top:45px;
+min-width:110px;
+background:url(../images/order_icon.png) left 32px no-repeat
+}
+.details .total{padding:2px 0}
+/******************************search in inner pages ************************/
+.searchCat{
+padding:10px;
+background-color:#e9e9e9;
+margin:73px 0 0 20px
+}
+.find{
+border:1px solid #f5b042;
+background-color:#fcb542;
+-moz-box-shadow: 0 9px 5px #fedaa0 inset;
+-webkit-box-shadow: 0 9px 5px #fedaa0 inset;
+box-shadow: 0 9px 5px #fedaa0 inset;
+-webkit-appearance: none;
+width:46px;
+height:22px;
+text-align:center;
+font-weight:bold;
+font-family:verdana;
+font-size:12px;
+margin-top:2px
+}
+.search2{
+background:url(../images/search_icon.png) 6px center no-repeat ;
+padding-left:28px;
+width:248px;
+height:23px;
+line-height:21px \9
+}
+.search2,.searchCat select{
+border:1px solid #e1e1e1;
+background-color: #f9f9f9;
+font-size:12px;
+color:#9f9e9e
+}
+.searchCat select{
+width:117px;
+padding-left:5px;
+height:25px;
+margin:0 5px
+}
+.searchCat input,.searchCat select{
+-moz-border-radius:4px;
+-webkit-border:4px;
+border-radius:4px;
+}
+/**********************breadcrumbs*****************************/
+#BreadCrumb{
+padding:10px 20px 10px 20px;
+background-color:#fff;
+-moz-border-radius:5px 0 5px 0 ;
+-webkit-border:5px 0 5px 0;
+border-radius:5px 0 5px 0;
+border-bottom:1px solid #f5f5f5;
+float:left;
+margin-bottom:22px;
+color:#545456;
+font-size:15px
+}
+#BreadCrumb .breadDisc{
+background-position:-46px -145px;
+display:block;
+width:9px;
+height:9px;
+margin:3px 9px 0 0;
+overflow:hidden
+}
+#BreadCrumb a,#BreadCrumb span{float:left;display:inline-block}
+#BreadCrumb .breardArrow{
+background-position:-45px -156px;
+display:block;
+width:9px;
+height:12px;
+margin:2px 9px 0
+}
+/*******************container for right content*********************/
+.container {
+-moz-border-radius:5px 0 5px 5px ;
+-webkit-border:5px 0 5px 5px;
+border-radius:5px 0 5px 5px;
+background-color:#fff;
+overflow:hidden;
+color:#545456;
+}

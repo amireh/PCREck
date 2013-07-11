@@ -1,0 +1,13 @@
+POST / HTTP/1.1
+Host: localhost:9090
+Accept: */*
+Content-Type: application/xml
+Dakwak-APIKey: 4c320675d1748267bb0001274c320675d1748267bb000125
+Dakwak-ToLang: ar
+Dakwak-TID: 1
+Content-Length: 121
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<my_page>
+  <some_element><![CDATA[translate me]]></some_element>
+</my_page>

@@ -1,0 +1,38 @@
+/**
+** reset style values for the main html elemnet in whole site
+**/
+html {
+	direction:ltr;
+	overflow-x:hidden
+}
+body, textarea, input, select, td ,button{
+	font:normal 14px/14px "Trebuchet MS";
+	text-align:left;
+	direction:ltr;
+	color:#fff
+}
+textarea, input[type="text"]{color:#000}
+body{margin:0}
+body div, body p {word-wrap:break-word}
+h1, h2, h3, h4, h5, h6 , span{word-wrap: normal}
+*, ul, ol, body, h1, h2, h3, h4, h5, h6 {
+	padding:0;
+	margin:0
+}
+ul {list-style:none}
+ul  li,ol  li,span{direction:ltr}
+button{text-align:center}
+a {
+	color:#478b9b;
+	text-decoration:none
+}
+a:hover {
+text-decoration:underline;
+cursor:pointer
+}
+button:hover,input[type="submit"]:hover,input[type="button"]:hover{cursor:pointer}
+.right {float:right}
+.left {float:left}
+.clear {clear:both}
+.bold {font-weight:bold}
+.dBlock{display:block} 

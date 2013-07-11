@@ -1,0 +1,12 @@
+bin
+build
+log
+exclude
+dumps/
+data/
+lib/
+lib*.so
+bin/dakwak.cfg
+config/vhosts
+config
+test/*/html_resp.html

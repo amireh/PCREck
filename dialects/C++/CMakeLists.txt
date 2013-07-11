@@ -1,0 +1,36 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+IF(DEFINED CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "Choose the type of build, options are: None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.")
+ELSE()
+  SET(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build, options are: None(CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.")
+ENDIF()
+
+INCLUDE (CheckIncludeFileCXX)
+INCLUDE (CMakeDependentOption)
+
+PROJECT(PCREck)
+
+SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake ${CMAKE_SOURCE_DIR}/CMake/Modules ${CMAKE_MODULE_PATH})
+
+SET(libalgol_DIR /usr/local/lib/algol)
+FIND_PACKAGE(libalgol REQUIRED)
+
+ADD_DEFINITIONS("-std=c++0x -Wno-deprecated")
+
+# project version
+SET( ${PROJECT_NAME}_MAJOR_VERSION 0 )
+SET( ${PROJECT_NAME}_MINOR_VERSION 1 )
+SET( ${PROJECT_NAME}_BUILD_LEVEL 0 )
+
+INCLUDE_DIRECTORIES(include ${libalgol_INCLUDE_DIRS})
+
+LINK_LIBRARIES(${libalgol_LIBRARIES})
+
+# LINK_LIBRARIES()
+
+SET(LIBRARY_OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib")
+SET(EXECUTABLE_OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+
+ADD_SUBDIRECTORY(src)
+#ADD_SUBDIRECTORY(test/unit)

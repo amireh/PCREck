@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">I\'m Getting Stopped and Frisked</string>
+
+
+    <string name="main_warning" >NOT READY!\nCLICK HERE TO SETUP.</string>
+    <string name="main_instructions" >Long click to send alert.</string>
+    <string name="main_menu_nudge" >(Menu for Help and Setup)</string>
+
+    <string name="menu_setup" >Setup</string>
+    <string name="menu_help" >Help</string>
+
+    <string name="menu_location_on" >Update Location</string>   <!--  added since transtation -->
+    <string name="menu_location_off" >Disable Location</string>  <!--  added since transtation -->
+
+    <string name="button_cancel" >Cancel</string>
+
+
+    <string name="setup_enter_message" >Enter Message to SMS:</string>
+    <string name="setup_enter_numbers" >Enter SMS Numbers:</string>
+    <string name="setup_back_button_comment" >(Back Button Will Save)</string>
+
+    <string name="setup_enter_message_hint" >Enter text you want to broadcast. eg: My name is Jane Doe and I was just arrested for protesting with Occupy Wall Street</string>
+    <string name="setup_enter_number_hint" >Enter numbers you want to SMS to, separated by spaces. eg: 2125555555 3475555555</string>
+
+    <string name="sent_sent" >Messages Sent!</string>
+    <string name="sent_be_polite" >Be Polite</string>
+
+    <string name="help_url" >file:///android_asset/help.html</string>
+
+    <string name="broadcast_message_toast_prefix" >Message Sent to </string>
+    <string name="broadcast_error_msg" >Something went wrong sending your broadcast - this is likely because of a bad SMS number. Hopefully you were testing when this happened. Click Setup to change settings.</string>
+
+
+    <string name="button_contacts" >Get SMS Number from Address Book</string>
+
+</resources>
