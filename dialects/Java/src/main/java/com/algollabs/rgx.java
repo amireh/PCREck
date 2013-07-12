@@ -248,8 +248,6 @@ public class rgx implements Container {
       if (cli.hasOption("flags"))
         flags = cli.getOptionValue( "flags" );
 
-      System.out.println("Testing " + ptrn + " on " + subj);
-
       System.out.println(new Construct(ptrn, subj, flags, false).test());
     }
   }
@@ -304,7 +302,6 @@ public class rgx implements Container {
       raw_ptrn_ = in_ptrn.replace("\\\\", "\\");
       subj_     = in_subj;
       flags_    = in_flags;
-      System.out.println(subj_.toString());
     }
 
     /**
@@ -333,12 +330,12 @@ public class rgx implements Container {
 
         offset_ = new int[]{ m.start(0), m.end(0) };
 
-        System.out.println("Match boundaries: " + offset_[0] + "," + offset_[1]);
-        System.out.println("# of captures: " + nr_groups);
+        // System.out.println("Match boundaries: " + offset_[0] + "," + offset_[1]);
+        // System.out.println("# of captures: " + nr_groups);
 
         for (int i = 1; i <= nr_groups; ++i) {
           captures_.add(new Capture(m.start(i), m.group(i)));
-          System.out.println("Capture @" + m.start(i) + " => " + m.group(i) );
+          // System.out.println("Capture @" + m.start(i) + " => " + m.group(i) );
         }
 
         out = new ConstructMatchRC().serialize(this);
@@ -369,7 +366,7 @@ public class rgx implements Container {
           }
         }
 
-        System.out.println(String.format("Compiling %s", raw_ptrn_));
+        // System.out.println(String.format("Compiling %s", raw_ptrn_));
 
         return Pattern.compile(raw_ptrn_, flags);
       } catch (Exception e) {
