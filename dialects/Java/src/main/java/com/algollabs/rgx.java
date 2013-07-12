@@ -137,9 +137,9 @@ public class rgx implements Container {
         String      k = entry.getKey();
         JsonElement v = entry.getValue();
 
-        if (k.equals("pattern"))      { ptrn  = v.toString(); }
-        else if (k.equals("subject")) { subj  = v.toString(); }
-        else if (k.equals("flags"))   { flags = v.toString(); }
+        if (k.equals("pattern"))      { ptrn  = gson_.fromJson(v, String.class); }
+        else if (k.equals("subject")) { subj  = gson_.fromJson(v, String.class); }
+        else if (k.equals("flags"))   { flags = gson_.fromJson(v, String.class); }
         else {
           throw new UnrecognizedAttributeException(k);
         }
@@ -256,7 +256,7 @@ public class rgx implements Container {
 
   private static void printHelp() {
     HelpFormatter formatter = new HelpFormatter();
-    formatter.printHelp( "rgx:Java", options );
+    formatter.printHelp( "rgx", options );
   }
 
   private static final JsonParser parser_ = new JsonParser();
@@ -304,6 +304,7 @@ public class rgx implements Container {
       raw_ptrn_ = in_ptrn.replace("\\\\", "\\");
       subj_     = in_subj;
       flags_    = in_flags;
+      System.out.println(subj_.toString());
     }
 
     /**
@@ -322,9 +323,12 @@ public class rgx implements Container {
 
       System.out.println("Testing " + ptrn_.pattern() + " on " + subj_);
 
-      m = ptrn_.matcher(subj_);
+      m = ptrn_
+          .matcher(subj_)
+          .useAnchoringBounds(false)
+          .useTransparentBounds(false);
 
-      if (m.find()) {
+      if (m.find(0)) {
         int nr_groups = m.groupCount();
 
         offset_ = new int[]{ m.start(0), m.end(0) };
@@ -333,7 +337,7 @@ public class rgx implements Container {
         System.out.println("# of captures: " + nr_groups);
 
         for (int i = 1; i <= nr_groups; ++i) {
-          captures_.add(new Capture(m.start(i) - 1, m.group(i)));
+          captures_.add(new Capture(m.start(i), m.group(i)));
           System.out.println("Capture @" + m.start(i) + " => " + m.group(i) );
         }
 
