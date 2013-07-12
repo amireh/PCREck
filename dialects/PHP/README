@@ -1,0 +1,7 @@
+PHP dialect engine for rgx.
+
+Requires PHP 5.4+.
+
+To run, use the PHP built-in webserver (or configure a web server):
+
+`php -S localhost:9400 -t www www/index.php`
