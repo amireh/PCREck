@@ -15,8 +15,8 @@
  * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_rgx_EXCEPTION_H
-#define H_rgx_EXCEPTION_H
+#ifndef H_RGX_EXCEPTION_H
+#define H_RGX_EXCEPTION_H
 
 #include <exception>
 #include <string>

@@ -15,8 +15,8 @@
  * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_rgx_REQUEST_HANDLER_H
-#define H_rgx_REQUEST_HANDLER_H
+#ifndef H_RGX_REQUEST_HANDLER_H
+#define H_RGX_REQUEST_HANDLER_H
 
 #include <algol/http/request.hpp>
 #include <algol/http/reply.hpp>

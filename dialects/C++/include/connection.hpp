@@ -15,8 +15,8 @@
  * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_rgx_CONNECTION_H
-#define H_rgx_CONNECTION_H
+#ifndef H_RGX_CONNECTION_H
+#define H_RGX_CONNECTION_H
 
 #include <vector>
 #include <iostream>

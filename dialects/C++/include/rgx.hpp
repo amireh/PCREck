@@ -15,8 +15,8 @@
  * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_rgx_H
-#define H_rgx_H
+#ifndef H_RGX_H
+#define H_RGX_H
 
 #include "exception.hpp"
 

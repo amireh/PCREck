@@ -15,8 +15,8 @@
  * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_rgx_KERNEL_H
-#define H_rgx_KERNEL_H
+#ifndef H_RGX_KERNEL_H
+#define H_RGX_KERNEL_H
 
 #include <string>
 #include <vector>
@@ -158,4 +158,4 @@ namespace rgx {
 
 } // namespace rgx
 
-#endif // H_rgx_KERNEL_H
+#endif // H_RGX_KERNEL_H

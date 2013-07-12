@@ -15,8 +15,8 @@
  * along with rgx. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef H_rgx_REQUEST_PARSER_H
-#define H_rgx_REQUEST_PARSER_H
+#ifndef H_RGX_REQUEST_PARSER_H
+#define H_RGX_REQUEST_PARSER_H
 
 #include <boost/logic/tribool.hpp>
 #include <boost/tuple/tuple.hpp>
