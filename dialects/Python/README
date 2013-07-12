@@ -1,0 +1,10 @@
+This is the Python dialect engine for rgx. The script works using both Python 2.7
+and Python 3.1+ interpreters.
+
+Dependencies:
+
+  * bottle (easy_install bottle)
+
+Run the script with -h for usage, or:
+
+`python ./rgx.py 127.0.0.1 9400`
