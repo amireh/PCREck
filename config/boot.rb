@@ -6,18 +6,19 @@ $LOAD_PATH << $ROOT
 require 'rubygems'
 require 'bundler/setup'
 require 'base64'
+require 'net/http'
 
 Bundler.require(:default)
 
 configure do
   require 'lib/version'
 
-  puts "---- rgx #{rgx::VERSION} ----"
+  puts "---- rgx #{Rgx::VERSION} ----"
   puts ">> Booting..."
 
   # --------------------------------------------------------
   # Validate that configuration files exist and are readable
-  config_files = [ 'database' ]
+  config_files = [ 'database', 'dialects' ]
   config_files.each { |config_file|
     unless File.exists?(File.join($ROOT, 'config', "%s.yml" %[config_file] ))
       raise "Missing required config file: config/%s.yml" %[config_file]
@@ -27,9 +28,12 @@ configure do
   # --------------------------------------------------------
 
   set :root, $ROOT
+  set :server, :thin
 
-  @@engines = {}
-  @@dialects = []
+  # @@engines = {}
+  # @@dialects = []
+
+  @@dialects = settings.dialects.keys
 
   def log(msg)
     if settings.development? then
@@ -37,14 +41,14 @@ configure do
     end
   end
 
-  def register_engine(e)
-    @@engines[e.dialect] = e
-    @@dialects << e.dialect
-  end
+  # def register_engine(e)
+  #   @@engines[e.dialect] = e
+  #   @@dialects << e.dialect
+  # end
 
-  log "Loading engines"
-  require 'lib/engine'
-  Dir.glob("#{$ROOT}/lib/**/*.rb").each { |e| require e }
+  # log "Loading engines"
+  # require 'lib/engine'
+  # Dir.glob("#{$ROOT}/lib/**/*.rb").each { |e| require e }
 
   class Permalink
     include DataMapper::Resource
@@ -110,6 +114,33 @@ def show_dialect(dialect, mode)
   })
 
   erb :"modes/#{mode}"
+end
+
+get '/dialects' do
+  settings.dialects.keys.to_json
+end
+
+get '/status', provides: [ :json ] do
+  status = {}
+
+  @@dialects.each do |dialect|
+    status[dialect] = false
+
+    endpoint = URI.parse(settings.dialects[dialect])
+    req = Net::HTTP.new(endpoint.host, endpoint.port)
+    req.open_timeout = 0.25
+    req.read_timeout = 1
+
+    begin
+      req.get(endpoint.request_uri || '/')
+      status[dialect] = true
+    rescue Exception => e
+    end
+  end
+
+  respond_with status do |f|
+    f.json { status.to_json }
+  end
 end
 
 [ '/:dialect', '/:dialect/advanced' ].each { |r|

@@ -1,4 +1,4 @@
-module rgx
+module Rgx
   class Engine
     attr_reader :dialect
     attr_reader :options # the options the engine supports

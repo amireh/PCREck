@@ -70,7 +70,7 @@ namespace rgx {
 
   void kernel::configure(const string_t& json_data)
   {
-    log_->infoStream() << "Configuring.";
+    info() << "Configuring.";
 
     string_t data = json_data;
     if (data.empty()) {
@@ -97,7 +97,7 @@ namespace rgx {
   {
     algol::path_t root = file_manager::singleton().root_path();
 
-    log_->infoStream() << "binding at: " << config_.listen_interface << ":" << config_.port;
+    info() << "binding at: " << config_.listen_interface << ":" << config_.port;
 
     init_ = true;
 
@@ -117,7 +117,7 @@ namespace rgx {
     }
 
     if (lua_engine_.start((root / "../rgx_helpers.lua").string())) {
-      lua_engine_.invoke("rgx_export", 0);
+      lua_engine_.invoke("rgx_export", 0, 0);
       lua_engine_.run((root / "../PCRE/" / "rgx.lua").string());
       lua_engine_.run((root / "../Lua/" / "rgx.lua").string());
     }
@@ -125,9 +125,9 @@ namespace rgx {
     for (std::size_t i = 0; i < config_.nr_workers; ++i)
       workers_.create_thread(boost::bind(&kernel::work, boost::ref(this)));
 
-    log_->infoStream() << "rgx running:";
-    log_->infoStream() << "\taccepting connections on " << config_.nr_workers << " threads";
-    log_->infoStream() << "\tconnections will time out every " << connection::get_timeout() << "s";
+    info() << "rgx running:";
+    info() << "\taccepting connections on " << config_.nr_workers << " threads";
+    info() << "\tconnections will time out every " << connection::get_timeout() << "s";
 
     running_ = true;
 
@@ -138,13 +138,13 @@ namespace rgx {
   void kernel::cleanup()
   {
     if (!init_) {
-      log_->errorStream()
+      error()
         << "WARNING: attempting to clean up the kernel when it has "
         << "already been cleaned, or not run at all!";
       return;
     }
 
-    log_->infoStream() << "cleaning up";
+    info() << "cleaning up";
 
     new_connection_.reset();
     paused_connections_.clear();
@@ -159,23 +159,23 @@ namespace rgx {
     try {
       io_service_.run();
     } catch (std::exception& e) {
-      log_->errorStream() << "an exception caught in a worker, aborting: " << e.what();
+      error() << "an exception caught in a worker, aborting: " << e.what();
       throw e;
     }
   }
 
   void kernel::stop() {
     if (!is_running()) {
-      log_->errorStream()
+      error()
         << "WARNING: attempting to stop the kernel when it's not running!";
 
       if (init_)
-        log_->warnStream() << "received stop() command when I'm already offline";
+        warn() << "received stop() command when I'm already offline";
 
       return;
     }
 
-    log_->infoStream() << "shutting down gracefully, waiting for current jobs to finish, please wait";
+    info() << "shutting down gracefully, waiting for current jobs to finish, please wait";
 
     for (connection_ptr conn : connections_)
       conn->stop();
@@ -185,14 +185,14 @@ namespace rgx {
 
     io_service_.stop();
 
-    log_->infoStream() << "stopped";
+    info() << "stopped";
     running_ = false;
   }
 
   void kernel::pause(pause_callback_t cb) {
     // Locking the connection mutex is necessary since the acceptor
     // routine is affected by the paused_ flag which is toggled here
-    log_->infoStream() << "Pausing...";
+    info() << "Pausing...";
     {
       scoped_lock lock(conn_mtx_);
 
@@ -206,7 +206,7 @@ namespace rgx {
 
   void kernel::on_paused() {
     // Invoke the callback if any, otherwise resume()
-    log_->infoStream() << "Paused.";
+    info() << "Paused.";
 
     if (pause_cb_)
       return pause_cb_();
@@ -217,7 +217,7 @@ namespace rgx {
   void kernel::resume() {
     scoped_lock lock(conn_mtx_);
 
-    log_->infoStream() << "Resuming...";
+    info() << "Resuming...";
 
     paused_ = false;
 
@@ -228,7 +228,7 @@ namespace rgx {
 
     paused_connections_.clear();
 
-    log_->infoStream() << "Resumed.";
+    info() << "Resumed.";
   }
 
 	/* +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ *
@@ -260,7 +260,7 @@ namespace rgx {
       // no matter whether we're paused or not, we still accept new connections
       accept();
     } else {
-      log_->errorStream() << "couldn't accept connection! " << e;
+      error() << "couldn't accept connection! " << e;
       throw std::runtime_error("unable to accept connection, see log for more info");
     }
   }
@@ -295,14 +295,14 @@ namespace rgx {
     else if (key == "connection timeout" || key == "timeout" || key == "conn_timeout") {
       timespec ts;
       if (!utility::string_to_seconds(value, &ts)) {
-        log_->errorStream() << "invalid time value for 'connection timeout' => '" << value << "', defaulting to 5s";
+        error() << "invalid time value for 'connection timeout' => '" << value << "', defaulting to 5s";
         ts.tv_sec = 5;
       }
 
       connection::set_timeout(ts.tv_sec);
     }
     else {
-      log_->warnStream() << "unknown rgx config setting '"
+      warn() << "unknown rgx config setting '"
         << key << "' => '" << value << "', discarding";
     }
   }

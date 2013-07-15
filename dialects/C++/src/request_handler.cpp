@@ -67,7 +67,7 @@ namespace rgx {
         mode = MODE_CPP;
       }
 
-      log_->infoStream() << "\tcalling lua engine...";
+      info() << "\tcalling lua engine...";
       // start_timer();
       timer.start();
 
@@ -77,13 +77,13 @@ namespace rgx {
             lua_engine_.invoke("rgx.Lua.flags", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
               lua_remove(lua, lua_gettop(lua));
-            }, 1, "std::string", &req_.body);
+            }, 1, 1, "std::string", &req_.body);
           break;
           case MODE_PCRE:
             lua_engine_.invoke("rgx.PCRE.flags", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
               lua_remove(lua, lua_gettop(lua));
-            }, 1, "std::string", &req_.body);
+            }, 1, 1, "std::string", &req_.body);
           break;
           case MODE_CPP:
           break;
@@ -95,13 +95,13 @@ namespace rgx {
             lua_engine_.invoke("rgx.Lua.test", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
               lua_remove(lua, lua_gettop(lua));
-            }, 1, "std::string", &req_.body);
+            }, 1, 1, "std::string", &req_.body);
           break;
           case MODE_PCRE:
             lua_engine_.invoke("rgx.PCRE.test", [&](lua_State* lua) -> void {
               rep_.body = string_t(lua_tostring(lua, lua_gettop(lua)));
               lua_remove(lua, lua_gettop(lua));
-            }, 1, "std::string", &req_.body);
+            }, 1, 1, "std::string", &req_.body);
           break;
           case MODE_CPP:
           break;
@@ -110,19 +110,19 @@ namespace rgx {
 
       // stop_timer();
       timer.stop();
-      log_->infoStream() << "\tcalling lua engine took: " << timer.elapsed << "ms";
+      info() << "\tcalling lua engine took: " << timer.elapsed << "ms";
     }
 
     // update the CLength header with the new body's size
     rep_.get_header("Content-Length").value = utility::stringify(rep_.body.size());
     rep_.get_header("Content-Type").value = "application/json; charset=utf-8";
 
-    log_->infoStream() << "\tdone!";
+    info() << "\tdone!";
     return true;
   }
 
   void request_handler::on_uuid_set() {
-    logger::assign_uuid(get_uuid());
+    logger::set_uuid_prefix(this);
   }
 
 } // end of namespace dakwak

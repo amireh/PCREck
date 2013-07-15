@@ -20,7 +20,7 @@ package.cpath = '/usr/local/lib/?.so;' .. package.cpath
 
 local json = require 'dkjson'
 local algol = require 'lua_algol'
-local logger = algol.logger("Lua"):log()
+local logger = algol.logger("Lua")
 
 local rgx;
 local ilist;

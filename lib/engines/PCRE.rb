@@ -1,4 +1,4 @@
-module rgx
+module Rgx
   class PCRE < Engine
     def script
       'rgx.lua'

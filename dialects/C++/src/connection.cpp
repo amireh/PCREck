@@ -48,13 +48,13 @@ namespace rgx {
   {
     outbound_.status = reply::status_type::ok;
 
-    log_->debugStream() << "created";
+    debug() << "created";
   }
 
   connection::~connection() {
     parser_.cleanup();
 
-    log_->debugStream() << "destroyed";
+    debug() << "destroyed";
   }
 
   void connection::assign_close_handler(close_handler_t handler) {
@@ -74,7 +74,7 @@ namespace rgx {
 
     longevity_timer_.start();
 
-    // log_->debugStream() << "listening";
+    // debug() << "listening";
   }
 
   void connection::stop() {
@@ -88,12 +88,12 @@ namespace rgx {
       socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
       socket_.close(ignored_ec);
     } catch (std::exception& e) {
-      log_->errorStream() << "bad socket; couldn't close cleanly";
+      error() << "bad socket; couldn't close cleanly";
     }
 
     longevity_timer_.stop();
 
-    log_->debugStream() << "closed (elapsed: "
+    debug() << "closed (elapsed: "
       << longevity_timer_.elapsed << "ms)";
 
     if (close_handler_) {
@@ -114,7 +114,7 @@ namespace rgx {
     if (ec)
       return;
 
-    log_->warnStream() << "client stream has timed out while waiting for content, closing connection";
+    warn() << "client stream has timed out while waiting for content, closing connection";
     return stop();
   }
 
@@ -145,13 +145,13 @@ namespace rgx {
     boost::tribool result;
     std::string trailer;
 
-    // log_->debugStream() << "received " << bytes_transferred << " bytes";
+    // debug() << "received " << bytes_transferred << " bytes";
     result = parser_.parse_header(headbuf_.data(), headbuf_.data() + bytes_transferred, trailer);
 
     // parser failed processing the header for some reason
     if (!result)
     {
-      log_->debugStream() << "invalid request header, rejecting";
+      debug() << "invalid request header, rejecting";
       return reject(reply::bad_request);
     }
 
@@ -170,24 +170,24 @@ namespace rgx {
       switch(inbound_.status)
       {
         case request::status_t::invalid_method:
-          log_->errorStream() << "request has a non-supported method '" << inbound_ << "', aborting";
+          error() << "request has a non-supported method '" << inbound_ << "', aborting";
           t = reply::not_implemented;
         break;
         case request::status_t::invalid_format:
-          log_->errorStream() << "request has a non-supported format '" << inbound_.format_str << "', aborting";
+          error() << "request has a non-supported format '" << inbound_.format_str << "', aborting";
           t = reply::not_implemented;
         break;
         case request::status_t::missing_length:
-          log_->infoStream()
+          info()
           << "request does not specify a Content-Length, can not attempt indeterminate body reading, aborting";
           t = reply::bad_request;
         break;
         case request::status_t::invalid_length:
-        log_->errorStream() << "request has 0 Content-Length, aborting";
+        error() << "request has 0 Content-Length, aborting";
           t = reply::bad_request;
         break;
         default:
-          log_->errorStream() << "unknown request status: " << (int)inbound_.status << ", investigate!";
+          error() << "unknown request status: " << (int)inbound_.status << ", investigate!";
           t = reply::internal_server_error;
       }
 
@@ -195,7 +195,7 @@ namespace rgx {
     }
 
     // set up the UUID logging
-    __set_uuid(inbound_.uuid);
+    // __set_uuid(inbound_.uuid);
 
     handler_.init();
 
@@ -206,7 +206,7 @@ namespace rgx {
       std::istringstream buf(trailer);
       buf.read(bodybuf_.data(), trailing_bytes);
 
-      log_->debugStream()
+      debug()
         << "there are " << trailing_bytes << "bytes of trailing data"
         << " and req clength is " << inbound_.content_length << "b";
 
@@ -272,14 +272,14 @@ namespace rgx {
   {
     reading_timer_.stop();
 
-    log_->infoStream() << "body read in " << reading_timer_.elapsed << "ms";
+    info() << "body read in " << reading_timer_.elapsed << "ms";
 
     // trim the request's body
     utility::full_trimi(inbound_.body);
 
     // handle the request, prepare the reply
     if (!handler_.handle()) {
-      log_->infoStream() << "request content was not read successfully, aborting";
+      info() << "request content was not read successfully, aborting";
       return reject(reply::internal_server_error);
     }
 
@@ -299,18 +299,18 @@ namespace rgx {
   {
     if (!e) {
       string_t status = status_strings::to_string(outbound_.status);
-      log_->debugStream()
+      debug()
         << "reply sent successfully, status => "
         << status.substr(0, status.size()-2); // strip out the trailing \r\n
     } else {
-      log_->errorStream() << "reply could not be sent! boost ec: '" << e << "', aborting";
+      error() << "reply could not be sent! boost ec: '" << e << "', aborting";
     }
 
     stop();
   }
 
   void connection::on_uuid_set() {
-    logger::assign_uuid(get_uuid());
+    // logger::set_uuid_prefix(this);
   }
 
 } // namespace rgx

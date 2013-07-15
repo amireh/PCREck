@@ -280,12 +280,12 @@ namespace rgx {
             req.content_length = utility::convertTo<int>(req.headers.back().value);
           } catch (bad_conversion& e)
           {
-            log_->warnStream() << "unable to parse content-length: '" << req.headers.back().value << "'";
+            warn() << "unable to parse content-length: '" << req.headers.back().value << "'";
             req.has_content_length = false;
           }
           parsing_content_length_ = false;
 
-          // log_->debugStream() << "got content-length: " << (int)req.content_length;
+          // debug() << "got content-length: " << (int)req.content_length;
         }
 
         state_ = expecting_newline_2;

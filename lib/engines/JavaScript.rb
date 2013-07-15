@@ -1,4 +1,4 @@
-module rgx
+module Rgx
   class JavaScript < Engine
     def script
       'rgx.js'

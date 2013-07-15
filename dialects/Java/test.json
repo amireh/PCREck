@@ -1,5 +1,0 @@
-{
-  "pattern": "\\s*(\\w+) b(\\w{2,})",
-  "subject": " foo bar",
-  "flags": "DOTALL, UNIXLINES"
-}

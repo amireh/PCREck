@@ -1,0 +1,10 @@
+dialects:
+  C++:        "http://localhost:9400"
+  Lua:        "http://localhost:9400/lua"
+  PCRE:       "http://localhost:9400/PCRE"
+  Java:       "http://localhost:9401"
+  Perl:       "http://localhost:9402"
+  JavaScript: "http://localhost:9403"
+  Ruby:       "http://localhost:9404"
+  PHP:        "http://localhost:9405"
+  Python:     "http://localhost:9406"

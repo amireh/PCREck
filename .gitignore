@@ -10,3 +10,4 @@ vendor
 [transients]
 dialects/Java/*.class
 dialects/Java/target/
+www/assets/compiled
