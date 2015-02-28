@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+export NODE_ENV=production
+
+./node_modules/webpack/bin/webpack.js --progress
+
+FILESIZE=$(ls -s www/index.js | cut -d' ' -f1)
+
+echo "Build complete. Assets filesize is ${FILESIZE}"

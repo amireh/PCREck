@@ -1,13 +1,14 @@
 public/css/fonts/*
 
-[config]
+# config
 config/database.yml
 
-[assets]
+# assets
 *.zip
 vendor
 
-[transients]
+# env
+/node_modules
+/npm-debug.log
 dialects/Java/*.class
 dialects/Java/target/
-www/assets/compiled
