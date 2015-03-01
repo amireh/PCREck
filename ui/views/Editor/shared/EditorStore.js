@@ -4,8 +4,8 @@ var subjectUUID = 0;
 class EditorStore extends Store {
   getInitialState() {
     return {
-      pattern: '',
-      subjects: [],
+      pattern: 'foo(bar)',
+      subjects: [{ id: 's0011', position: 1, text: 'foobarzoo' }],
       flags: []
     };
   }

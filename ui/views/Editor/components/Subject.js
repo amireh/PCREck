@@ -12,7 +12,7 @@ var Subject = React.createClass({
     result: shape({
       status: string,
       offset: array,
-      captures: arrayOf(string)
+      captures: arrayOf(arrayOf(number))
     })
   },
 
@@ -22,7 +22,8 @@ var Subject = React.createClass({
     return(
       <div>
         <HighlightedInput
-          range={result.status === RC_MATCH ? result.offset : undefined}
+          match={result.status === RC_MATCH ? result.offset : undefined}
+          captures={result.status === RC_MATCH ? result.captures : undefined}
           value={this.props.text}
           onChange={this.props.onChange}
         />

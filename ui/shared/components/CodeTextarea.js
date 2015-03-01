@@ -1,13 +1,14 @@
-var React = require("react");
+var React = require('react');
 var CodeMirror = require('codemirror');
-var modeHtmlMixed = require('codemirror/mode/htmlmixed/htmlmixed');
 var { extend } = require('lodash');
+require('codemirror/mode/ruby/ruby');
 
 var DEFAULTS = {
+  mode: 'ruby'
 };
 
 var CodeTextarea = React.createClass({
-  displayName: "CodeTextarea",
+  displayName: 'CodeTextarea',
 
   componentDidMount: function() {
     this.cm = CodeMirror.fromTextArea(

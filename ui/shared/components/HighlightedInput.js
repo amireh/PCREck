@@ -2,12 +2,23 @@ var React = require("react");
 var CodeMirror = require('codemirror');
 var modeHtmlMixed = require('codemirror/mode/htmlmixed/htmlmixed');
 
-var HIGHLIGHT_OPTIONS = {
+var MATCH_HIGHLIGHT_OPTIONS = {
   className: 'highlighted-input__match'
+};
+
+var CAPTURE_HIGHLIGHT_OPTIONS = {
+  className: 'highlighted-input__capture'
 };
 
 var HighlightedInput = React.createClass({
   displayName: "HighlightedInput",
+
+  getDefaultProps: function() {
+    return {
+      match: undefined,
+      captures: [],
+    };
+  },
 
   componentDidMount: function() {
     this.cm = CodeMirror.fromTextArea(this.refs.inputWidget.getDOMNode(), {
@@ -23,18 +34,25 @@ var HighlightedInput = React.createClass({
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    var { range } = this.props;
+    var { cm } = this;
+    var { match, captures } = this.props;
+    var highlight = function(range, opts) {
+      // console.log('highlighting [%o,%o] with %s', cm.posFromIndex(range[0]-1), cm.posFromIndex(range[1]), opts.className);
+      cm.markText(cm.posFromIndex(range[0]), cm.posFromIndex(range[1]+1), opts);
+    };
 
-    this.cm.getAllMarks().forEach(function(mark) {
+    cm.getAllMarks().forEach(function(mark) {
       mark.clear();
     });
 
-    if (range) {
-      this.cm.markText(
-        this.cm.posFromIndex(range[0]),
-        this.cm.posFromIndex(range[1]+1),
-        HIGHLIGHT_OPTIONS
-      );
+    if (match) {
+      highlight(match, MATCH_HIGHLIGHT_OPTIONS);
+    }
+
+    if (captures) {
+      captures.forEach(function(capture) {
+        highlight(capture, CAPTURE_HIGHLIGHT_OPTIONS);
+      });
     }
   },
 

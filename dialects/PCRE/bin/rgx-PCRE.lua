@@ -39,16 +39,7 @@ local function matcher(raw_pattern, subject, flags)
     return nil, "invalid regular expression; " .. rex_or_msg
   end
 
-  -- local match = { rex_pcre:find(subject, rex_or_msg) }
-  local match = { rex_or_msg:tfind(subject) }
-
-  -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
-  if match[1] then
-    match[1] = match[1] - 1
-    match[2] = match[2] - 1
-  end
-
-  return match
+  return { rex_or_msg:exec(subject) }
 end
 
 local flags = {
@@ -82,10 +73,23 @@ local function onInput(json_construct)
   end
 
   if #result > 0 then
+    captures = {}
+    offset = {}
+
+    -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
+    if result[1] then
+      offset = { result[1]-1, result[2]-1 }
+    end
+
+    -- map the captures as [b,e] offset arrays
+    for i=1,#result[3],2 do
+      table.insert(captures, { result[3][i]-1, result[3][i+1]-1 })
+    end
+
     return {
       status = "RC_MATCH",
-      offset = { result[1], result[2] },
-      captures = result[3]
+      offset = offset,
+      captures = captures
     }
   else
     return { status = "RC_NOMATCH" }
