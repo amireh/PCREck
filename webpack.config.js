@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
     rgxConfig.WEBPACK_DEVSERVER_PORT
   );
 
-  config.entry.index.unshift("webpack/hot/dev-server");
+  config.entry.index.unshift("webpack/hot/only-dev-server");
   config.entry.index.unshift('webpack-dev-server/client?' + devServerPath);
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
 }

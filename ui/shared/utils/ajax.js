@@ -53,5 +53,5 @@ module.exports = function(options, onSuccess, onError) {
     });
   }
 
-  xhr.send(JSON.stringify(data));
+  xhr.send(data);
 };
