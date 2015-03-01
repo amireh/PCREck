@@ -1,6 +1,7 @@
 var path = require("path");
 var webpack = require("webpack");
 var commonConfig = require("./webpack/common");
+var rgxConfig = require('./config');
 var nodeEnv = process.env.NODE_ENV || 'development';
 var config = {
   plugins: [],
@@ -27,8 +28,14 @@ config.entry.index = [
 ];
 
 if (process.env.NODE_ENV === "development") {
+  var devServerPath = (
+    'http://' +
+    rgxConfig.WEBPACK_DEVSERVER_HOST + ':' +
+    rgxConfig.WEBPACK_DEVSERVER_PORT
+  );
+
   config.entry.index.unshift("webpack/hot/dev-server");
-  config.entry.index.unshift('webpack-dev-server/client?http://localhost:8943');
+  config.entry.index.unshift('webpack-dev-server/client?' + devServerPath);
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 

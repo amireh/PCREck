@@ -1,0 +1,17 @@
+{
+  "esnext": true,
+  "undef": true,
+  "trailing": false,
+  "unused": true,
+  "indent": 2,
+  "curly": false,
+  "expr": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "browser": true,
+  "node": true,
+  "quotmark": false,
+  "validthis": true,
+  "globals": {
+  }
+}
