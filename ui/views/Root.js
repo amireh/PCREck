@@ -26,11 +26,13 @@ var Root = React.createClass({
 
   render() {
     return (
-      <RouteHandler
-        onChange={this.reload}
-        config={getConfig()}
-        {...this.props}
-      />
+      <div className="app-container">
+        <RouteHandler
+          onChange={this.reload}
+          config={getConfig()}
+          {...this.props}
+        />
+      </div>
     );
   },
 

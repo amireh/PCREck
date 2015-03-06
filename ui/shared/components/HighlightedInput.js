@@ -27,6 +27,8 @@ var HighlightedInput = React.createClass({
     this.cm.on('change', () => {
       this.props.onChange(this.cm.getValue());
     });
+
+    this.highlight();
   },
 
   componentWillUnmount: function() {
@@ -34,6 +36,22 @@ var HighlightedInput = React.createClass({
   },
 
   componentDidUpdate: function(prevProps, prevState) {
+    this.highlight();
+  },
+
+  render() {
+    return(
+      <div className="highlighted-input">
+        <textarea
+          ref="inputWidget"
+          value={this.props.value}
+          readOnly
+        />
+      </div>
+    );
+  },
+
+  highlight: function() {
     var { cm } = this;
     var { match, captures } = this.props;
     var highlight = function(range, opts) {
@@ -54,18 +72,6 @@ var HighlightedInput = React.createClass({
         highlight(capture, CAPTURE_HIGHLIGHT_OPTIONS);
       });
     }
-  },
-
-  render() {
-    return(
-      <div className="highlighted-input">
-        <textarea
-          ref="inputWidget"
-          value={this.props.value}
-          readOnly
-        />
-      </div>
-    );
   }
 });
 

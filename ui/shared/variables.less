@@ -5,18 +5,20 @@
 @green: #008000;
 
 // <jenking>
-@bg: #000000;
+@bg: #222222;
 @fg: #c0c0c0;
+// @bg: rgb(0, 0, 170);
+// @fg: rgb(170, 170, 170);
 @hover-bg: inherit;
 @hover-fg: #00ff00;
 @active-bg: @hover-bg;
 @active-fg: @hover-fg;
-@border-bg: @fg;
+@border-bg: lighten(@bg, 10%);
 @link-fg: #008080;
 @link-focus: #00ffff;
 @td-bg: #272822;
-@font: Monaco, monospace, "Ubuntu Mono";
-@font-size: 12px;
+@font: Arial, Monaco, monospace, "Ubuntu Mono";
+@font-size: 15px;
 // </jenking>
 
 // <light>
@@ -37,8 +39,8 @@
 // </light>
 
 // <monokai>
-// @bg: #333;
-// @fg: #ddd;
+// @bg: lighten(#272822, 5%);
+// @fg: #f8f8f2;
 // @link-fg: #008080;
 // @link-focus: #00ffff;
 // @hover-bg: inherit;

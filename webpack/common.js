@@ -9,7 +9,10 @@ var baseConfig = {
     modulesDirectories: [
       "shared",
       "node_modules"
-    ]
+    ],
+    alias: {
+      "dialects": path.resolve(__dirname, "../dialects")
+    }
   },
 
   module: {

@@ -23,9 +23,11 @@ var Editor = React.createClass({
     return(
       <div>
         <EditorView
+          dialect={editorStore.getDialect()}
           pattern={editorStore.getPattern()}
           subjects={editorStore.getSubjects()}
           flags={editorStore.getFlags()}
+          availableFlags={editorStore.getAvailableFlags()}
           results={resultStore.getAll()}
         />
       </div>

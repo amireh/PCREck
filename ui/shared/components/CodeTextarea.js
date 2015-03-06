@@ -1,23 +1,28 @@
 var React = require('react');
 var CodeMirror = require('codemirror');
-var { extend } = require('lodash');
-require('codemirror/mode/ruby/ruby');
-
-var DEFAULTS = {
-  mode: 'ruby'
-};
+var { string, func, object } = React.PropTypes;
 
 var CodeTextarea = React.createClass({
   displayName: 'CodeTextarea',
 
+  propTypes: {
+    className: string,
+    onChange: func.isRequired,
+    value: string,
+    placeholder: string,
+    options: object
+  },
+
   componentDidMount: function() {
     this.cm = CodeMirror.fromTextArea(
       this.refs.inputWidget.getDOMNode(),
-      extend({}, DEFAULTS, this.props.options)
+      this.props.options
     );
 
     this.cm.on('change', () => {
-      this.props.onChange(this.cm.getValue());
+      if (!this.cm.isClean() && this.cm.getValue() !== this.props.value) {
+        this.props.onChange(this.cm.getValue());
+      }
     });
   },
 
@@ -25,12 +30,22 @@ var CodeTextarea = React.createClass({
     this.cm = null;
   },
 
+  componentDidUpdate: function(prevProps, prevState) {
+    if (this.props.value !== this.cm.getValue()) {
+      this.cm.setValue(this.props.value);
+      this.cm.markClean();
+    }
+  },
+
   render() {
+    var className = `${this.props.className || ''} code-textarea`;
+
     return(
-      <div className="highlighted-input">
+      <div className={className}>
         <textarea
           ref="inputWidget"
           value={this.props.value}
+          placeholder={this.props.placeholder}
           readOnly
         />
       </div>

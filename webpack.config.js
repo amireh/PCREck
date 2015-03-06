@@ -17,7 +17,8 @@ var config = {
 
 config.plugins.push(
   new webpack.DefinePlugin({
-    "process.env.NODE_ENV": JSON.stringify(nodeEnv)
+    "process.env.NODE_ENV": JSON.stringify(nodeEnv),
+    "process.env.APP_ROOT": path.resolve(__dirname)
   })
 );
 

@@ -1,7 +1,30 @@
 @import "~variables";
-@import "./css/skin-8bit";
+// @import "./css/skin-8bit";
+@import "./css/skin-flat";
 @import "~codemirror/lib/codemirror.css";
 // @import "~codemirror/theme/neo.css";
+@import "./css/editor";
+
+.CodeMirror {
+  font-family: monospace;
+  font-size: 12px;
+
+  // border: 5px solid @border-bg;
+  background: lighten(@bg, 5%);
+  color: @fg;
+  padding: @line-height / 4;
+}
+
+.CodeMirror-cursor { border-left: 1px solid @fg !important; }
+
+.CodeMirror-empty {
+  color: lighten(@bg, 20%) !important;
+}
+
+.app-container {
+  width: 960px;
+  margin: 0 auto;
+}
 
 .highlighted-input {
   &__match {
@@ -15,4 +38,46 @@
   .CodeMirror {
     height: auto;
   }
+}
+
+
+.v-tabbed-panel {
+  &__tabs {
+    width: 25%;
+  }
+
+  &__tab {
+    cursor: pointer;
+  }
+
+  &__content {
+    width: 70%;
+    margin-right: 5%;
+  }
+
+  &__content, &__tabs {
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+.type-ellipsify {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  resize: none;
+  display: inline-block;
+}
+
+.type-strong {
+  font-weight: bold;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: middle;
 }

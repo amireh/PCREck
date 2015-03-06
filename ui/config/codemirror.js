@@ -1,8 +1,9 @@
 var CodeMirror = require('codemirror');
-var theme = 'midnight';
+// var theme = 'zenburn';
 
-require('style!css!codemirror/theme/' + theme + '.css');
+require('codemirror/addon/display/placeholder');
+// require('style!css!codemirror/theme/' + theme + '.css');
 
-CodeMirror.defaults.theme = theme;
+// CodeMirror.defaults.theme = theme;
 CodeMirror.defaults.lineNumbers = false;
 CodeMirror.defaults.dragDrop = false;

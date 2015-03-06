@@ -1,10 +1,9 @@
-require('./index.less');
-
 var React = require('react');
 var Router = require('react-router');
 var Root = require('./views/Root.js');
 
 require('./config/codemirror');
+require('./index.less');
 
 var { Route, DefaultRoute, NotFoundRoute, HashLocation } = Router;
 

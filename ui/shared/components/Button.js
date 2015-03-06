@@ -22,6 +22,7 @@ var Button = React.createClass({
     className['btn-default'] = type === 'default';
     className['btn-danger'] = type === 'danger';
     className['btn-success'] = type === 'success';
+    className[this.props.className] = !!this.props.className;
 
     return(
       <button

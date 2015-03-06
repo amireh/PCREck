@@ -14,6 +14,11 @@ exports.updatePattern = function(pattern) {
   debouncedSubmit();
 };
 
+exports.updateFlags = function(flags) {
+  editorStore.setFlags(flags);
+  debouncedSubmit();
+};
+
 exports.addSubject = function() {
   editorStore.addSubject();
 };
