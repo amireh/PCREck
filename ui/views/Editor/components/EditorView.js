@@ -9,6 +9,7 @@ var ResultEmblem = require('./ResultEmblem');
 var Actions = require('Actions');
 var EllipsifedText = require('components/EllipsifedText');
 var { findWhere, pluck } = require('lodash');
+var K = require('constants');
 
 var EditorView = React.createClass({
   displayName: "EditorView",
@@ -32,6 +33,9 @@ var EditorView = React.createClass({
 
   render() {
     var availableFlagNames = pluck(this.props.availableFlags, 'name').join('');
+    var hasInvalidPattern = this.props.results.some(function(subjectResult) {
+      return subjectResult.result.status === K.RC_BADPATTERN;
+    });
 
     return(
       <div className="editor">
@@ -47,7 +51,10 @@ var EditorView = React.createClass({
               />
             </Label>
 
-            <Label className="pattern-input-container" value="Pattern">
+            <Label
+              className="pattern-input-container"
+              value={hasInvalidPattern ? this.renderPatternError() : "Pattern"}
+            >
               <CodeTextarea
                 onChange={this.updatePattern}
                 value={this.props.pattern}
@@ -68,9 +75,10 @@ var EditorView = React.createClass({
             <HTabbedPanel.Tab key="controls" tabClassName="editor__subject-controls">
               <Button
                 className="editor__add-subject-btn"
-                onClick={this.addSubject}>
-                +
-              </Button>
+                onClick={this.addSubject}
+                children="+"
+                title="Add another subject"
+              />
             </HTabbedPanel.Tab>
 
             <HTabbedPanel.Content>
@@ -88,6 +96,58 @@ var EditorView = React.createClass({
           />
         </form>
       </div>
+    );
+  },
+
+  renderSubjectTab: function(subject) {
+    var result = findWhere(this.props.results, { subjectId: subject.id }) || {};
+    var Tab = HTabbedPanel.Tab;
+
+    return (
+      <Tab key={subject.id} className="editor__subject-tab">
+        {false &&
+          <EllipsifedText>{subject.text}</EllipsifedText>
+        }
+
+        {<ResultEmblem {...result.result} />}
+      </Tab>
+    );
+  },
+
+  renderSubject: function(id) {
+    var subject = findWhere(this.props.subjects, { id });
+    var result = findWhere(this.props.results, { subjectId: id });
+
+    if (!subject) {
+      return null;
+    }
+
+    var { customAttrs } = subject;
+
+    return (
+      <div className="editor__subject" key={'subject-'+subject.id}>
+        <Label value={"Subject " + subject.position}>
+          <Subject
+            ref="subject"
+            onChange={this.updateSubject.bind(null, subject.id)}
+            result={result ? result.result : undefined}
+            {...customAttrs}
+            {...subject}
+          />
+        </Label>
+      </div>
+    );
+  },
+
+  renderPatternError: function() {
+    var error = this.props.results.filter(function(subjectResult) {
+      return subjectResult.result.status === K.RC_BADPATTERN;
+    })[0].result.error;
+
+    return (
+      <EllipsifedText className="editor__pattern-error">
+        Error: {error}
+      </EllipsifedText>
     );
   },
 
@@ -116,6 +176,10 @@ var EditorView = React.createClass({
     Actions.updatePattern(newPattern);
   },
 
+  submitConstruct: function() {
+    Actions.submit(this.props.dialect);
+  },
+
   addSubject: function(e) {
     e.stopPropagation();
 
@@ -129,25 +193,6 @@ var EditorView = React.createClass({
     Actions.addSubject();
   },
 
-  submitConstruct: function() {
-    Actions.submit();
-  },
-
-  renderSubjectTab: function(subject) {
-    var result = findWhere(this.props.results, { subjectId: subject.id }) || {};
-    var Tab = HTabbedPanel.Tab;
-
-    return (
-      <Tab key={subject.id} className="editor__subject-tab">
-        {false &&
-          <EllipsifedText>{subject.text}</EllipsifedText>
-        }
-
-        {<ResultEmblem {...result.result} />}
-      </Tab>
-    );
-  },
-
   activateSubject: function(id) {
     if (this.props.activeSubjectId) {
       Actions.updateSubjectAttrs(
@@ -159,35 +204,10 @@ var EditorView = React.createClass({
     Actions.activateSubject(id);
   },
 
-  renderSubject: function(id) {
-    var subject = findWhere(this.props.subjects, { id });
-    var result = findWhere(this.props.results, { subjectId: id });
-
-    if (!subject) {
-      return null;
-    }
-
-    var { customAttrs } = subject;
-
-    return (
-      <div className="editor__subject" key={'subject-'+subject.id}>
-        <Label value={"Subject " + subject.position}>
-          <Subject
-            ref="subject"
-            onChange={this.updateSubject.bind(null, subject.id)}
-            result={result ? result.result : undefined}
-            {...customAttrs}
-            {...subject}
-          />
-        </Label>
-      </div>
-    );
-  },
-
   updateSubject: function(id, newText, customAttrs) {
     Actions.updateSubjectAttrs(id, customAttrs);
     Actions.updateSubjectText(id, newText);
-  }
+  },
 });
 
 module.exports = EditorView;

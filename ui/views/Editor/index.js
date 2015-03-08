@@ -1,45 +1,47 @@
 var React = require("react");
 var EditorView = require('./components/EditorView');
-var Banner = require('./components/Banner');
-var EditorStore = require('EditorStore');
-var ResultStore = require('ResultStore');
+var appStore = require('AppStore').getSingleton();
+var editorStore = require('EditorStore').getSingleton();
+var resultStore = require('ResultStore').getSingleton();
+var Actions = require('Actions');
 
 var Editor = React.createClass({
   displayName: "Editor",
 
   componentDidMount: function() {
-    EditorStore.getSingleton().addChangeListener(this.reload);
-    ResultStore.getSingleton().addChangeListener(this.reload);
+    Actions.setDialect(this.getDialect());
+
+    editorStore.addChangeListener(this.reload);
+    resultStore.addChangeListener(this.reload);
   },
 
   componentWillUnmount: function() {
-    EditorStore.getSingleton().removeChangeListener(this.reload);
-    ResultStore.getSingleton().removeChangeListener(this.reload);
+    resultStore.removeChangeListener(this.reload);
+    editorStore.removeChangeListener(this.reload);
   },
 
   render() {
-    var editorStore = EditorStore.getSingleton();
-    var resultStore = ResultStore.getSingleton();
+    var dialect = this.getDialect();
 
     return(
-      <div>
-        <Banner />
-
-        <EditorView
-          dialect={editorStore.getDialect()}
-          pattern={editorStore.getPattern()}
-          subjects={editorStore.getSubjects()}
-          flags={editorStore.getFlags()}
-          availableFlags={editorStore.getAvailableFlags()}
-          results={resultStore.getAll()}
-          activeSubjectId={editorStore.getActiveSubjectId()}
-        />
-      </div>
+      <EditorView
+        dialect={dialect}
+        pattern={editorStore.getPattern()}
+        subjects={editorStore.getSubjects()}
+        flags={editorStore.getFlags()}
+        availableFlags={appStore.getAvailableFlags(dialect)}
+        results={resultStore.getAll()}
+        activeSubjectId={editorStore.getActiveSubjectId()}
+      />
     );
   },
 
   reload: function() {
     this.props.onChange();
+  },
+
+  getDialect() {
+    return decodeURIComponent(this.props.params.dialect);
   }
 });
 

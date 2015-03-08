@@ -9,6 +9,7 @@ var rgxConfig = require('./config');
 var path = require('path');
 var API = require('./lib/API');
 var cleanup = require('./lib/utils/process.cleanup');
+var AVAILABLE_DIALECTS = rgxConfig.AVAILABLE_DIALECTS;
 
 var ROOT = __dirname;
 var host = rgxConfig.HOST;
@@ -34,12 +35,19 @@ app.use(function(req, res, next) {
 
   console.log(req.url);
 
-  if (dialect && req.method === 'POST') {
-    console.log('Got a match request:', req.method, req.url, req.body);
+  if (dialect && AVAILABLE_DIALECTS.indexOf(dialect) === -1) {
+    res.statusCode = 400;
+    res.setHeader('Content-Type', 'application/json');
+    res.write(JSON.stringify({
+      message: "unknown dialect '" + dialect + "'"
+    }));
+    res.end();
+  }
+  else if (dialect && req.method === 'POST') {
     var params = req.body;
-    // var params = JSON.parse(req.body);
 
     API.match(dialect, params.pattern, params.subjects, params.flags, function(result) {
+      res.setHeader('Content-Type', 'application/json');
       res.write(JSON.stringify(result));
       res.end();
     });
@@ -47,6 +55,14 @@ app.use(function(req, res, next) {
   else {
     next();
   }
+});
+
+app.use(function onerror(err, req, res, next) {
+  // an error occurred!
+  res.setHeader('Content-Type', 'application/json');
+  res.statusCode = 500;
+  res.write(JSON.stringify({ message: err.message }));
+  res.end();
 });
 
 cleanup(API.stop);

@@ -1,4 +1,6 @@
 var React = require("react");
+var Button = require("components/Button");
+var Icon = require("components/Icon");
 var { AVAILABLE_SCHEMES, DEFAULT_SCHEME } = require("constants");
 
 var ColorSchemeSwitcher = React.createClass({
@@ -8,11 +10,13 @@ var ColorSchemeSwitcher = React.createClass({
 
   render() {
     return(
-      <button
+      <Button
         onClick={this.switchScheme}
-        className="color-scheme-switcher icon icon-contrast"
+        className="color-scheme-switcher"
         title="Switch Scheme"
-      />
+      >
+        <Icon className="icon-contrast" />
+      </Button>
     );
   },
 

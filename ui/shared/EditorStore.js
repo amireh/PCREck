@@ -1,22 +1,11 @@
 var Store = require('Store');
-var getConfig = require('getConfig');
-var { AVAILABLE_DIALECTS } = getConfig();
+var appStore = require('AppStore').getSingleton();
 var subjectUUID = 0;
-
-var FLAGS = AVAILABLE_DIALECTS.reduce(function(flags, dialect) {
-  var dialectFlags = require("json!dialects/PCRE/flags.json");
-
-  flags[dialect] = Object.keys(dialectFlags).map(function(flagName) {
-    return { name: flagName, desc: dialectFlags[flagName] };
-  });
-
-  return flags;
-}, {});
 
 class EditorStore extends Store {
   getInitialState() {
     return {
-      dialect: 'PCRE',
+      dialect: null,
       pattern: 'foo(bar)',
       subjects: [{ id: 's0011', position: 1, text: 'foobarzoo' }],
       flags: '',
@@ -26,6 +15,10 @@ class EditorStore extends Store {
 
   getDialect() {
     return this.state.dialect;
+  }
+
+  setDialect(dialect) {
+    this.setState({ dialect });
   }
 
   getPattern() {
@@ -53,10 +46,6 @@ class EditorStore extends Store {
 
     this.state.subjects.push(subject);
     this.setState({ activeSubjectId: subject.id });
-  }
-
-  getAvailableFlags() {
-    return FLAGS[this.getDialect()];
   }
 
   getFlags() {

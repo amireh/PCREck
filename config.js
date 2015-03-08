@@ -12,5 +12,13 @@ exports.DIALECT_BINMAP = {
 };
 
 exports.AVAILABLE_DIALECTS = [
-  'PCRE'
-];
+  'C++',
+  'Java',
+  'JavaScript',
+  'Lua',
+  'PCRE',
+  'PHP',
+  'Perl',
+  'Python',
+  'Ruby'
+].sort();

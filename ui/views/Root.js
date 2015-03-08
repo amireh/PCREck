@@ -3,31 +3,46 @@ var Router = require("react-router");
 var RouteActions = require("actions/RouteActions");
 var getConfig = require("getConfig");
 var ColorSchemeSwitcher = require("components/ColorSchemeSwitcher");
+var ErrorNotifier = require("components/ErrorNotifier");
+var Banner = require('components/Banner');
+var appStore = require('AppStore').getSingleton();
 
 var { RouteHandler } = Router;
 
 var Root = React.createClass({
   mixins: [ Router.Navigation, Router.State ],
+  statics: {
+    willTransitionTo() {
+      console.log('>> transition << ');
+    }
+  },
 
   getDefaultProps() {
     return {
-      query: {}
+      query: {},
+      params: {}
     };
   },
 
   componentDidMount: function() {
     RouteActions.assignDelegate(this);
-
-    this.populate();
+    appStore.addChangeListener(this.reload);
   },
 
   componentWillUnmount: function() {
+    appStore.removeChangeListener(this.reload);
     RouteActions.assignDelegate(undefined);
   },
 
   render() {
     return (
       <div className="app-container">
+        <Banner dialect={this.props.params.dialect} />
+
+        <ErrorNotifier
+          error={appStore.getLatestError()}
+        />
+
         <RouteHandler
           onChange={this.reload}
           config={getConfig()}
@@ -37,10 +52,6 @@ var Root = React.createClass({
         <ColorSchemeSwitcher />
       </div>
     );
-  },
-
-  populate: function() {
-    var config = getConfig();
   },
 
   reload: function() {

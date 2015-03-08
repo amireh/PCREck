@@ -1,4 +1,5 @@
 var React = require("react");
+var classSet = require("utils/classSet");
 
 function getStyle(node, styleProp) {
   if (node.currentStyle) {
@@ -19,8 +20,14 @@ var EllipsifedText = React.createClass({
   },
 
   render() {
+    var className = classSet({ 'type-ellipsify': true }, this.props.className);
+
     return(
-      <span ref="node" className="type-ellipsify" children={this.props.children} />
+      <span
+        ref="node"
+        className={className}
+        children={this.props.children}
+      />
     );
   },
 

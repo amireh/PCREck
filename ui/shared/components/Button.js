@@ -27,6 +27,8 @@ var Button = React.createClass({
     return(
       <button
         onClick={this.props.onClick}
+        onKeyPress={this.props.onKeyPress}
+        title={this.props.title}
         type="button"
         className={classSet(className)}
         children={this.props.children}

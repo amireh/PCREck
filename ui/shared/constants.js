@@ -6,6 +6,7 @@ exports.QUERY_OFF = undefined;
 
 exports.RC_MATCH = 'RC_MATCH';
 exports.RC_NOMATCH = 'RC_NOMATCH';
+exports.RC_BADPATTERN = 'RC_BADPATTERN';
 exports.KC_RETURN = 13;
 exports.THROTTLE = 180;
 exports.AVAILABILE_SCHEMES = [

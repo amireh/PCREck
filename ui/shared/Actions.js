@@ -1,3 +1,4 @@
+var appStore = require('AppStore').getSingleton();
 var editorStore = require('EditorStore').getSingleton();
 var resultStore = require('ResultStore').getSingleton();
 var { findWhere, pluck, debounce } = require('lodash');
@@ -6,8 +7,11 @@ var { THROTTLE } = require("constants");
 
 var debouncedSubmit;
 var getCurrentDialect = function() {
-  // TODO
-  return 'PCRE';
+  return editorStore.getDialect();
+};
+
+exports.setDialect = function(dialect) {
+  editorStore.setDialect(dialect);
 };
 
 exports.updatePattern = function(pattern) {
@@ -81,11 +85,22 @@ exports.submit = function() {
         };
       })
     });
-  }, function(error) {
-
-  });
+  }, appStore.setError.bind(appStore));
 };
 
 debouncedSubmit = debounce(exports.submit, THROTTLE, {
   leading: false, trailing: true
 });
+
+exports.dismissError = function() {
+  appStore.clearError();
+};
+
+/**
+ * Called on every route transition. Here we get to clean up any state that
+ * should not be carried across the pages, like error notifications.
+ */
+exports.clearTransientState = function() {
+  exports.setDialect();
+  exports.dismissError();
+};

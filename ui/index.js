@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var Root = require('./views/Root.js');
+var Actions = require('Actions');
 
 require('./config/codemirror');
 require('./css/index.less');
@@ -11,16 +12,26 @@ var router = Router.create({
   location: HashLocation,
   routes: [
     <Route name="root" path="/" handler={Root}>
-      <DefaultRoute name="editor" handler={require("./views/Editor")} />
-    </Route>,
+      <DefaultRoute
+        name="dialects"
+        handler={require("./views/Dialects")}
+      />
 
-    <NotFoundRoute
-      name="not-found"
-      handler={require('./views/NotFound')}
-    />
+      <Route
+        name="editor"
+        path="/dialects/:dialect"
+        handler={require("./views/Editor")}
+      />
+
+      <NotFoundRoute
+        name="not-found"
+        handler={require('./views/NotFound')}
+      />
+    </Route>,
   ]
 });
 
 router.run(function(Handler, state) {
+  Actions.clearTransientState();
   React.render(<Handler {...state} />, document.querySelector("#__app__"));
 });
