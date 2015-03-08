@@ -19,8 +19,15 @@ var EditorView = React.createClass({
       flags: '',
       subjects: [],
       results: [],
-      availableFlags: []
+      availableFlags: [],
+      activeSubjectId: null
     };
+  },
+
+  componentDidUpdate: function(prevProps, prevState) {
+    if (this.props.activeSubjectId !== prevProps.activeSubjectId) {
+      this.refs.subject.focus();
+    }
   },
 
   render() {
@@ -29,47 +36,55 @@ var EditorView = React.createClass({
     return(
       <div className="editor">
         <form onSubmit={this.consume}>
-          <div className="editor__pattern">
-            <Label fakeLabel value="Regular expression:">
+          <div className="editor__pattern-and-flags">
+            <Label className="flags-input-container" value="Flags">
               <CodeTextarea
-                className="editor__flags inline-block"
+                className=""
                 onChange={this.updateFlags}
                 value={this.props.flags}
-                placeholder={availableFlagNames}
+                placeholder={availableFlagNames.substr(0,6)}
                 options={{scrollbarStyle: null}}
               />
+            </Label>
 
-              <div className="pattern-input-container">
-                <CodeTextarea
-                  onChange={this.updatePattern}
-                  value={this.props.pattern}
-                />
-              </div>
+            <Label className="pattern-input-container" value="Pattern">
+              <CodeTextarea
+                onChange={this.updatePattern}
+                value={this.props.pattern}
+                autoFocus
+              />
             </Label>
           </div>
 
           <HTabbedPanel
+            inverted
+            onChange={this.activateSubject}
             className="editor__subjects"
-            contentRenderer={this.renderSubject}
             contentKeys={pluck(this.props.subjects, 'id')}
+            value={this.props.activeSubjectId}
           >
             {this.props.subjects.map(this.renderSubjectTab)}
 
-            <div key="controls" className="editor__subject-controls">
-              <div className="editor__subject-tab">
-                <Button className="editor__add-subject-btn" onClick={this.addSubject}>+</Button>
-              </div>
-            </div>
-          </HTabbedPanel>
+            <HTabbedPanel.Tab key="controls" tabClassName="editor__subject-controls">
+              <Button
+                className="editor__add-subject-btn"
+                onClick={this.addSubject}>
+                +
+              </Button>
+            </HTabbedPanel.Tab>
 
-          {false && <div className="editor__actions">
-            <Button onClick={this.submitConstruct}>Test</Button>
-          </div>}
+            <HTabbedPanel.Content>
+              {this.props.activeSubjectId &&
+                this.renderSubject(this.props.activeSubjectId)
+              }
+            </HTabbedPanel.Content>
+          </HTabbedPanel>
 
           <FlagPicker
             flags={this.props.availableFlags}
             value={this.props.flags}
             onChange={this.toggleFlag}
+            dialect={this.props.dialect}
           />
         </form>
       </div>
@@ -101,7 +116,16 @@ var EditorView = React.createClass({
     Actions.updatePattern(newPattern);
   },
 
-  addSubject: function() {
+  addSubject: function(e) {
+    e.stopPropagation();
+
+    if (this.props.activeSubjectId) {
+      Actions.updateSubjectAttrs(
+        this.props.activeSubjectId,
+        this.refs.subject.getCustomAttributes()
+      );
+    }
+
     Actions.addSubject();
   },
 
@@ -111,26 +135,48 @@ var EditorView = React.createClass({
 
   renderSubjectTab: function(subject) {
     var result = findWhere(this.props.results, { subjectId: subject.id }) || {};
+    var Tab = HTabbedPanel.Tab;
 
     return (
-      <HTabbedPanel.Tab key={subject.id} className="editor__subject-tab">
-        {false && <EllipsifedText>{subject.text}</EllipsifedText>}
+      <Tab key={subject.id} className="editor__subject-tab">
+        {false &&
+          <EllipsifedText>{subject.text}</EllipsifedText>
+        }
 
         {<ResultEmblem {...result.result} />}
-      </HTabbedPanel.Tab>
+      </Tab>
     );
+  },
+
+  activateSubject: function(id) {
+    if (this.props.activeSubjectId) {
+      Actions.updateSubjectAttrs(
+        this.props.activeSubjectId,
+        this.refs.subject.getCustomAttributes()
+      );
+    }
+
+    Actions.activateSubject(id);
   },
 
   renderSubject: function(id) {
     var subject = findWhere(this.props.subjects, { id });
     var result = findWhere(this.props.results, { subjectId: id });
 
+    if (!subject) {
+      return null;
+    }
+
+    var { customAttrs } = subject;
+
     return (
       <div className="editor__subject" key={'subject-'+subject.id}>
         <Label value={"Subject " + subject.position}>
           <Subject
+            ref="subject"
             onChange={this.updateSubject.bind(null, subject.id)}
             result={result ? result.result : undefined}
+            {...customAttrs}
             {...subject}
           />
         </Label>
@@ -138,7 +184,8 @@ var EditorView = React.createClass({
     );
   },
 
-  updateSubject: function(id, newText) {
+  updateSubject: function(id, newText, customAttrs) {
+    Actions.updateSubjectAttrs(id, customAttrs);
     Actions.updateSubjectText(id, newText);
   }
 });

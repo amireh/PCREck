@@ -1,5 +1,6 @@
 var React = require("react");
 var EditorView = require('./components/EditorView');
+var Banner = require('./components/Banner');
 var EditorStore = require('EditorStore');
 var ResultStore = require('ResultStore');
 
@@ -22,6 +23,8 @@ var Editor = React.createClass({
 
     return(
       <div>
+        <Banner />
+
         <EditorView
           dialect={editorStore.getDialect()}
           pattern={editorStore.getPattern()}
@@ -29,6 +32,7 @@ var Editor = React.createClass({
           flags={editorStore.getFlags()}
           availableFlags={editorStore.getAvailableFlags()}
           results={resultStore.getAll()}
+          activeSubjectId={editorStore.getActiveSubjectId()}
         />
       </div>
     );

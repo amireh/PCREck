@@ -1,0 +1,32 @@
+.v-tabbed-panel {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+
+  &__tabs {
+    width: 25%;
+  }
+
+  &__tab {
+    cursor: pointer;
+  }
+
+  &__content {
+    width: 70%;
+    margin-right: 5%;
+    padding: 0 @whitespace;
+  }
+
+  &__content, &__tabs {
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+.schemable({
+  .v-tabbed-panel {
+    .v-tabbed-panel__content {
+      background: @base2;
+    }
+  }
+});

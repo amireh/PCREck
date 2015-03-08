@@ -1,0 +1,41 @@
+.checkbox {
+  position: relative;
+  vertical-align: middle;
+
+  input {
+    width: 22px;
+    display: none;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  span {
+    pointer-events: none;
+  }
+
+  .checkbox__indicator {
+    font-size: 14px;
+    width: 16px;
+    display: inline-block;
+    margin-right: @whitespace/2;
+
+    &:before {
+      margin-top: -2px;
+      content: @icon-checkbox;
+    }
+  }
+}
+
+.schemable({
+  .checkbox {
+    &__indicator {
+      color: @base0;
+    }
+
+    &--checked .checkbox__indicator:before {
+      content: @icon-checkbox-checked;
+    }
+  }
+});

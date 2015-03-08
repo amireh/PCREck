@@ -16,19 +16,37 @@ var Subject = React.createClass({
     })
   },
 
+  componentDidMount: function() {
+    if (this.props.cursor) {
+      this.refs.input.setCursor(this.props.cursor);
+    }
+  },
+
   render() {
     var result = this.props.result || {};
 
     return(
-      <div>
-        <HighlightedInput
-          match={result.status === RC_MATCH ? result.offset : undefined}
-          captures={result.status === RC_MATCH ? result.captures : undefined}
-          value={this.props.text}
-          onChange={this.props.onChange}
-        />
-      </div>
+      <HighlightedInput
+        ref="input"
+        match={result.status === RC_MATCH ? result.offset : undefined}
+        captures={result.status === RC_MATCH ? result.captures : undefined}
+        value={this.props.text}
+        onChange={this.emitChange}
+        autoFocus={this.props.autoFocus}
+      />
     );
+  },
+
+  emitChange(text) {
+    this.props.onChange(text, this.getCustomAttributes());
+  },
+
+  focus() {
+    return this.refs.input.focus();
+  },
+
+  getCustomAttributes() {
+    return { cursor: this.refs.input.getCursor() };
   }
 });
 

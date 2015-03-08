@@ -2,6 +2,7 @@ var React = require("react");
 var Router = require("react-router");
 var RouteActions = require("actions/RouteActions");
 var getConfig = require("getConfig");
+var ColorSchemeSwitcher = require("components/ColorSchemeSwitcher");
 
 var { RouteHandler } = Router;
 
@@ -32,6 +33,8 @@ var Root = React.createClass({
           config={getConfig()}
           {...this.props}
         />
+
+        <ColorSchemeSwitcher />
       </div>
     );
   },

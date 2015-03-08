@@ -1,6 +1,8 @@
 var React = require("react");
 var CodeMirror = require('codemirror');
 var modeHtmlMixed = require('codemirror/mode/htmlmixed/htmlmixed');
+var { debounce } = require("lodash");
+var { THROTTLE } = require("constants");
 
 var MATCH_HIGHLIGHT_OPTIONS = {
   className: 'highlighted-input__match'
@@ -25,7 +27,7 @@ var HighlightedInput = React.createClass({
     });
 
     this.cm.on('change', () => {
-      this.props.onChange(this.cm.getValue());
+      this.emitChange(this.cm.getValue());
     });
 
     this.highlight();
@@ -45,6 +47,7 @@ var HighlightedInput = React.createClass({
         <textarea
           ref="inputWidget"
           value={this.props.value}
+          autoFocus={this.props.autoFocus}
           readOnly
         />
       </div>
@@ -55,13 +58,10 @@ var HighlightedInput = React.createClass({
     var { cm } = this;
     var { match, captures } = this.props;
     var highlight = function(range, opts) {
-      // console.log('highlighting [%o,%o] with %s', cm.posFromIndex(range[0]-1), cm.posFromIndex(range[1]), opts.className);
       cm.markText(cm.posFromIndex(range[0]), cm.posFromIndex(range[1]+1), opts);
     };
 
-    cm.getAllMarks().forEach(function(mark) {
-      mark.clear();
-    });
+    this.dehighlight();
 
     if (match) {
       highlight(match, MATCH_HIGHLIGHT_OPTIONS);
@@ -72,7 +72,31 @@ var HighlightedInput = React.createClass({
         highlight(capture, CAPTURE_HIGHLIGHT_OPTIONS);
       });
     }
-  }
+  },
+
+  dehighlight: function() {
+    this.cm.getAllMarks().forEach(function(mark) {
+      mark.clear();
+    });
+  },
+
+  focus() {
+    if (!this.cm.hasFocus()) {
+      this.cm.focus();
+    }
+  },
+
+  setCursor(cursor) {
+    this.cm.setCursor(cursor);
+  },
+
+  getCursor() {
+    return this.cm.getCursor();
+  },
+
+  emitChange: debounce(function(value) {
+    this.props.onChange(value);
+  }, THROTTLE)
 });
 
 module.exports = HighlightedInput;

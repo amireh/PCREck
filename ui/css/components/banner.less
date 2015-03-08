@@ -1,0 +1,67 @@
+.schemable({
+  @height: @banner-height;
+
+  .banner-wrapper {
+    background: @base3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @height;
+    z-index: 3;
+    border-bottom: @banner-border-dim solid @base2;
+  }
+
+  .banner {
+    width: @content-width;
+    margin: @whitespace auto;
+    height: @banner-inner-height;
+    position: relative;
+
+    &__logo {
+      margin: 0;
+      letter-spacing: 2px;
+      display: inline-block;
+      // vertical-align: middle;
+    }
+
+    &__logo-highlight {
+      color: @solarized-cyan;
+    }
+
+    &__motto {
+      // display: inline-block;
+      // vertical-align: middle;
+      font-size: smaller;
+      margin: 0;
+      margin-top: @whitespace;
+      &, em { font-style: normal; }
+    }
+  }
+
+  .banner__navigation {
+    position: absolute;
+    right: 0;
+    top: @whitespace;
+    line-height: 1;
+
+    &-item {
+      margin-left: @whitespace;
+      letter-spacing: 1px;
+
+      &:before, &:after {
+        font-size: 12px;
+      }
+
+      &:before {
+        content: '[ ';
+        color: @solarized-cyan;
+      }
+
+      &:after {
+        content: ' ]';
+        color: @solarized-cyan;
+      }
+    }
+  }
+});

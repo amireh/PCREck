@@ -1,4 +1,5 @@
 var React = require("react");
+var Checkbox = require("components/Checkbox");
 var { arrayOf, shape, string } = React.PropTypes;
 
 var FlagPicker = React.createClass({
@@ -13,32 +14,38 @@ var FlagPicker = React.createClass({
   getDefaultProps: function() {
     return {
       flags: [],
-      value: ''
+      value: '',
+      dialect: ''
     };
   },
 
   render: function() {
     return(
-      <div>
-        {this.props.flags.map(this.renderFlag)}
+      <div className="flag-picker">
+        <header className="flag-picker__header">
+          {this.props.dialect} Flags
+        </header>
+
+        <div className="flag-picker__flags">
+          {this.props.flags.map(this.renderFlag)}
+        </div>
       </div>
     );
   },
 
   renderFlag: function(flag) {
     return (
-      <label className="form-label" key={flag.name}>
-        <input
-          type="checkbox"
-          value={flag.name}
-          checked={this.props.value.indexOf(flag.name) > -1}
-          onChange={this.props.onChange}
-        />
-
+      <Checkbox
+        key={flag.name}
+        value={flag.name}
+        checked={this.props.value.indexOf(flag.name) > -1}
+        onChange={this.props.onChange}
+        className="flag-picker__flag"
+      >
         <code className="type-strong">/{flag.name}</code>
         {' '}
         {flag.desc}
-      </label>
+      </Checkbox>
     )
   }
 });

@@ -1,0 +1,28 @@
+.schemable({
+  .highlighted-input {
+    &__match {
+      background-color: @base3;
+      color: @solarized-green;
+    }
+
+    &__capture {
+      color: @solarized-cyan;
+    }
+
+    .CodeMirror {
+      height: auto;
+    }
+  }
+
+  .CodeMirror-selectedtext.highlighted-input {
+    &__match {
+      background-color: inherit;
+      color: negation(@solarized-green, @solarized-cyan);
+    }
+
+    &__capture {
+      background-color: inherit;
+      color: negation(@solarized-cyan, @solarized-cyan);
+    }
+  }
+});

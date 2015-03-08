@@ -2,6 +2,7 @@ var editorStore = require('EditorStore').getSingleton();
 var resultStore = require('ResultStore').getSingleton();
 var { findWhere, pluck, debounce } = require('lodash');
 var ajax = require('utils/ajax');
+var { THROTTLE } = require("constants");
 
 var debouncedSubmit;
 var getCurrentDialect = function() {
@@ -21,6 +22,28 @@ exports.updateFlags = function(flags) {
 
 exports.addSubject = function() {
   editorStore.addSubject();
+};
+
+exports.activateSubject = function(id) {
+  var subject = findWhere(editorStore.state.subjects, { id });
+
+  if (subject) {
+    editorStore.setState({ activeSubjectId: id });
+  }
+  else {
+    console.warn('Unable to find subject with id %s', id);
+  }
+};
+
+exports.updateSubjectAttrs = function(id, customAttrs) {
+  var subject = findWhere(editorStore.state.subjects, { id });
+
+  if (subject) {
+    subject.customAttrs = customAttrs;
+  }
+  else {
+    console.warn('Unable to find subject with id %s', id);
+  }
 };
 
 exports.updateSubjectText = function(id, newText) {
@@ -63,4 +86,6 @@ exports.submit = function() {
   });
 };
 
-debouncedSubmit = debounce(exports.submit, 200, { leading: false, trailing: true });
+debouncedSubmit = debounce(exports.submit, THROTTLE, {
+  leading: false, trailing: true
+});

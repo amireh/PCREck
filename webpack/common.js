@@ -7,6 +7,7 @@ var baseConfig = {
 
   resolve: {
     modulesDirectories: [
+      "css",
       "shared",
       "node_modules"
     ],

@@ -19,7 +19,8 @@ class EditorStore extends Store {
       dialect: 'PCRE',
       pattern: 'foo(bar)',
       subjects: [{ id: 's0011', position: 1, text: 'foobarzoo' }],
-      flags: ''
+      flags: '',
+      activeSubjectId: null,
     };
   }
 
@@ -44,13 +45,14 @@ class EditorStore extends Store {
   }
 
   addSubject() {
-    this.state.subjects.push({
+    var subject = {
       id: `s${++subjectUUID}`,
       position: this.state.subjects.length+1,
       text: ''
-    });
+    };
 
-    this.emitChange();
+    this.state.subjects.push(subject);
+    this.setState({ activeSubjectId: subject.id });
   }
 
   getAvailableFlags() {
@@ -59,6 +61,12 @@ class EditorStore extends Store {
 
   getFlags() {
     return this.state.flags;
+  }
+
+  getActiveSubjectId() {
+    return this.state.activeSubjectId || (
+      this.state.subjects.length ? this.state.subjects[0].id : null
+    );
   }
 }
 

@@ -1,8 +1,6 @@
 @import "~variables";
 
 body {
-  background: @bg;
-  color: @fg;
   font-family: @font;
   font-size: @font-size;
   padding: 0;
@@ -19,7 +17,7 @@ a {
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: @link-fg;
+  font-weight: bold;
 
   &:hover {
     text-decoration: underline;
@@ -34,72 +32,71 @@ a {
   }
 }
 
-button, .btn {
-  padding: @whitespace/2;
-  line-height: inherit;
-  background: #333;
-  box-shadow: 0 0 0 1px #323232 inset;
-  border: 1px solid #3d3d3d;
-  border-radius: 1px;
-  color: inherit;
-  cursor: pointer;
-  // min-width: 32px;
-
-  &:hover, &:focus {
-    background: #3d3d3d;
-    box-shadow: none;
+.schemable({
+  a {
+    color: @base0;
   }
+});
 
-  &:active, &.active {
-    box-shadow: none;
-    // border: none;
-    outline: 1px solid #444;
-    // border-style: ridge;
-  }
-
-  &.a11y-btn {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    background: transparent;
-    color: inherit;
-    height: auto;
+.schemable({
+  button, .btn {
+    padding: @whitespace/2 @whitespace;
     line-height: inherit;
-    padding: 0;
-    margin: 0;
-    text-align: left;
+    background: @base2;
+    box-shadow:
+      0 0 0 1px darken(@base2, 5%) inset,
+      1px 1px 0px 1px lighten(@base2, 10%) inset
+    ;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-family: inherit;
+    color: inherit;
+    transition: background 0.08s ease-out 0s;
 
     &:hover {
-      color: @hover-fg;
-      cursor: pointer;
+      background: @base3;
+    }
+
+    &:active, &--active {
+      background: @base3;
+      box-shadow: 0 0 0 1px darken(@base2, 5%) inset;
+      outline: none;
+    }
+
+    &:focus, &--focus {
+      box-shadow:
+        0 0 0 1px darken(@base2, 5%) inset,
+        0 0 0 2px negation(@base1, @base2) inset
+      ;
+
+      outline: none;
     }
   }
-}
+});
 
-.a11y-btn:focus, .a11y-btn.active, .active .a11y-btn {
-  color: @active-fg;
-  outline: none;
-}
 
 :disabled, [disabled] {
   pointer-events: none;
   cursor: default;
 }
 
-.form-input {
-  display: block;
-  line-height: 30px;
-  padding: @whitespace / 2;
-  font-family: inherit;
-  border-style: inset;
-  border-width: 2px;
-  border-color: @border-bg;
-  color: inherit;
-  background: transparent;
-  margin: @whitespace 0;
-  width: 100%;
-}
+.schemable({
+  .form-input {
+    display: block;
+    line-height: 30px;
+    padding: @whitespace / 2;
+    font-family: inherit;
+    border-style: inset;
+    border-width: 2px;
+    border-color: @base1;
+    color: inherit;
+    background: transparent;
+    margin: @whitespace 0;
+    width: 100%;
+  }
+});
 
 input[type="checkbox"] {
   vertical-align: middle;
