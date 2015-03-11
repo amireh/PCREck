@@ -1,6 +1,6 @@
 var React = require("react");
-var { Link } = require("react-router");
 var { arrayOf, string } = React.PropTypes;
+var classSet = require('utils/classSet');
 
 var DialectPicker = React.createClass({
   displayName: "DialectPicker",
@@ -24,9 +24,14 @@ var DialectPicker = React.createClass({
   },
 
   renderDialect: function(dialect) {
+    var className = classSet({
+      'dialect-picker__dialect': true,
+      'dialect-picker__dialect--active': this.props.activeDialect === dialect
+    });
+
     return (
-      <div key={dialect} onClick={this.setDialect} className="dialect-picker__dialect">
-        <Link to="editor" params={{dialect: encodeURIComponent(dialect)}}>{dialect}</Link>
+      <div key={dialect} onClick={this.setDialect} className={className}>
+        <a href={`#/dialects/${dialect}`}>{dialect}</a>
       </div>
     );
   }

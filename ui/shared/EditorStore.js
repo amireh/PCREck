@@ -5,20 +5,11 @@ var subjectUUID = 0;
 class EditorStore extends Store {
   getInitialState() {
     return {
-      dialect: null,
       pattern: 'foo(bar)',
       subjects: [{ id: 's0011', position: 1, text: 'foobarzoo' }],
       flags: '',
       activeSubjectId: null,
     };
-  }
-
-  getDialect() {
-    return this.state.dialect;
-  }
-
-  setDialect(dialect) {
-    this.setState({ dialect });
   }
 
   getPattern() {

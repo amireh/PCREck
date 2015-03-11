@@ -9,3 +9,30 @@
     }
   }
 }
+
+.schemable({
+  .dialect-picker__dialect--active a {
+    color: @solarized-cyan;
+  }
+});
+
+.schemable({
+  .qtip .dialect-picker {
+    background: @base2;
+    padding: @whitespace/2;
+    max-height: 200px;
+    // width: 120px;
+    overflow: auto;
+    border: 1px solid @base1;
+    white-space: nowrap;
+
+    &__dialect {
+      display: block;
+      width: 100%;
+
+      a {
+        padding: 0;
+      }
+    }
+  }
+});

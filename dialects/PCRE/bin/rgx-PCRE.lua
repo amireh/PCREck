@@ -78,15 +78,15 @@ local function onInput(json_construct)
 
     -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
     if result[1] then
-      offset = { result[1]-1, result[2]-1 }
+      offset = { result[1]-1, result[2] }
     end
 
     -- map the captures as [b,e] offset arrays
     for i=1,#result[3],2 do
-      if result[3][i] == false then
+      if result[3][i] == false or result[3][i+1] < result[3][i] then
         table.insert(captures, {})
       else
-        table.insert(captures, { result[3][i]-1, result[3][i+1]-1 })
+        table.insert(captures, { result[3][i]-1, result[3][i+1] })
       end
     end
 

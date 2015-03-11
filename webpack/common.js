@@ -6,25 +6,31 @@ var baseConfig = {
   devtool: nodeEnv === "production" ? null : "eval",
 
   resolve: {
+    fallback: path.resolve(__dirname, "../node_modules"),
     modulesDirectories: [
       "css",
       "shared",
       "node_modules"
     ],
     alias: {
-      "dialects": path.resolve(__dirname, "../dialects")
+      "dialects": path.resolve(__dirname, "../dialects"),
+      "qtip": path.join(__dirname, '..', 'ui', 'vendor', 'jquery.qtip.js')
     }
+  },
+
+  resolveLoader: {
+    fallback: path.resolve(__dirname, "../node_modules")
   },
 
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /(ui|qjunk)\/(.*)\.js$/,
         loader: [
-          "jsx-loader?harmony&insertPragma=React.DOM",
+          'jsx-loader?harmony&insertPragma=React.DOM',
           'wrap-loader?js',
-          "react-hot"
-        ].join("!")
+          'react-hot'
+        ].join('!')
       },
 
       {
@@ -34,7 +40,7 @@ var baseConfig = {
 
       {
         test: /\.less$/,
-        loader: "style-loader!css-loader?importLoaders=1!less-loader"
+        loader: 'style-loader!css-loader?importLoaders=1!less-loader'
       }
     ]
   },

@@ -67,10 +67,11 @@ app.use(function onerror(err, req, res, next) {
 
 cleanup(API.stop);
 
-API.start([ 'PCRE' ], function() {
+API.start([ 'PCRE', 'Perl', 'Ruby' ], function() {
   http.createServer(app).listen(port, host, function(err, result) {
     if (err) {
       console.error(err);
+      process.exit(1);
     }
     else {
       console.info('rgx.io server started at ' + host + ':' + port);

@@ -3,6 +3,27 @@
 An interface for writing and checking [PCRE](http://www.pcre.org) regular expressions.
 [rgx](http://www.rgx.com) is similar to what [Rubular](http://www.rubular.com) is for Ruby's regexes.
 
+## Spec
+
+**Capture sample**
+
+```javascript
+{
+  "offset": Array(Number, Number),
+  "captures": Array(Array(Number,Number)),
+  "status": "RC_MATCH"
+}
+```
+
+**Bad pattern sample**
+
+```javascript
+{
+  "status": "RC_BADPATTERN",
+  "error": String
+}
+```
+
 ## The Lua part
 
 Uses [lrexlib-pcre](http://rrthomas.github.com/lrexlib/manual.html) to test a PCRE

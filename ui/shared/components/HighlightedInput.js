@@ -58,7 +58,7 @@ var HighlightedInput = React.createClass({
     var { cm } = this;
     var { match, captures } = this.props;
     var highlight = function(range, opts) {
-      cm.markText(cm.posFromIndex(range[0]), cm.posFromIndex(range[1]+1), opts);
+      cm.markText(cm.posFromIndex(range[0]), cm.posFromIndex(range[1]), opts);
     };
 
     this.dehighlight();

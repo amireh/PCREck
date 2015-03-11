@@ -1,4 +1,4 @@
-var assign = require('lodash').extend;
+var { extend } = require('lodash');
 var singletons = {};
 
 class Store {
@@ -44,7 +44,7 @@ class Store {
   }
 
   setState(newState) {
-    assign(this.state, newState);
+    extend(this.state, newState);
     this.emitChange();
   }
 

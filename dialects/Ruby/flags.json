@@ -1,1 +1,5 @@
-{}
+{
+  "i": "Ignore case",
+  "m": "Treat a newline as a character matched by .",
+  "x": "Ignore whitespace and comments in the pattern"
+}

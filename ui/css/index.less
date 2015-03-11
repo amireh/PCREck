@@ -1,7 +1,8 @@
-@import "~variables";
-@import "~helpers";
-@import "~skin-flat";
+@import "variables";
+@import "helpers";
+@import "skin-flat";
 @import "fonts/rgx-1.2/style";
+@import "qtip";
 @import "~codemirror/lib/codemirror.css";
 @import "~codemirror";
 @import "~components/banner";
@@ -10,7 +11,7 @@
 @import "~components/highlighted-input";
 @import "~components/color-scheme-switcher";
 @import "~components/flag-picker";
-@import "~components/checkbox";
+@import "~qjunk/lib/Checkbox/index";
 @import "~components/dialect-picker";
 @import "~components/error-notifier";
 
@@ -18,4 +19,8 @@
   width: @content-width;
   margin: 0 auto;
   margin-top: @content-top-offset;
+}
+
+.qtip-content {
+  padding: 0;
 }

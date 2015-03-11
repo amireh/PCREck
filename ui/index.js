@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
-var Root = require('./views/Root.js');
+var AppStore = require('AppStore');
+var Root = require('./views/Root');
 var Actions = require('Actions');
 
 require('./config/codemirror');

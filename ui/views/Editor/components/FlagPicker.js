@@ -42,6 +42,7 @@ var FlagPicker = React.createClass({
         onChange={this.props.onChange}
         className="flag-picker__flag"
       >
+        {' '}
         <code className="type-strong">/{flag.name}</code>
         {' '}
         {flag.desc}

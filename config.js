@@ -8,17 +8,19 @@ exports.DIALECTS_DIR = 'dialects';
 exports.SIGNAL_READY = 'ready';
 
 exports.DIALECT_BINMAP = {
-  'PCRE': 'rgx-PCRE.lua'
+  'PCRE': 'rgx-PCRE.lua',
+  'Ruby': 'rgx-Ruby.rb',
+  'Perl': 'rgx-Perl.pm',
 };
 
 exports.AVAILABLE_DIALECTS = [
-  'C++',
-  'Java',
-  'JavaScript',
-  'Lua',
+  // 'C++',
+  // 'Java',
+  // 'JavaScript',
+  // 'Lua',
   'PCRE',
-  'PHP',
+  // 'PHP',
   'Perl',
-  'Python',
+  // 'Python',
   'Ruby'
 ].sort();

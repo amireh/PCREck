@@ -156,7 +156,7 @@ var EditorView = React.createClass({
   },
 
   updateFlags: function(newFlags) {
-    Actions.updateFlags(newFlags);
+    Actions.updateFlags(this.props.dialect, newFlags);
   },
 
   toggleFlag: function(e) {
@@ -173,7 +173,7 @@ var EditorView = React.createClass({
   },
 
   updatePattern(newPattern) {
-    Actions.updatePattern(newPattern);
+    Actions.updatePattern(this.props.dialect, newPattern);
   },
 
   submitConstruct: function() {
@@ -206,7 +206,7 @@ var EditorView = React.createClass({
 
   updateSubject: function(id, newText, customAttrs) {
     Actions.updateSubjectAttrs(id, customAttrs);
-    Actions.updateSubjectText(id, newText);
+    Actions.updateSubjectText(this.props.dialect, id, newText);
   },
 });
 

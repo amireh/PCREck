@@ -6,22 +6,15 @@ var ajax = require('utils/ajax');
 var { THROTTLE } = require("constants");
 
 var debouncedSubmit;
-var getCurrentDialect = function() {
-  return editorStore.getDialect();
-};
 
-exports.setDialect = function(dialect) {
-  editorStore.setDialect(dialect);
-};
-
-exports.updatePattern = function(pattern) {
+exports.updatePattern = function(dialect, pattern) {
   editorStore.setPattern(pattern);
-  debouncedSubmit();
+  debouncedSubmit(dialect);
 };
 
-exports.updateFlags = function(flags) {
+exports.updateFlags = function(dialect, flags) {
   editorStore.setFlags(flags);
-  debouncedSubmit();
+  debouncedSubmit(dialect);
 };
 
 exports.addSubject = function() {
@@ -50,20 +43,20 @@ exports.updateSubjectAttrs = function(id, customAttrs) {
   }
 };
 
-exports.updateSubjectText = function(id, newText) {
+exports.updateSubjectText = function(dialect, id, newText) {
   var subject = findWhere(editorStore.state.subjects, { id });
 
   if (subject) {
     subject.text = newText;
     editorStore.emitChange();
-    debouncedSubmit();
+    debouncedSubmit(dialect);
   }
   else {
     console.warn('Unable to find subject with id %s', id);
   }
 };
 
-exports.submit = function() {
+exports.submit = function(dialect) {
   var subjects = editorStore.getSubjects();
   var params = {
     pattern: editorStore.getPattern(),
@@ -72,7 +65,7 @@ exports.submit = function() {
   };
 
   ajax({
-    url: `/dialects/${getCurrentDialect()}`,
+    url: `/dialects/${dialect}`,
     type: 'POST',
     data: JSON.stringify(params),
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -101,6 +94,5 @@ exports.dismissError = function() {
  * should not be carried across the pages, like error notifications.
  */
 exports.clearTransientState = function() {
-  exports.setDialect();
   exports.dismissError();
 };

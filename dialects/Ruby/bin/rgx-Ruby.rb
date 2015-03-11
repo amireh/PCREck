@@ -17,64 +17,25 @@
 # along with rgx. If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-require 'rubygems'
-require 'bundler/setup'
+# require 'rubygems'
+# require 'bundler/setup'
 
-Bundler.require(:default)
+# Bundler.require(:default)
+require 'json'
 
 RC_MATCH = 'RC_MATCH'
 RC_NOMATCH = 'RC_NOMATCH'
 RC_BADPATTERN = 'RC_BADPATTERN'
 
-configure do
-  set :protection, :except => [ :http_origin ]
-end
-
-before do
-  if (request.accept || '').to_s.include?('json')
-    request.body.rewind
-    body = request.body.read.to_s || ''
-    unless body.empty?
-      begin;
-        params.merge!(::JSON.parse(body))
-        # puts params.inspect
-        # puts request.path
-      rescue ::JSON::ParserError => e
-        puts e.message
-        puts e.backtrace
-        halt 400, "Malformed JSON content"
-      end
-    end
-  end
-end
-
-Flags = {
-  'i' => 'Ignore case',
-  'm' => 'Treat a newline as a character matched by .',
-  'x' => 'Ignore whitespace and comments in the pattern'
-}
-
-get '/flags', provides: [ :json ] do
-  Flags.to_json
-end
-
-post '/', provides: [ :json ] do
-  ptrn = params[:pattern]
-  subj = params[:subject]
-  flags = params[:flags]
+def match(pattern, subject, flags)
   rc, re = nil, nil
 
-  puts params.inspect
-
-  if !ptrn || !subj then
-    halt 400, "Missing pattern "
-  end
-
   if flags && !flags.empty?
-    ptrn = "(?#{flags}:#{ptrn})"
+    pattern = "(?#{flags}:#{pattern})"
   end
 
-  begin re = Regexp.compile(ptrn)
+  begin
+    re = Regexp.compile(pattern)
   rescue Exception => e
     return {
       status: RC_BADPATTERN,
@@ -82,24 +43,37 @@ post '/', provides: [ :json ] do
     }.to_json
   end
 
-  if match = re.match(subj)
+  match = re.match(subject)
+
+  if !match.nil?
     rc = {
       status: RC_MATCH,
       offset: [ match.begin(0), match.end(0) ],
-      captures: []
+      captures: (1..match.length-1).map do |i|
+        [ match.begin(i), match.end(i) ]
+      end
     }
-
-    for i in (1..match.length-1) do
-      rc[:captures] << {
-        position: match.begin(i),
-        string:   match[i]
-      }
-    end
   else
     rc = {
       status: RC_NOMATCH
     }
   end
 
-  rc.to_json
+  rc
+end
+
+def write(msg, stream=STDOUT)
+  stream.puts(msg)
+  stream.flush
+end
+
+write "ready"
+
+while input = STDIN.gets
+  decoded_input = ::JSON.parse(input)
+  write match(
+    decoded_input['pattern'].to_s,
+    decoded_input['subject'].to_s,
+    decoded_input['flags'].to_s
+  ).to_json
 end

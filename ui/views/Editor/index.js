@@ -9,8 +9,6 @@ var Editor = React.createClass({
   displayName: "Editor",
 
   componentDidMount: function() {
-    Actions.setDialect(this.getDialect());
-
     editorStore.addChangeListener(this.reload);
     resultStore.addChangeListener(this.reload);
   },
